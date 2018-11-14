@@ -1,6 +1,29 @@
 {% extends "mainApp/wrapper.html" %}
 
+{% block account-loginOK %}
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item active px-1"><a class="btn btn-primary" href="#" role="button">Register</a></li>
+    <li class="nav-item px-1"><a class="btn btn-success" href="#" role="button">Login</a></li>
+</ul>
+{% endblock %}
+
+{% block account-loginNO %}
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item active px-1"><a class="btn btn-primary" href="#" role="button">Register</a></li>
+    <li class="nav-item px-1"><a class="btn btn-success" href="#" role="button">Login</a></li>
+</ul>
+{% endblock %}
 
 {% block content %}
-<div>Hello - we add this</div>
+<div class="continer">
+    <main role="main">
+        <div class="jumborton">
+            <div class="col-sm-8 mx-auto">
+                <h1>Let's start!</h1>
+                <p>Description</p>
+                <p><a class="btn btn-primary" href="#" role="button">To begin</a></p>
+            </div>
+        </div>
+    </main>
+</div>
 {% endblock %}
