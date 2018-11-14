@@ -30,11 +30,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                   <h4 class="modal-title">Регистрация</h4>
+                   <h4 class="modal-title">Добро пожаловать!</h4>
                     <button class="close" data-dismiss="modal">x</button>
                 </div>
                 <div class="modal-body">
-                    <form id="registration_form" autocomplete="on" role="form" >
+                <ul class="nav nav-tabs">
+                    <li class="active nav-item"><a class="nav-link active" href="#register" data-toggle="tab">Регистрация</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#login" data-toggle="tab">Вход</a></li>
+                </ul>
+                <br>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="register">
+                        <form id="registration_form" autocomplete="on" role="form" >
                         <div class="form-group">
                             <label for="id_registration_full-name">Имя и фамилия</label>
                             <input id="id_registration_full-name" class="form-control" autofocus placeholder="Имя и фамилия" spellcheck="true" autocomplete="name" name="full_name" type="text">
@@ -48,9 +55,27 @@
                             <input id="id_registration_password" class="form-control" placeholder="Пароль" spellcheck="true" autocomplete="password" name="password" type="email">
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-success" data-dismiss="modal">Регистрация</button>
+                    <div class="text-right">
+                        <button class="btn btn-success btn-block" data-dismiss="modal">Регистрация</button>
+                    </div>
+                    </div>
+                    
+                    <div role="tabpanel" class="tab-pane" id="login">
+                        <form id="login_form" autocomplete="on" role="form" >
+                       <div class="form-group">
+                            <label for="id_login_email">Email</label>
+                            <input id="id_login_email" class="form-control" required placeholder="E-mail" spellcheck="true" autocomplete="name" name="email" type="email">
+                        </div>
+                       <div class="form-group">
+                            <label for="id_login_password">Пароль</label>
+                            <input id="id_login_password" class="form-control" placeholder="Пароль" spellcheck="true" autocomplete="password" name="password" type="email">
+                        </div>
+                    </form>
+                       <div class="text-right">
+                            <button class="btn btn-success btn-block" data-dismiss="modal">Вход</button>
+                        </div>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
