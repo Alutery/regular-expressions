@@ -1,16 +1,13 @@
 {% extends "mainApp/wrapper.html" %}
 
 {% block account-loginOK %}
-<ul class="navbar-nav ml-auto">
-    <li class="nav-item active my-2 px-1"><a class="btn btn-primary" href="#" role="button">Register</a></li>
-    <li class="nav-item my-2 px-1"><a class="btn btn-success" href="#" role="button">Login</a></li>
-</ul>
+
 {% endblock %}
 
 {% block account-loginNO %}
 <ul class="navbar-nav ml-auto">
-    <li class="nav-item active my-2 px-1"><a class="btn btn-primary" href="#" role="button">Register</a></li>
-    <li class="nav-item my-2 px-1"><a class="btn btn-success" href="#" role="button">Login</a></li>
+    <li class="nav-item active my-2 px-1"><a class="btn btn-primary" data-toggle="modal" href="#popupLogin" role="button">Регистрация</a></li>
+    <li class="nav-item my-2 px-1"><a class="btn btn-success" href="#" role="button">Вход</a></li>
 </ul>
 {% endblock %}
 
@@ -21,9 +18,48 @@
             <div class="col-sm-8 mx-auto">
                 <h1>Let's start!</h1>
                 <p>Description</p>
-                <p><a class="btn btn-primary" href="#" role="button">To begin</a></p>
+                <p><a class="btn btn-primary" href="#" role="button">Начать</a></p>
             </div>
         </div>
     </main>
 </div>
 {% endblock %}
+
+{% block modal %}
+    <div id="popupLogin" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                   <h4 class="modal-title">Регистрация</h4>
+                    <button class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">
+                    <form id="registration_form" autocomplete="on" role="form" >
+                        <div class="form-group">
+                            <label for="id_registration_full-name">Имя и фамилия</label>
+                            <input id="id_registration_full-name" class="form-control" autofocus placeholder="Имя и фамилия" spellcheck="true" autocomplete="name" name="full_name" type="text">
+                        </div>
+                       <div class="form-group">
+                            <label for="id_registration_email">Email</label>
+                            <input id="id_registration_email" class="form-control" required placeholder="E-mail" spellcheck="true" autocomplete="name" name="email" type="email">
+                        </div>
+                       <div class="form-group">
+                            <label for="id_registration_password">Пароль</label>
+                            <input id="id_registration_password" class="form-control" placeholder="Пароль" spellcheck="true" autocomplete="password" name="password" type="email">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal">Регистрация</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+<!--
+{% block scripts %}
+    
+
+{% endblock %}-->
