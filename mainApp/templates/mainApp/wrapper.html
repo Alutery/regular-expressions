@@ -18,13 +18,18 @@
     
     <style>
         body {padding-top: 90px}
+footer {
+bottom: 0;
+position: relative;
+width: 100%;
+}
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
        <div class="container">
         
-        <a href="#" class="navbar-brand" >REGEX</a>
+        <a href="{% url 'index' %}" class="navbar-brand" >REGEX</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-1" >
             <span class="sr-only">Navigation</span>
             <span class="navbar-toggler-icon"></span>
@@ -32,10 +37,9 @@
         
         <div class="collapse navbar-collapse" id="navbar-collapse-1">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active px-1"><a class="nav-link" href="home.html">Главная</a></li>
-                <li class="nav-item px-1"><a class="nav-link" href="#">Теория</a></li>
-                <li class="nav-item px-1"><a class="nav-link" href="/practice/">Практика</a></li>
-                <li class="nav-item px-1"><a class="nav-link" href="#">О нас</a></li>
+                <li class="nav-item active px-1" id="main_tab"><a class="nav-link" href="{% url 'index' %}">Главная</a></li>
+                <li class="nav-item px-1" id="theory_tab"><a class="nav-link" href="/theory">Теория</a></li>
+                <li class="nav-item px-1" id="practice_tab"><a class="nav-link" href="/practice">Практика</a></li>
             </ul>
             {% if status %}
             {% block account-loginOK %}
@@ -48,31 +52,80 @@
         </div>
     </nav>
     <main role="main" class="container">
-    <div class="jumbotron">
-    <div class="container-fluid">
+    
       
     {% block content %}
     {% endblock %}
      
-     {% block modal %}
-     {% endblock %}
-      
+    <div id="popupLogin" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                   <h4 class="modal-title">Добро пожаловать!</h4>
+                    <button class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">
+                <ul class="nav nav-tabs">
+                    <li class="active nav-item"><a class="nav-link active" href="#register" data-toggle="tab" id="reg-nav-item"  target="_blank">Регистрация</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#login" data-toggle="tab" id="log-nav-item"  target="_blank">Вход</a></li>
+                </ul>
+                <br>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="register">
+                        <form id="registration_form" autocomplete="on" role="form" >
+                        <div class="form-group">
+                            <label for="id_registration_full-name">Имя и фамилия</label>
+                            <input id="id_registration_full-name" class="form-control" autofocus placeholder="Имя и фамилия" spellcheck="true" autocomplete="name" name="full_name" type="text">
+                        </div>
+                       <div class="form-group">
+                            <label for="id_registration_email">Email</label>
+                            <input id="id_registration_email" class="form-control" required placeholder="E-mail" spellcheck="true" autocomplete="name" name="email" type="email">
+                        </div>
+                       <div class="form-group">
+                            <label for="id_registration_password">Пароль</label>
+                            <input id="id_registration_password" class="form-control" placeholder="Пароль" spellcheck="true" autocomplete="password" name="password" type="email">
+                        </div>
+                    </form>
+                    <br>
+                    <div class="text-right">
+                        <button class="btn btn-success btn-block" data-dismiss="modal">Регистрация</button>
+                    </div>
+                    </div>
+                    
+                    <div role="tabpanel" class="tab-pane" id="login">
+                        <form id="login_form" autocomplete="on" role="form" >
+                       <div class="form-group">
+                            <label for="id_login_email">Email</label>
+                            <input id="id_login_email" class="form-control" required placeholder="E-mail" spellcheck="true" autocomplete="name" name="email" type="email">
+                        </div>
+                       <div class="form-group">
+                            <label for="id_login_password">Пароль</label>
+                            <input id="id_login_password" class="form-control" placeholder="Пароль" spellcheck="true" autocomplete="password" name="password" type="email">
+                        </div>
+                    </form>
+                      <br>
+                       <div class="text-right">
+                            <button class="btn btn-success btn-block" data-dismiss="modal">Вход</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+      
+   
   </main>
-  <div class="container">
-    <hr>
-    &copy; Все права защищены 2018
-  </div>
-  
+
   
   
     
     
     <!--    Latest compiled and minified JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    
-    
+    {% block scripts %}
+    {% endblock %}
+
             
 </body>
 </html>
