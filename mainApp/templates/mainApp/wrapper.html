@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+    {% load staticfiles %}
     <!--    jQuerty-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     
@@ -18,11 +18,11 @@
     
     <style>
         body {padding-top: 90px}
-footer {
-bottom: 0;
-position: relative;
-width: 100%;
-}
+        footer {
+        bottom: 0;
+        position: relative;
+        width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -57,12 +57,14 @@ width: 100%;
     {% block content %}
     {% endblock %}
      
-    <div id="popupLogin" class="modal fade" tabindex="-1">
+    <div id="popupLogin" class="modal fade" tabindex="-1" id="modal-login">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                    <h4 class="modal-title">Добро пожаловать!</h4>
-                    <button class="close" data-dismiss="modal">x</button>
+                    <button class="close" data-dismiss="modal" aria-label="Close" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                 <ul class="nav nav-tabs">
@@ -124,6 +126,13 @@ width: 100%;
     <!--    Latest compiled and minified JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     {% block scripts %}
+    <script type="text/javascript">
+        $('#modal-login').on('show.bs.modal', function (e) {
+            e.preventDefault();
+            $( '#reg-nav-item' ).removeClass( 'active' );
+            $( '#log-nav-item' ).removeClass( 'active' );
+        })
+    </script>
     {% endblock %}
 
             

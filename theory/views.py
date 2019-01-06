@@ -6,3 +6,6 @@ def theory(request):
 
 def less1(request):
     return render(request, 'theory/lessons/lesson_1.html')
+
+def less2(request):
+    return render(request, 'theory/lessons/lesson_2.html')

@@ -1,0 +1,95 @@
+{% extends "practice/main.html" %}
+
+{% block task %}
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li class="page-item active" id="btn_task_1_1"><a class="page-link">1</a></li>
+    <li class="page-item" id="btn_task_1_2"><a class="page-link">2</a></li>
+    <li class="page-item" id="btn_task_1_3"><a class="page-link">3</a></li>
+    <li class="page-item" id="btn_task_1_4"><a class="page-link">4</a></li>
+    <li class="page-item" id="btn_task_1_5"><a class="page-link">5</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="jumbotron">
+    <div class="container">
+    <h5>Дано регулярное выражение:</h5>
+    <br>
+    <p id="regex_assignment"><!-- Target for dynamic svg generation --></p>
+    <hr>
+    <p>Выберете расширенный конечный автомат, соответствующий данному регулярному выражению:</p><br>
+
+    <div class="row">
+      <div class="col-md-11">
+
+      <div class="col-md-10 gallery-FSM">
+        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(121).jpg">
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(121).jpg" alt="Lights" style="width:100%" >
+        </a>
+        <h4 class="text-center my-3">1</h4>
+      </div>
+
+      <div class="col-md-10 gallery-FSM">
+        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(96).jpg">
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(96).jpg" alt="Lights" style="width:100%"/>
+        </a>
+        <h4 class="text-center my-3">2</h4>
+      </div>
+
+      <div class="col-md-10 gallery-FSM">
+        <a class="black-text" href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(104).jpg">
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(104).jpg" alt="Lights" style="width:100%"/>
+        </a>
+        <h4 class="text-center my-3">3</h4>
+      </div>
+
+      <div class="col-md-10 gallery-FSM">
+        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(45).jpg">
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(45).jpg"  alt="Lights" style="width:100%"/>
+        </a>
+        <h4 class="text-center my-3">4</h4>
+      </div>
+    </div>
+
+</div>
+        <div class="radio">
+            <input type="radio" name="radio" id="radio1" />
+            <label for="radio1">Вариант 1</label>
+        </div>
+        <div class="radio">
+            <input type="radio" name="radio" id="radio2" checked/>
+            <label for="radio2">Вариант 2</label>
+        </div>
+        <div class="radio">
+            <input type="radio" name="radio" id="radio3" />
+            <label for="radio3">Вариант 3</label>
+        </div>
+        <div class="radio">
+            <input type="radio" name="radio" id="radio4" />
+            <label for="radio4">Вариант 4</label>
+        </div>
+    </div>
+    <br>
+    <p id="result"></p>
+    <button class="btn btn-success btn-block" id="btn_accept">Подтвердить</button>
+  </div>
+</div>
+</div>
+
+{% load staticfiles%}
+<script src="{% static 'js/practice/practice_task_3.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+{% endblock %}
