@@ -34,10 +34,11 @@ $(document).ready(function () {
   var current_answer = false;
 
 
-  function Update(regex, statement_input, answer) {
+  function Update(regex_arg, statement_input, answer) {
     $('#answer_request').show();
     $('#result').text('');
 
+    regex.text(regex_arg);
     statement.text(statement_input);
     current_answer = answer;
   }
@@ -77,35 +78,35 @@ $(document).ready(function () {
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
 
-    Update('abc', false);
+    Update('a+b.', 'abc', false);
   });
 
   btn_2.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
 
-    Update('abc', false);
+    Update('AAA', 'abc', false);
   });
 
   btn_3.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
 
-    Update('AFDDA', true);
+    Update('AFDDA', 'aaa', true);
   });
 
   btn_4.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
 
-    Update('abc', false);
+    Update('abc', 'fgfgf', false);
   });
 
   btn_5.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
 
-    Update('abc', false);
+    Update('ab+c', 'h', false);
   });
 
 });

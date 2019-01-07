@@ -27,20 +27,22 @@
     <div class="container">
     <h5>Дано регулярное выражение:</h5>
     <br>
-    <div id="graphviz_svg"><!-- Target for dynamic svg generation --></div><hr>
+    <div id="regex"><!-- Target for dynamic svg generation --></div><hr>
     <p>Принадлежит ли слово данному регулярному выражению?</p>
     <p id="statement">loading...</p><br>
+    
     <p id="result"></p>
+
     <div class="row" id="answer_request">
-    <div class="col">
-      <button class="btn btn-success btn-block" id="btn_yes">Да</button>
-    </div>
-    <div class="col">
-      <button class="btn btn-danger btn-block" id="btn_no">Нет</button>
-    </div>
+      <div class="col">
+        <button class="btn btn-success btn-block" id="btn_yes">Да</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-danger btn-block" id="btn_no">Нет</button>
+      </div>
   </div>
 </div>
-</div
+</div>
 
 {% load staticfiles%}
 <script src="{% static 'js/practice/practice_task_2.js' %}"></script>

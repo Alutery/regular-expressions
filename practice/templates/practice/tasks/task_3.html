@@ -9,11 +9,11 @@
         <span class="sr-only">Previous</span>
       </a>
     </li>
-    <li class="page-item active" id="btn_task_1_1"><a class="page-link">1</a></li>
-    <li class="page-item" id="btn_task_1_2"><a class="page-link">2</a></li>
-    <li class="page-item" id="btn_task_1_3"><a class="page-link">3</a></li>
-    <li class="page-item" id="btn_task_1_4"><a class="page-link">4</a></li>
-    <li class="page-item" id="btn_task_1_5"><a class="page-link">5</a></li>
+    <li class="page-item active" id="btn_task_3_1"><a class="page-link">1</a></li>
+    <li class="page-item" id="btn_task_3_2"><a class="page-link">2</a></li>
+    <li class="page-item" id="btn_task_3_3"><a class="page-link">3</a></li>
+    <li class="page-item" id="btn_task_3_4"><a class="page-link">4</a></li>
+    <li class="page-item" id="btn_task_3_5"><a class="page-link">5</a></li>
     <li class="page-item">
       <a class="page-link" href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
@@ -35,61 +35,60 @@
       <div class="col-md-11">
 
       <div class="col-md-10 gallery-FSM">
-        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(121).jpg">
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(121).jpg" alt="Lights" style="width:100%" >
-        </a>
+        <div id="graph_1"></div>
         <h4 class="text-center my-3">1</h4>
       </div>
 
       <div class="col-md-10 gallery-FSM">
         <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(96).jpg">
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(96).jpg" alt="Lights" style="width:100%"/>
+          <div alt="Lights" style="width:100%" id="graph_2"></div>
         </a>
         <h4 class="text-center my-3">2</h4>
       </div>
 
       <div class="col-md-10 gallery-FSM">
         <a class="black-text" href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(104).jpg">
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(104).jpg" alt="Lights" style="width:100%"/>
+          <div alt="Lights" style="width:100%" id="graph_3"></div>
         </a>
         <h4 class="text-center my-3">3</h4>
       </div>
 
       <div class="col-md-10 gallery-FSM">
-        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(45).jpg">
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(45).jpg"  alt="Lights" style="width:100%"/>
-        </a>
+        <div alt="Lights" style="width:100%" id="graph_4"></div>
         <h4 class="text-center my-3">4</h4>
       </div>
     </div>
-
-</div>
+  </div>
+  <p id="result"></p>
+  <div id="answer_request">
         <div class="radio">
-            <input type="radio" name="radio" id="radio1" />
+            <input type="radio" name="radio" id="radio1" value="1" checked="" />
             <label for="radio1">Вариант 1</label>
         </div>
         <div class="radio">
-            <input type="radio" name="radio" id="radio2" checked/>
+            <input type="radio" name="radio" id="radio2" value="2" />
             <label for="radio2">Вариант 2</label>
         </div>
         <div class="radio">
-            <input type="radio" name="radio" id="radio3" />
+            <input type="radio" name="radio" id="radio3" value="3" />
             <label for="radio3">Вариант 3</label>
         </div>
         <div class="radio">
-            <input type="radio" name="radio" id="radio4" />
+            <input type="radio" name="radio" id="radio4" value="4" />
             <label for="radio4">Вариант 4</label>
         </div>
-    </div>
+    
     <br>
     <p id="result"></p>
     <button class="btn btn-success btn-block" id="btn_accept">Подтвердить</button>
   </div>
+  <button class="btn btn-primary btn-block" id="btn_repeat" hidden>Повторить</button>
 </div>
 </div>
 
 {% load staticfiles%}
-<script src="{% static 'js/practice/practice_task_3.js' %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <script src="{% static 'js/practice/practice_task_3.js' %}"></script>
+  <script src="{% static 'js/viz.js/viz.js' %}"></script>
+  <script src="{% static 'js/viz.js/full.render.js' %}"></script>
 
 {% endblock %}
