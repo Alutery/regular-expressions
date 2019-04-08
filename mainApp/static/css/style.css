@@ -1,3 +1,38 @@
-.gallery-FSM{
-	margin-bottom: 40px; 
-	}
+.gallery-FSM {
+	margin-bottom: 40px;
+}
+
+html {
+	overflow: -moz-scrollbars-vertical;
+	overflow: scroll;
+}
+
+body {
+	padding-top: 90px
+}
+
+footer {
+	bottom: 0;
+	position: relative;
+	width: 100%;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
