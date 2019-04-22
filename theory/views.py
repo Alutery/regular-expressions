@@ -9,3 +9,6 @@ def less1(request):
 
 def less2(request):
     return render(request, 'theory/lessons/lesson_2.html')
+
+def regexToNFA(request):
+    return render(request, 'theory/lessons/regex_to_NFA.html')

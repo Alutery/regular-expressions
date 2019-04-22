@@ -15,9 +15,9 @@
             <li class="list-group-item"><a href="{% url 'theory_intro' %}">Введение</a></li>
             <li class="list-group-item"><a href="{% url 'less1' %}">Регулярные множества и выражения</a></li>
             <li class="list-group-item"><a href="{% url 'less2' %}">Конечные автоматы</a></li>
+            <li class="list-group-item"><a href="{% url 'regex_to_NFA' %}">Построение ДКА по регулярному выражению</a></li>
             <li class="list-group-item"><a href="#">Построение НКА</a></li>
             <li class="list-group-item"><a href="#">Построение ДКА по НКА</a></li>
-            <li class="list-group-item"><a href="#">Построение ДКА по регулярному выражению</a></li>
         </ul>
     </div>
     <div class="col-sm-9">
@@ -31,7 +31,7 @@
 {% block scripts %}
 <script>
 	$( '.navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
-	$( '#theory_tab' ).addClass( 'active' );
+	$( '#._tab' ).addClass( 'active' );
     
     
     $('#logClick').click(function(e) {
