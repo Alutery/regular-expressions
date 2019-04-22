@@ -12,3 +12,6 @@ def less2(request):
 
 def regexToNFA(request):
     return render(request, 'theory/lessons/regex_to_NFA.html')
+
+def DFAtoregex(request):
+    return render(request, 'theory/lessons/DFA_to_regex.html')

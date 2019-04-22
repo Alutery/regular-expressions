@@ -7,4 +7,5 @@ urlpatterns = [
     path('lesson_1/', views.less1, name='less1'),
     path('lesson_2/', views.less2, name='less2'),
     path('regextoNFA', views.regexToNFA, name='regex_to_NFA'),
+    path('DFAtoregex', views.DFAtoregex, name='DFA_to_regex'),
 ]
