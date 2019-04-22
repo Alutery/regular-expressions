@@ -13,5 +13,5 @@ def task2(request):
 def task3(request):
     return render(request, 'practice/tasks/task_3.html')
 
-def task4(request):
-    return render(request, 'practice/tasks/task_4.html')
+def taskDFAtoregex(request):
+    return render(request, 'practice/tasks/task_DFA_to_regex.html')
