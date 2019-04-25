@@ -26,23 +26,16 @@
 <div class="jumbotron">
     <div class="container">
     <h5>Дан конечный автомат-распознаватель:</h5>
+    <!-- {% load staticfiles %} -->
+    <!-- <img class="img-theory" id="graph_1" src="{% static 'media/graph_1.png' %}" alt="graph_1"> -->
     <br><div id="graphviz_svg"><!-- Target for dynamic svg generation --></div><hr>
-    <p id="result"></p>
-    <div class="row" id="answer_request">
-    <form class="m-2">
-      <div class="form-group">
-          <label for="inputRegex">Какое регулярное выражение ему соответствует?</label>
-          <input type="text" class="form-control" id="inputRegex" placeholder="Введите здесь">
-      </div>
-      <button type="submit" class="btn btn-primary">Подтвердить</button>
-    </form>
+    {% include url %}
   </div>
-</div>
 </div>
 
 {% load staticfiles%}
 <script src="{% static 'js/viz.js/viz.js' %}"></script>
 <script src="{% static 'js/viz.js/full.render.js' %}"></script>
-<script src="{% static 'js/practice/practice_task_1.js' %}"></script>
+<script src="{% static 'js/practice/taskDFAtoregex.js' %}"></script>
 
 {% endblock %}

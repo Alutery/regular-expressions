@@ -1,0 +1,10 @@
+<div class="row" id="answer_request">
+    <form  method="post">
+        {% csrf_token %}
+        <div class="form-group mb-3 mt-4">
+            <label for="inputRegex">Какое регулярное выражение ему соответствует?</label>
+            <input class="form-control noresize" rows="1" placeholder="Введите здесь" type="text" id="inputRegex" name="q" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="btn_accept">Подтвердить</button>
+    </form>
+</div>

@@ -8,4 +8,5 @@ urlpatterns = [
     path('task_2/', views.task2, name='task2'),
     path('task_3/', views.task3, name='task3'),
     path('taskDFAtoregex/', views.taskDFAtoregex, name='task_DFA_to_regex'),
+    path('checkregex', views.get_check_equivalence, name='get_check_equivalence'),
 ]

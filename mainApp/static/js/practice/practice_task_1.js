@@ -1,25 +1,5 @@
 $(document).ready(function () {
 
-  // Installs error handling.
-  // jQuery.ajaxSetup({
-  // error: function(resp, e) {
-  //   if (resp.status == 0){
-  //     alert('You are offline!!\n Please Check Your Network.');
-  //     } else if (resp.status == 404){
-  //       alert('Requested URL not found.');
-  //     } else if (resp.status == 500){
-  //       alert('Internel Server Error:\n\t' + resp.responseText);
-  //     } else if (e == 'parsererror') {
-  //       alert('Error.\nParsing JSON Request failed.');
-  //     } else if (e == 'timeout') {
-  //       alert('Request timeout.');
-  //     } else {
-  //       alert('Unknown Error.\n' + resp.responseText);
-  //     }
-  //   }
-  // });  // error:function()
-
-  // var generate_btn = jQuery('#generate_btn');
   var btn_1 = jQuery('#btn_task_1_1');
   var btn_2 = jQuery('#btn_task_1_2');
   var btn_3 = jQuery('#btn_task_1_3');
@@ -59,11 +39,11 @@ $(document).ready(function () {
 
   // Startup function: call UpdateGraphviz
   jQuery(function() {
+    event.preventDefault();
     btn_1.click();
   });
 
   // Bind actions to form buttons.
-
   btn_yes.click(function(){
     $('#answer_request').hide();
     if(current_answer === true) {
