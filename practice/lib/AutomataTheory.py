@@ -1,3 +1,5 @@
+from future.utils import iteritems
+# from six import iteritems
 from os import popen
 import time
 
@@ -67,16 +69,16 @@ class Automata:
                         states.add(tns)
         return allstates
 
-    def display(self):
-        print "states:", self.states
-        print "start state: ", self.startstate
-        print "final states:", self.finalstates
-        print "transitions:"
+    def display(self, f):
+        f.write ("states:" + str(self.states) + "\n")
+        f.write ("start state: " + str(self.startstate) + "\n")
+        f.write ("final states:" + str(self.finalstates) + "\n")
+        f.write ("transitions:\n")
         for fromstate, tostates in self.transitions.items():
             for state in tostates:
                 for char in tostates[state]:
-                    print "  ",fromstate, "->", state, "on '"+char+"'",
-            print
+                    f.write ("  " + str(fromstate) + "->" + str(state) + "on '"+ char + "'\n"),
+            f.write('\n')
 
     def getPrintText(self):
         text = "language: {" + ", ".join(self.language) + "}\n"
@@ -204,11 +206,11 @@ class DFAfromNFA:
     def getMinimisedDFA(self):
         return self.minDFA
 
-    def displayDFA(self):
-        self.dfa.display()
+    def displayDFA(self, f):
+        self.dfa.display(f)
 
-    def displayMinimisedDFA(self):
-        self.minDFA.display()
+    def displayMinimisedDFA(self, f):
+        self.minDFA.display(f)
 
     def buildDFA(self, nfa):
         allstates = dict()
@@ -236,9 +238,9 @@ class DFAfromNFA:
                         toindex = count
                         count +=  1
                     else:
-                        toindex = [k for k, v in allstates.iteritems() if v  ==  trstates][0]
+                        toindex = [k for k, v in (iteritems(allstates)) if v  ==  trstates][0]
                     dfa.addtransition(fromindex, toindex, char)
-        for value, state in allstates.iteritems():
+        for value, state in list(iteritems(allstates)):
             if nfa.finalstates[0] in state:
                 dfa.addfinalstates(value)
         self.dfa = dfa
@@ -307,7 +309,7 @@ class DFAfromNFA:
         while newFound and len(unchecked) > 0:
             newFound = False
             toremove = set()
-            for p, pair in unchecked.items():
+            for p, pair in list(unchecked.items()):
                 for tr in pair[2:]:
                     if [tr[0], tr[1]] in distinguished or [tr[1], tr[0]] in distinguished:
                         unchecked.pop(p)
@@ -346,8 +348,8 @@ class NFAfromRegex:
     def getNFA(self):
         return self.nfa
 
-    def displayNFA(self):
-        self.nfa.display()
+    def displayNFA(self, f):
+        self.nfa.display(f)
 
     def buildNFA(self):
         language = set()
@@ -391,7 +393,7 @@ class NFAfromRegex:
             op = self.stack.pop()
             self.processOperator(op)
         if len(self.automata) > 1:
-            print self.automata
+            print (self.automata)
             raise BaseException("Regex could not be parsed successfully")
         self.nfa = self.automata.pop()
         self.nfa.language = language
@@ -451,4 +453,3 @@ def isInstalled(program):
             if is_exe(exe_file) or is_exe(exe_file+".exe"):
                 return True
     return False
-

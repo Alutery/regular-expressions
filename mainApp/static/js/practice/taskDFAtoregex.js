@@ -23,6 +23,7 @@ $(document).ready(function () {
         svg_div.html("<br>loaing...<br>");
         statement.text(statement_input);
         current_answer = answer;
+        $("#answer").val(statement_input);
         // Generate the Visualization of the Graph into "svg".
     
         var viz = new Viz();
@@ -73,7 +74,7 @@ $(document).ready(function () {
           s_3 -> s_3 [ label = "a, b" ];\
           s_2 -> s_3 [ label = "b" ];\
           s_2 -> s_2 [ label = "a" ];}', 
-          'aabba', false);
+          'a*a', false);
       });
 
 });
