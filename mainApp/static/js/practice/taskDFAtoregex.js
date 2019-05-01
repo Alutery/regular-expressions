@@ -14,15 +14,15 @@ $(document).ready(function () {
     var statement = $('#statement');
 
     // var btn_accept = $('#btn_accept');
-    var current_answer = false;
+    // var current_answer = false;
 
-    function UpdateGraphviz(data, statement_input, answer) {
+    function UpdateGraphviz(data, statement_input) {
         // $('#answer_request').show();
         // $('#result').text('');
     
         svg_div.html("<br>loaing...<br>");
         statement.text(statement_input);
-        current_answer = answer;
+        // current_answer = answer;
         $("#answer").val(statement_input);
         // Generate the Visualization of the Graph into "svg".
     
@@ -63,18 +63,79 @@ $(document).ready(function () {
         $(this).addClass( "active" );
     
         UpdateGraphviz(
-          'digraph G { rankdir=LR;\
-          size="8,5"\
-          node [shape = doublecircle]; s_2;\
-          node [shape = circle];\
-          s_0 -> s_1 [ label = "b" ];\
-          s_1 -> s_3 [ label = "a" ];\
-          s_1 -> s_2 [ label = "b" ];\
-          s_0 -> s_0 [ label = "a" ];\
-          s_3 -> s_3 [ label = "a, b" ];\
-          s_2 -> s_3 [ label = "b" ];\
-          s_2 -> s_2 [ label = "a" ];}', 
-          'a*a', false);
-      });
+          `digraph G { rankdir=LR;
+          layout="circo";
+          node [shape = doublecircle, color = red]; A;
+          node [shape = circle, color = black];
+          A -> B [ label = "a " ];
+          B -> A [ label = " b " ];
+          A -> C [ label = "b" ];
+          C -> A [ label = "a" ];
+          C -> B [ label = "b" ];}`, 
+          '(ab+b(a+bb))*');
+    });
+
+    btn_2.click(function(){
+      $( ".page-item" ).removeClass( "active" );
+      $(this).addClass( "active" );
+  
+      UpdateGraphviz(
+        `digraph G { 
+        layout="dot";
+        node [shape = circle, color = red]; A;
+        node [shape = doublecircle, color = black] B, C;
+        A -> B [ label = "a" ];
+        A -> C [ label = "b" ];
+        C -> C [ label = " a" ];
+        B -> B [ label = " a" ];}`, 
+        'aa*+ba*');
+    });
+
+    btn_3.click(function(){
+      $( ".page-item" ).removeClass( "active" );
+      $(this).addClass( "active" );
+
+      UpdateGraphviz(
+        `digraph G { rankdir=LR;
+        layout="dot";
+        node [shape = circle, color = red]; A;
+        node [shape = doublecircle, color = black] B;
+        A -> B [ label = "a" ];
+        B -> A [ label = "b" ];
+        A -> A [ label = "c" ];
+        B -> B [ label = "d" ];}`, 
+        'c*a(d+bc*a)*');
+    });
+
+    btn_4.click(function(){
+      $( ".page-item" ).removeClass( "active" );
+      $(this).addClass( "active" );
+
+      UpdateGraphviz(
+        `digraph G { rankdir=LR;
+        layout="dot";
+        node [shape = circle, color = red]; A;
+        node [shape = doublecircle, color = black] B;
+        A -> B [ label = "0" ];
+        B -> A [ label = "1" ];}`, 
+        'c*a(d+bc*a)*');
+    });
+
+    btn_5.click(function(){
+      $( ".page-item" ).removeClass( "active" );
+      $(this).addClass( "active" );
+
+      UpdateGraphviz(
+        `digraph G { rankdir=LR;
+        layout="circo";
+        node [shape = circle, color = red]; A;
+        node [color = black]; B;
+        node [shape = doublecircle]; C;
+        A -> B [ label = "b" ];
+        C -> B [ label = "a" ];
+        A -> C [ label = "a" ];
+        B -> B [ label = "a,b" ];}`, 
+        'a*');
+    });
 
 });
