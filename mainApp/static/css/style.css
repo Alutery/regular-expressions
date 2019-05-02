@@ -19,6 +19,7 @@ body {
 	line-height: 1.5;
 	padding-bottom: 90px;
 }
+.modal { padding-right: 0 !important }
 
 footer {
 	bottom: 0;
@@ -26,24 +27,34 @@ footer {
 	width: 100%;
 }
 
-/* width */
+/* width
 ::-webkit-scrollbar {
-	width: 10px;
+	width: 5px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
 	background: #f1f1f1;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
 	background: #888;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
 	background: #555;
+} */
+
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
 }
 
 p {
