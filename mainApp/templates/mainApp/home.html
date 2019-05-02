@@ -44,7 +44,7 @@
 
 {% block scripts %}
 
-<script>
+<script type="text/javascript">
 $('#logClick').click(function(e) {
         e.preventDefault();
         $( '#reg-nav-item' ).removeClass( 'active' );
@@ -52,12 +52,13 @@ $('#logClick').click(function(e) {
 });
     
 $('#regClick').click(function(e) {
-        e.preventDefault();
-        $( '#reg-nav-item' ).addClass( 'active' );
-        $( '#log-nav-item' ).removeClass( 'active' );
+    e.preventDefault();
+    $( '#reg-nav-item' ).addClass( 'active' );
+    $( '#log-nav-item' ).removeClass( 'active' );
 });
+
 $( '.navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
-$( '#practice_tab' ).addClass( 'active' );
+$( '#main_tab' ).addClass( 'active' );
 </script>
 
 {% endblock %}

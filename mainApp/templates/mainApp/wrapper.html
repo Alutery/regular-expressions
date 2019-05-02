@@ -52,7 +52,7 @@
     {% block content %}
     {% endblock %}
     
-    <div id="popupLogin" class="modal fade" tabindex="-1" id="modal-login">
+    <div id="popupLogin" class="modal fade" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -63,12 +63,12 @@
                 </div>
                 <div class="modal-body">
                 <ul class="nav nav-tabs">
-                    <li class="active nav-item"><a class="nav-link active" href="#register" data-toggle="tab" id="reg-nav-item"  target="_blank">Регистрация</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#register" data-toggle="tab" id="reg-nav-item"  target="_blank">Регистрация</a></li>
                     <li class="nav-item"><a class="nav-link" href="#login" data-toggle="tab" id="log-nav-item"  target="_blank">Вход</a></li>
                 </ul>
                 <br>
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="register">
+                    <div role="tabpanel" class="tab-pane" id="register">
                         <form id="registration_form" autocomplete="on" role="form" >
                         <div class="form-group">
                             <label for="id_registration_full-name">Имя и фамилия</label>
@@ -119,15 +119,27 @@
     <!--    Latest compiled and minified JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     {% block scripts %}
-    <script type="text/javascript">
-        $('#modal-login').on('show.bs.modal', function (e) {
-            e.preventDefault();
-            $( '#reg-nav-item' ).removeClass( 'active' );
-            $( '#log-nav-item' ).removeClass( 'active' );
-        })
-    </script>
     {% endblock %}
 
-    
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#popupLogin').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            if(recipient == "reg") {                
+                $( '#reg-nav-item' ).addClass( 'active' );
+                $( '#register' ).addClass( 'active' );
+                $( '#log-nav-item' ).removeClass( 'active' );
+                $( '#login' ).removeClass( 'active' );
+            }
+            else {
+                $( '#reg-nav-item' ).removeClass( 'active' );
+                $( '#log-nav-item' ).addClass( 'active' );
+                $( '#register' ).removeClass( 'active' );
+                $( '#login' ).addClass( 'active' );
+            }
+        });
+    });
+    </script>
 </body>
 </html>
