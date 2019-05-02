@@ -7,8 +7,8 @@ def theory_intro(request):
 def less1(request):
     return render(request, 'theory/lessons/lesson_1.html')
 
-def less2(request):
-    return render(request, 'theory/lessons/lesson_2.html')
+def FA(request):
+    return render(request, 'theory/lessons/FA.html')
 
 def regexToNFA(request):
     return render(request, 'theory/lessons/regex_to_NFA.html')
