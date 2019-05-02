@@ -1,11 +1,12 @@
 from django.shortcuts import render
 
 # Create your views here.
-def theory_intro(request):
-    return render(request, 'theory/lessons/lesson_1.html')
 
-def less1(request):
-    return render(request, 'theory/lessons/lesson_1.html')
+def intro(request):
+    return render(request, 'theory/lessons/intro.html')
+
+def basic_definitions(request):
+    return render(request, 'theory/lessons/basic_definitions.html')
 
 def FA(request):
     return render(request, 'theory/lessons/FA.html')
