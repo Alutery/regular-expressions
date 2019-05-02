@@ -56,6 +56,8 @@ $('#regClick').click(function(e) {
         $( '#reg-nav-item' ).addClass( 'active' );
         $( '#log-nav-item' ).removeClass( 'active' );
 });
+$( '.navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
+$( '#main_tab' ).addClass( 'active' );
 </script>
 
 {% endblock %}

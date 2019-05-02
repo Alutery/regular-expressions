@@ -31,9 +31,9 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
+<script type="text/javascript">
 	$( '.navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
-	$( '#._tab' ).addClass( 'active' );
+	$( '#theory_tab' ).addClass( 'active' );
     
     
     $('#logClick').click(function(e) {
@@ -47,5 +47,11 @@
         $( '#reg-nav-item' ).addClass( 'active' );
         $( '#log-nav-item' ).removeClass( 'active' );
     });
+
+    // $('#modal-login').on('show.bs.modal', function (e) {
+    //     e.preventDefault();
+    //     $( '#reg-nav-item' ).removeClass( 'active' );
+    //     $( '#log-nav-item' ).removeClass( 'active' );
+    // })
 </script>
 {% endblock %}
