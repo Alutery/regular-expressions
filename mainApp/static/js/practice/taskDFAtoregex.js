@@ -57,7 +57,7 @@ $(document).ready(function () {
     //         btn_accept.click();
     //     }
     // });
-
+    
     btn_1.click(function(){
         $( ".page-item" ).removeClass( "active" );
         $(this).addClass( "active" );
@@ -126,7 +126,8 @@ $(document).ready(function () {
       $(this).addClass( "active" );
 
       UpdateGraphviz(
-        `digraph G { rankdir=LR;
+        `digraph G { 
+         rankdir=LR;
         layout="circo";
         node [shape = circle, color = red]; A;
         node [color = black]; B;

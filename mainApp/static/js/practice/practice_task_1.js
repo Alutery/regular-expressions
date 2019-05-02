@@ -68,120 +68,128 @@ $(document).ready(function () {
     }
   });
 
+  // (a+b)*
   btn_1.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
-
+    current = 1;
     UpdateGraphviz(
-      'digraph G { rankdir=LR;\
-      size="8,5"\
-      node [shape = doublecircle]; s_2;\
-      node [shape = circle];\
-      s_0 -> s_1 [ label = "b" ];\
-      s_1 -> s_3 [ label = "a" ];\
-      s_1 -> s_2 [ label = "b" ];\
-      s_0 -> s_0 [ label = "a" ];\
-      s_3 -> s_3 [ label = "a, b" ];\
-      s_2 -> s_3 [ label = "b" ];\
-      s_2 -> s_2 [ label = "a" ];}', 
+      `digraph G { 
+      size="8,5";
+      layout="circo";
+      node [shape = doublecircle, color = red]; A;
+      node [shape = circle, color = black];
+      A -> A [ label = " a, b" ];
+      B -> A [ label = "a, b" ];
+      C -> B [ label = "b" ];
+      C -> A [ color = white ];
+      C -> C [ label = " a" ];}`, 
       'aabba', true);
   });
 
+  // b*(cb+a)
   btn_2.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
-
+    current = 2;
     UpdateGraphviz(
-      'digraph G { rankdir=LR;\
-      size="8,5"\
-      node [shape = doublecircle]; s_2;\
-      node [shape = circle];\
-      s_0 -> s_1 [ label = "b" ];\
-      s_1 -> s_3 [ label = "a" ];\
-      s_1 -> s_2 [ label = "b" ];\
-      s_0 -> s_0 [ label = "a" ];\
-      s_3 -> s_3 [ label = "a, b" ];\
-      s_2 -> s_3 [ label = "b" ];\
-      s_2 -> s_2 [ label = "a" ];}', 
-      'abab', true);
+      `digraph G { 
+        layout="circo";
+        rankdir=LR;
+        size="8,5";
+        node [shape = circle, color = red]; A;
+        node [shape = doublecircle, color = black]; E;
+        node [shape = circle, color = black];
+        A -> C [ label = "c" ];
+        A -> B [ label = "b " ];
+        B -> B [ label = " b" ];
+        B -> C [ label = "c" ];
+        C -> D [ label = "b" ];
+        D -> E [ label = "a" ];
+        D -> F [ label = "b" ];
+        F -> E [ label = "a " ];
+        F -> F [ label = " b" ];
+      }`, 
+      'bbbba', true);
   });
 
+  // (ab|b)(a|c*)
   btn_3.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
-
+    current = 3;
     UpdateGraphviz(
-      'digraph finite_state_machine {\
-      rankdir=LR;\
-      size="7"\
-      node [shape = doublecircle]; s_0 s_3 s_4 s_8;\
-      node [shape = circle];\
-      s_0 -> s_2 [ label = "B" ];\
-      s_0 -> s_1 [ label = "D" ];\
-      s_1 -> s_3 [ label = "A" ];\
-      s_2 -> s_6 [ label = "F" ];\
-      s_2 -> s_5 [ label = "A" ];\
-      s_2 -> s_4 [ label = "A, D" ];\
-      s_5 -> s_7 [ label = "F" ];\
-      s_5 -> s_5 [ label = "A, B, D" ];\
-      s_6 -> s_6 [ label = "B" ];\
-      s_6 -> s_5 [ label = "A" ];\
-      s_7 -> s_8 [ label = "D" ];\
-      s_7 -> s_5 [ label = "A" ];\
-      s_8 -> s_6 [ label = "B" ];\
-      s_8 -> s_5 [ label = "A" ];\
-      }',
-      'AFDDA', true)
+      `digraph G { 
+        rankdir=LR;
+        size="8,5";
+        node [color = red, shape = circle]; A;
+        node [shape = doublecircle, color = black]; E F D C;
+        node [shape = circle, color = black];
+        A -> C [ label = "b" ];
+        A -> B [ label = "a" ];
+        B -> D [ label = "b" ];
+        D -> F [ label = "c" ];
+        C -> E [ label = "a" ];
+        C -> F [ label = "c" ];
+        D -> E [ label = "a" ];
+        F -> E [ label = "a" ];
+        F -> F [ label = "c" ];
+      }`,
+      'abbcc', false)
   });
 
+  // (bb(d+a)a)*
   btn_4.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
-
+    current = 4;
     UpdateGraphviz(
-      'digraph G {\
-      rankdir=LR;\
-      size="8,5"\
-      node [shape = doublecircle]; s_2;\
-      node [shape = circle];\
-      s_0 -> s_1 [ label = "b" ];\
-      s_1 -> s_3 [ label = "a" ];\
-      s_1 -> s_2 [ label = "b" ];\
-      s_0 -> s_0 [ label = "a" ];\
-      s_3 -> s_3 [ label = "a, b" ];\
-      s_2 -> s_3 [ label = "b" ];\
-      s_2 -> s_2 [ label = "a" ];\
-      s_0 -> s_4 [ label = "b" ];\
-      s_1 -> s_4 [ label = "c" ];\
-      s_2 -> s_4 [ label = "a, c" ];\
-      s_3 -> s_4 [ label = "a" ];\
-      s_4 -> s_4 [ label = "a, b, c" ];}', 
-      'abc', false);
+      `digraph G { 
+        rankdir=LR;
+        size="8,5";
+        node [color = red, shape = doublecircle]; A;
+        node [shape = doublecircle, color = black]; G;
+        node [shape = circle, color = black];
+        A -> B [ label = "b" ];
+        B -> C [ label = "b" ];
+        C -> D [ label = "d" ];
+        G -> B [ label = "b" ];
+        D -> F [ label = "d" ];
+        D -> E [ label = "a" ];
+        F -> E [ label = "a" ];
+        F -> F [ label = "d" ];
+        E -> G [ label = "a" ];
+      }`, 
+      'bbdabbaa', true);
   });
 
+  // (d|a(b|d))*|c|a
   btn_5.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
-
+    current = 5;
     UpdateGraphviz(
-      'digraph G {\
-      rankdir=LR;\
-      size="8,5"\
-      node [shape = doublecircle]; s_2;\
-      node [shape = circle];\
-      s_0 -> s_1 [ label = "b" ];\
-      s_1 -> s_3 [ label = "a" ];\
-      s_1 -> s_2 [ label = "b" ];\
-      s_0 -> s_0 [ label = "a" ];\
-      s_3 -> s_3 [ label = "a, b" ];\
-      s_2 -> s_3 [ label = "b" ];\
-      s_2 -> s_2 [ label = "a" ];\
-      s_0 -> s_4 [ label = "b" ];\
-      s_1 -> s_4 [ label = "c" ];\
-      s_2 -> s_4 [ label = "a, c" ];\
-      s_3 -> s_4 [ label = "a" ];\
-      s_4 -> s_4 [ label = "a, b, c" ];}', 
-      'bbaabc', false);
+      `digraph G { 
+        rankdir=LR;
+        size="8,5";
+        node [color = red, shape = doublecircle]; A;
+        node [shape = doublecircle, color = black]; C B F E D;
+        node [shape = circle, color = black];
+        A -> D [ label = "d" ];
+        A -> C [ label = "c" ];
+        A -> B [ label = "a" ];
+        D -> D [ label = "d" ];
+        B -> F [ label = "d" ];
+        B -> E [ label = "b" ];
+        E -> G [ label = "a" ];
+        G -> E [ label = "d" ];
+        G -> F [ label = "d" ];
+        F -> G [ label = "a" ];
+        F -> D [ label = "d" ];
+        E -> D [ label = "d" ];
+        D -> G [ label = "a" ];
+      }`, 
+      'dabddc', false);
   });
 
 });
