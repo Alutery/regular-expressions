@@ -9,10 +9,10 @@
         <p>
             <ul>
                 <li><span class="math inline">\(Q\)</span> – конечное множество состояний;</li>
-                <li><span class="math inline">\(\Sigma\)</span> – конечное множество входных символов;</li>
-                <li><span class="math inline">\(\delta\)</span> – функция переходов, аргументами которой являются текущее состояние и входной символ, а значением – новое состояние;</li>
-                <li><span class="math inline">\(q_{0}\)</span> – начальное состояние;</li>
-                <li><span class="math inline">\(F\)</span> – множество допускающих состояний.</li>
+                <li><span class="math inline">\(\Sigma\)</span> – конечное множество входных символов (алфавит);</li>
+                <li><span class="math inline">\(\delta : Q \times \Sigma \rightarrow Q \)</span> – функция переходов;</li>
+                <li><span class="math inline">\(q_{0} \in Q\)</span> – начальное состояние;</li>
+                <li><span class="math inline">\(F \subseteq Q\)</span> – множество допускающих состояний.</li>
             </ul>
         </p>
         <!-- <p><a href="#" class="btn btn-primary btn-large">Попрактиковаться!</a></p> -->
@@ -47,6 +47,19 @@
     специального символа ε. В этом случае говорят, что автомат может совершать спонтанные εпереходы из одного состояния в другое, не читая при этом следующий символ строки.</p>
 
 <p><i>Примечание.</i> ε-НКА полезны при рассмотрении вопроса о построении автоматов по регулярным выражениям (см. "Построение ДКА по регулярному выражению").</p>
+<hr>
+<h5 class="mt-5 mb-3">Конечный автомат-распознаватель.</h5>
+<p>Автомат <span class="math inline">\(M = {\displaystyle (Q,\Sigma ,\delta ,q_{0},F)}\)</span> допускает строку <span class="math inline">\(w = w_{1}w_{2} \ldots w_{n}\)</span>, где
+    wi ∈ Σ, если существует последовательность состояний r0, r1, . . . , rn, такая что:</p>
+<p>
+    <ol>
+        <li><p><span class="math inline">\( \large r_{0} = q_{0}\)</span></p></li>
+        <li><p><span class="math inline">\( \large \delta (r_{i}, w_{i+1}) = r_{i+1} \qquad (i = 0, \ldots , n − 1)\)</span></p></li>
+        <li><p><span class="math inline">\( \large  r_{n} \in F \)</span></p></li>
+    </ol>
+</p>
+
+<p>т.е. автомат M распознает язык A = {w | M допускает w}. <br> Неформально: aвтомат M допускает язык A, если он допускает все цепочки этого языка, и только их.</p>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 
