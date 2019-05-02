@@ -11,6 +11,12 @@ def basic_definitions(request):
 def FA(request):
     return render(request, 'theory/lessons/FA.html')
 
+def conversionChart(request):
+    return render(request, 'theory/lessons/conversion_chart.html')
+
+def NFAToDFA(request):
+    return render(request, 'theory/lessons/NFA_to_DFA.html')
+
 def regexToNFA(request):
     return render(request, 'theory/lessons/regex_to_NFA.html')
 

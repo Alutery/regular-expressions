@@ -54,5 +54,14 @@ p {
 	resize: none; 
 }
 
-.step .mb-1{
+table.table-bordered > thead > tr > th{
+    border:1.5px solid;
+}
+
+table.table-bordered > tbody > tr > td{
+    border:1.5px solid;
+}
+
+table.table-bordered > tbody > tr > th{
+    border:1.5px solid;
 }

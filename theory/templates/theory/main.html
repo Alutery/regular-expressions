@@ -15,9 +15,10 @@
             <li class="list-group-item"><a href="{% url 'intro' %}">Введение</a></li>
             <li class="list-group-item"><a href="{% url 'basic_definitions' %}">Регулярные множества и выражения</a></li>
             <li class="list-group-item"><a href="{% url 'FA' %}">Конечные автоматы</a></li>
+            <li class="list-group-item"><a href="{% url 'conversion_chart' %}">Диаграмма переходов</a></li>
             <li class="list-group-item"><a href="{% url 'regex_to_NFA' %}">Построение ДКА по регулярному выражению</a></li>
             <li class="list-group-item"><a href="#">Построение НКА</a></li>
-            <li class="list-group-item"><a href="#">Построение ДКА по НКА</a></li>
+            <li class="list-group-item"><a href="{% url 'NFA_to_DFA' %}">Построение ДКА по НКА</a></li>
             <li class="list-group-item"><a href="{% url 'DFA_to_regex' %}">Преобразование ДКА в регулярное выражение</a></li>
         </ul>
     </div>

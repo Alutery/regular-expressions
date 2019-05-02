@@ -1,0 +1,233 @@
+{% extends "theory/main.html" %}
+{% load staticfiles %}
+
+{% block doc %}
+<div class="jumbotron">
+    <div class="container">
+    <h3 class="mb-3">Построение ДКА по НКА</h3>
+    <p>
+        Необходимо по недетерминированному конечному автомату <span class="math inline">\({\displaystyle M =(Q,\Sigma ,\delta ,q_{0},F)}\)</span> 
+        построить детерминированный конечный автомат <span class="math inline">\({\displaystyle M' = (Q',\Sigma ,\delta ',q'_{0},F')}\)</span>.
+    </p>
+</div>
+</div>
+
+<p>
+    Начальным состоянием для строящегося автомата является ε-замыкание начального состояния автомата 
+    исходного. ε-замыкание — множество состояний, которые достижимы из данного путём переходов по ε. 
+</p>
+<p>Далее, пока есть состояния, 
+    для которых не построены переходы (переходы делаются по символам, переходы по которым есть в исходном автомате), для каждого 
+    символа вычисляется ε-замыкание множества состояний, которые достижимы из рассматриваемого состояния путём перехода по 
+    рассматриваемому символу. 
+</p>
+<p>
+    Если состояние, которое соответствует найденному множеству, уже есть, то добавляется переход туда. 
+    Если нет, то добавляется новое полученное состояние.
+</p>
+
+<h4 class="mb-3 mt-5">Пример.</h4>
+<h5 class="mb-3">Инициализация</h5>
+
+<p>Помечаются состояния, соответствующие ε-замыканию начального. Эти состояния будут соответствовать состоянию A будущего ДКА.</p>
+
+<table class="mt-4 mb-4 table table-bordered table-responsive-sm text-center" cellpadding="4">
+    <thead>
+        <tr>
+            <th scope="col" rowspan="2" class="align-middle">Состояние ДКА</th>
+            <th scope="col" rowspan="2" class="align-middle">Множество состояний НКА</th>
+            <th scope="col" colspan="3" class="align-middle">Символы, по которым осуществляется переход</th>
+        </tr>
+        <tr>
+            <th scope="col"><i>a</i></th>
+            <th scope="col"><i>b</i></th>
+            <th scope="col"><i>c</i></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>A</th>
+            <td style="text-align:center">{1, 2, 9}</td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> — </td>
+        </tr>
+    </tbody>
+</table>
+
+<img class="img-theory img-fluid" src="{% static 'media/NFA_to_DFA/graph_0.png' %}" alt="graph_0">
+
+<h5 class="mb-3 mt-5">Первая итерация</h5>
+<p>Из ε-замыкания есть переходы в состояния НКА 3 и 10 (по a и c, соответственно). Для состояния 3 ε-замыканием является множество состояний {3, 4, 6}, для состояния 10 — {10}. Обозначим соответствующие данным множествам новые состояния ДКА как B и C.</p>
+
+<table class="mt-4 mb-4 table table-bordered table-responsive-sm text-center" cellpadding="4" >
+    <thead>
+        <tr>
+            <th scope="col" rowspan="2" class="align-middle">Состояние ДКА</th>
+            <th scope="col" rowspan="2" class="align-middle">Множество состояний НКА</th>
+            <th scope="col" colspan="3" class="align-middle">Символы, по которым осуществляется переход</th>
+        </tr>
+        <tr>
+            <th scope="col"><i>a</i></th>
+            <th scope="col"><i>b</i></th>
+            <th scope="col"><i>c</i></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>A</th>
+            <td style="text-align:center">{1, 2, 9}</td>
+            <td style="text-align:center"> B </td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> C </td>
+        </tr>
+        <tr>
+            <th>B</th>
+            <td style="text-align:center">{3, 4, 6}</td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> — </td>
+        </tr>
+        <tr>
+            <th>C</th>
+            <td style="text-align:center">{10}</td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> — </td>
+        </tr>
+    </tbody>
+</table>
+
+<img class="img-theory img-fluid" src="{% static 'media/NFA_to_DFA/graph_1.png' %}" alt="graph_1">
+
+
+<h5 class="mb-3 mt-5">Вторая итерация</h5>
+<p>Из множества состояний НКА {3, 4, 6}, соответствующего состоянию ДКА B есть два перехода — в состояние 5 (по b) и 7 (по c). Их ε-замыкания пересекаются, но сами множества различны, поэтому им ставятся в соответствие два новых состояния ДКА — D и E. Из состояний НКА, соответствующих состоянию ДКА C, никаких переходов нет.</p>
+
+<table class="mt-4 mb-4 table table-bordered table-responsive-sm text-center" cellpadding="4" >
+    <thead>
+        <tr>
+            <th scope="col" rowspan="2" class="align-middle">Состояние ДКА</th>
+            <th scope="col" rowspan="2" class="align-middle">Множество состояний НКА</th>
+            <th scope="col" colspan="3" class="align-middle">Символы, по которым осуществляется переход</th>
+        </tr>
+        <tr>
+            <th scope="col"><i>a</i></th>
+            <th scope="col"><i>b</i></th>
+            <th scope="col"><i>c</i></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>A</th>
+            <td style="text-align:center">{1, 2, 9}</td>
+            <td style="text-align:center"> B </td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> C </td>
+        </tr>
+        <tr>
+            <th>B</th>
+            <td style="text-align:center">{3, 4, 6}</td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> D </td>
+            <td style="text-align:center"> E </td>
+        </tr>
+        <tr>
+            <th>C</th>
+            <td style="text-align:center">{10}</td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> — </td>
+        </tr>
+        <tr>
+            <th>D</th>
+            <td style="text-align:center">{2, 5, 8, 9}</td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> — </td>
+        </tr>
+        <tr>
+            <th>E</th>
+            <td style="text-align:center">{2, 7, 8, 9}</td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> — </td>
+        </tr>
+    </tbody>
+</table>
+
+<img class="img-theory img-fluid" src="{% static 'media/NFA_to_DFA/graph_2.png' %}" alt="graph_2">
+
+
+<h5 class="mb-3 mt-5">Третья итерация</h5>
+<p>
+    Из множеств состояний НКА, соответствующих состояниям ДКА D и E переходы делаются в множества состояний, соответствующие уже имеющимся состояниям (из множества {2, 5, 8, 9}, соответствующего состоянию D, по a переход в состояние 3, принадлежащее множеству {3, 4, 6}, соответствующему состоянию ДКА B, по c — переход в состояние 10, соответствующее состоянию C; аналогично для множества, соответствующего состоянию ДКА E). 
+</p>
+<p>Процесс построения таблицы состояний и переходов ДКА завершён.</p>
+
+<table class="mt-4 mb-4 table table-bordered table-responsive-sm text-center" cellpadding="4" >
+    <thead>
+        <tr>
+            <th scope="col" rowspan="2" class="align-middle">Состояние ДКА</th>
+            <th scope="col" rowspan="2" class="align-middle">Множество состояний НКА</th>
+            <th scope="col" colspan="3" class="align-middle">Символы, по которым осуществляется переход</th>
+        </tr>
+        <tr>
+            <th scope="col"><i>a</i></th>
+            <th scope="col"><i>b</i></th>
+            <th scope="col"><i>c</i></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>A</th>
+            <td style="text-align:center">{1, 2, 9}</td>
+            <td style="text-align:center"> B </td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> C </td>
+        </tr>
+        <tr>
+            <th>B</th>
+            <td style="text-align:center">{3, 4, 6}</td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> D </td>
+            <td style="text-align:center"> E </td>
+        </tr>
+        <tr>
+            <th>C</th>
+            <td style="text-align:center">{10}</td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> — </td>
+        </tr>
+        <tr>
+            <th>D</th>
+            <td style="text-align:center">{2, 5, 8, 9}</td>
+            <td style="text-align:center"> B </td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> C </td>
+        </tr>
+        <tr>
+            <th>E</th>
+            <td style="text-align:center">{2, 7, 8, 9}</td>
+            <td style="text-align:center"> B </td>
+            <td style="text-align:center"> — </td>
+            <td style="text-align:center"> C </td>
+        </tr>
+    </tbody>
+</table>
+
+<h5 class="mb-3 mt-5">Результат:</h5>
+
+<div class="col-12 col-md-7">
+    <img class="img-theory img-fluid"  src="{% static 'media/NFA_to_DFA/graph_3.png' %}" alt="graph_3">
+</div>
+
+<p class="mt-5"><i>*Источник: "Конструирование Компиляторов, Алгоритмы решения задач" (eSyr's wiki)</i></p>
+
+
+<!-- http://esyr.nizm.ru/wiki/%D0%9A%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%9A%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D1%8F%D1%82%D0%BE%D1%80%D0%BE%D0%B2%2C_%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D1%8B_%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F_%D0%B7%D0%B0%D0%B4%D0%B0%D1%87 -->
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+{% endblock %}
