@@ -12,13 +12,13 @@
 <div class="row">
     <div class="col-sm-3 sidebar">
         <ul class="nav nav-sidebar hidden-xs hidden-sm list-group">
-            <li class="list-group-item"><a href="{% url 'task1' %}">Допущение цепочки автоматом</a></li>
-            <li class="list-group-item"><a href="{% url 'lang_description' %}">Регулярное выражение по описанию языка</a></li>
-            <li class="list-group-item"><a href="{% url 'task2' %}">Принадлежность слова регулярному выражению</a></li>
-            <li class="list-group-item"><a href="{% url 'task_DFA_to_regex' %}">Упростить регулярное выражение</a></li>
-            <li class="list-group-item"><a href="{% url 'task3' %}">Соотвествие автомата рег. выражению</a></li>
-            <li class="list-group-item"><a href="{% url 'task_DFA_to_regex' %}">ДКА в регулярное выражение</a></li>
-            <li class="list-group-item"><a href="{% url 'task_DFA_to_regex' %}">Регулярность языка</a></li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'task1' %}" id="task1">Допущение цепочки автоматом</li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'lang_description' %}" id="lang_description">Регулярное выражение по описанию языка</li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'task2' %}" id="task2">Принадлежность слова регулярному выражению</li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'task_DFA_to_regex' %}" >Упростить регулярное выражение</li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'task3' %}" id="task3">Соотвествие автомата рег. выражению</li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'task_DFA_to_regex' %}" id="task_DFA_to_regex">ДКА в регулярное выражение</li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'task_DFA_to_regex' %}" >Регулярность языка</li>
         </ul>
     </div>
     <div class="col-sm-9">
@@ -31,6 +31,19 @@
 
 {% block scripts %}
 <script>
+    $(document).ready(function() {
+        $('.list-group-item-linkable').on('click', function() {
+            // same window/tab:
+            window.location.href = $(this).data('link');
+            // new window/tab:
+            //window.open($(this).data('link'));
+        });
+
+        $('.list-group-item-linkable a, .list-group-item-linkable button')
+        .on('click', function(e) {
+            // e.stopPropagation();
+        });
+    });
 	$( '.navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
 	$( '#practice_tab' ).addClass( 'active' );
 </script>
