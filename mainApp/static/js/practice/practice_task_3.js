@@ -1,34 +1,182 @@
 $(document).ready(function () {
   var data = [
-      'digraph G {\
-      rankdir=LR;\
-      size="8,5"\
-      node [shape = doublecircle]; s_2;\
-      node [shape = circle];\
-      s_0 -> s_1 [ label = "b" ];\
-      s_1 -> s_3 [ label = "a" ];\
-      s_1 -> s_2 [ label = "b" ];\
-      s_0 -> s_0 [ label = "a" ];\
-      s_3 -> s_3 [ label = "a, b" ];\
-      s_2 -> s_3 [ label = "b" ];\
-      s_2 -> s_2 [ label = "a" ];\
-      s_0 -> s_4 [ label = "b" ];\
-      s_1 -> s_4 [ label = "c" ];\
-      s_2 -> s_4 [ label = "a, c" ];\
-      s_3 -> s_4 [ label = "a" ];\
-      s_4 -> s_4 [ label = "a, b, c" ];}', 
+      `digraph G { 
+        rankdir=LR;
+        size="8,5";
+        node [color = red, shape = doublecircle]; A;
+        node [shape = doublecircle, color = black]; D;
+        node [shape = circle, color = black];
+        A -> B [ label = "d" ];
+        B -> C [ label = "b" ];
+        C -> D [ label = "a" ];
+        D -> B [ label = "d" ];
+        D -> D [ label = "a" ];
+      }`, // (dba*a)* - #0
 
-      'digraph G { rankdir=LR;\
-      size="8,5"\
-      node [shape = doublecircle]; s_2;\
-      node [shape = circle];\
-      s_0 -> s_1 [ label = "b" ];\
-      s_1 -> s_3 [ label = "a" ];\
-      s_1 -> s_2 [ label = "b" ];\
-      s_0 -> s_0 [ label = "a" ];\
-      s_3 -> s_3 [ label = "a, b" ];\
-      s_2 -> s_3 [ label = "b" ];\
-      s_2 -> s_2 [ label = "a" ];}', 
+      `digraph G { 
+        rankdir=LR;
+        size="8,5";
+        node [color = red, shape = circle]; A;
+        node [shape = doublecircle, color = black]; B;
+        node [shape = circle, color = black];
+        A -> B [ label = "b" ];
+        A -> C [ label = "d" ];
+        C -> D [ label = "b" ];
+        D -> E [ label = "a" ];
+        E -> C [ label = "d" ];
+        E -> E [ label = "a" ];
+        E -> B [ label = "b" ];
+      }`, // (dba*a)*b - #1
+
+      `digraph G { 
+        rankdir=LR;
+        size="8,5";
+        node [color = red, shape = circle]; A;
+        node [shape = doublecircle, color = black]; B;
+        node [shape = circle, color = black];
+        A -> B [ label = "b" ];
+        A -> C [ label = "d" ];
+        C -> D [ label = "b" ];
+        D -> E [ label = "a" ];
+        E -> C [ label = "d" ];
+        E -> E [ label = "a" ];
+        E -> B [ label = "b" ];
+        B -> B [ label = "b" ];
+      }`, // (dba*a)*b* - #2
+
+      `digraph G { 
+        rankdir=LR;
+        size="8,5";
+        node [color = red, shape = doublecircle]; A;
+        node [shape = doublecircle, color = black]; C D;
+        node [shape = circle, color = black];
+        A -> B [ label = "d" ];
+        B -> C [ label = "b" ];
+        C -> B [ label = "d" ];
+        D -> B [ label = "d" ];
+        C -> D [ label = "a" ];
+        D -> D [ label = "a" ];
+      }`, // (dba*)* - #3
+
+// -------------------------------------
+
+      `digraph G { 
+        rankdir=LR;
+        size="8,5";
+        node [color = red, shape = circle]; A;
+        node [shape = doublecircle, color = black]; B C D;
+        node [shape = circle, color = black];
+        A -> C [ label = "b" ];
+        A -> B [ label = "a" ];
+        B -> C [ label = "b" ];
+        B -> E [ label = "с" ];
+        B -> D [ label = "a" ];
+        D -> C [ label = "b" ];
+        D -> E [ label = "c" ];
+        D -> D [ label = "a" ];
+        E -> D [ label = "a" ];
+        E -> E [ label = "c" ];
+        E -> C [ label = "b" ];
+      }`, // (a(a|c)*)*(a|b) - #4
+
+      `digraph G { 
+        rankdir=LR;
+        size="8,5";
+        node [color = red, shape = circle]; A;
+        node [shape = doublecircle, color = black]; D;
+        node [shape = circle, color = black];
+        A -> B [ label = "a" ];
+        B -> C [ label = "a" ];
+        B -> E [ label = "с" ];
+        B -> D [ label = "b" ];
+        C -> E [ label = "c" ];
+        C -> D [ label = "b" ];
+        C -> C [ label = "a" ];
+        E -> E [ label = "c" ];
+        E -> C [ label = "a" ];
+      }`, // (a(a|c)*)*(ab) - #5
+
+      `digraph G { 
+        rankdir=LR;
+        size="8,5";
+        node [color = red, shape = circle]; A;
+        node [shape = doublecircle, color = black]; D;
+        node [shape = circle, color = black];
+        A -> B [ label = "a" ];
+        B -> C [ label = "a" ];
+        B -> D [ label = "b" ];
+        C -> E [ label = "c" ];
+        C -> D [ label = "b" ];
+        C -> C [ label = "a" ];
+        E -> C [ label = "a" ];
+      }`, // (a(ac)*)*(ab) - #6
+
+      `digraph G { 
+        rankdir=LR;
+        size="8,5";
+        node [color = red, shape = circle]; A;
+        node [shape = doublecircle, color = black]; D;
+        node [shape = circle, color = black];
+        A -> B [ label = "a" ];
+        A -> C [ label = "b" ];
+        B -> D [ label = "b" ];
+        C -> E [ label = "c" ];
+        C -> B [ label = "a" ];
+        C -> C [ label = "b" ];
+        E -> C [ label = "b" ];
+        E -> B [ label = "a" ];
+      }`, // (bc*)*(ab) - #7
+
+// -------------------------------------
+
+      `digraph G { 
+        rankdir=LR;
+        size="8,5";
+        node [color = red, shape = circle]; A;
+        node [shape = doublecircle, color = black]; D G H;
+        node [shape = circle, color = black];
+        A -> B [ label = "a" ];
+        A -> C [ label = "b" ];
+        B -> D [ label = "b" ];
+        C -> E [ label = "a" ];
+        C -> F [ label = "b" ];
+        F -> E [ label = "a" ];
+        F -> H [ label = "b" ];
+        H -> E [ label = "a" ];
+        H -> H [ label = "b" ];
+        E -> G [ label = "b" ];
+      }`, // bb*(b|a)b|ab - #8
+
+      `digraph G { 
+        rankdir=LR;
+        size="8,5";
+        node [color = red, shape = circle]; A;
+        node [shape = doublecircle, color = black]; D E G;
+        node [shape = circle, color = black];
+        A -> B [ label = "a" ];
+        A -> C [ label = "b" ];
+        B -> D [ label = "b" ];
+        C -> E [ label = "b" ];
+        E -> E [ label = "b" ];
+        E -> F [ label = "c" ];
+        F -> G [ label = "b" ];
+        G -> F [ label = "c" ];
+      }`, // bb*(bc)*b|ab = #9
+
+      `digraph G { 
+        rankdir=LR;
+        size="8,5";
+        node [color = red, shape = circle]; A;
+        node [shape = doublecircle, color = black]; B D;
+        node [shape = circle, color = black];
+        A -> B [ label = "b" ];
+        B -> D [ label = "a" ];
+        B -> C [ label = "b" ];
+        A -> A [ label = "a" ];
+        D -> D [ label = "a" ];
+        C -> D [ label = "b" ];
+        C -> C [ label = "a" ];
+      }`, 
 
       'digraph G { rankdir=LR;\
       size="8,5"\
@@ -81,31 +229,12 @@ $(document).ready(function () {
       s_3 -> s_4 [ label = "a" ];\
       s_4 -> s_4 [ label = "a, b, c" ];}'
       ];
-  // Installs error handling.
-  // jQuery.ajaxSetup({
-  // error: function(resp, e) {
-  //   if (resp.status == 0){
-  //     alert('You are offline!!\n Please Check Your Network.');
-  //     } else if (resp.status == 404){
-  //       alert('Requested URL not found.');
-  //     } else if (resp.status == 500){
-  //       alert('Internel Server Error:\n\t' + resp.responseText);
-  //     } else if (e == 'parsererror') {
-  //       alert('Error.\nParsing JSON Request failed.');
-  //     } else if (e == 'timeout') {
-  //       alert('Request timeout.');
-  //     } else {
-  //       alert('Unknown Error.\n' + resp.responseText);
-  //     }
-  //   }
-  // });  // error:function()
 
-  // var generate_btn = jQuery('#generate_btn');
-  var btn_1 = jQuery('#btn_task_3_1');
-  var btn_2 = jQuery('#btn_task_3_2');
-  var btn_3 = jQuery('#btn_task_3_3');
-  var btn_4 = jQuery('#btn_task_3_4');
-  var btn_5 = jQuery('#btn_task_3_5');
+  var btn_1 = jQuery('#btn_task_1');
+  var btn_2 = jQuery('#btn_task_2');
+  var btn_3 = jQuery('#btn_task_3');
+  var btn_4 = jQuery('#btn_task_4');
+  var btn_5 = jQuery('#btn_task_5');
 
   var img_graph = ['#graph_1', '#graph_2', '#graph_3', '#graph_4'];
 
@@ -116,7 +245,7 @@ $(document).ready(function () {
 
   var current_answer = 0;
 
-
+  // answer = {1, 2, 3, 4}, [4 indexes for data array]
   function Update(regex_assignment, answer) {
     $('#answer_request').show();
     $('#btn_repeat').hide();
@@ -146,18 +275,16 @@ $(document).ready(function () {
     }
   }
 
-  // Startup function: call UpdateGraphviz
+  // Startup function
   jQuery(function() {
     btn_1.click();
   });
 
-  // Bind actions to form buttons.
-
   btn_accept.click(function(){
     $('#answer_request').hide();
     $('#btn_repeat').show();
-    if(current_answer == $('input[name=radioName]:checked', '#answer_request').val()
-) {
+
+    if(current_answer == $('input[name=radio]:checked', '#answer_request').val()) {
       $('#result').text('Верно!');
       $('#result').css( "color", "green" );
     }
@@ -175,36 +302,36 @@ $(document).ready(function () {
   btn_1.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
-
-    Update('aabba', 2, 1, 3, 4, 1);
+    current = 1;
+    Update('(dba*a)*', 1, 0, 1, 2, 3);
   });
 
   btn_2.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
-
-    Update('aab*ba+', 1, 3, 3, 1, 1);
+    current = 2;
+    Update('(dba*a)*b*', 4, 1, 3, 0, 2);
   });
 
   btn_3.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
-
-    Update('aAA*a', 2, 1, 1, 1, 1);
+    current = 3;
+    Update('(a(a|c)*)*(a|b)', 3, 5, 7, 4, 6);
   });
 
   btn_4.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
-
-    Update('a+', 4, 2, 3, 2, 3);
+    current = 4;
+    Update('bb*(b|a)b|ab', 3, 9, 10, 8, 7);
   });
 
   btn_5.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
-
-    Update('SS.S.', 3, 1, 1, 1, 4);
+    current = 5;
+    Update('(bc*)*(ab)', 1, 7, 6, 5, 4);
   });
 
 
