@@ -18,8 +18,8 @@ def task2(request):
 def task3(request):
     return render(request, 'practice/tasks/task_3.html')
 
-def taskDFAtoregex(request):
-    sub_template = 'practice/tasks/subtemplates/input.html'
+def langDescription(request):
+    sub_template = 'practice/tasks/subtemplates/lang_description/input.html'
 
     if request.method == 'POST':
         input = request.POST['q']
@@ -27,7 +27,21 @@ def taskDFAtoregex(request):
 
         correctness = check_equivalence(input, answer)
 
-        sub_template = 'practice/tasks/subtemplates/result.html'
+        sub_template = 'practice/tasks/subtemplates/lang_description/result.html'
+        return render(request, 'practice/tasks/lang_description.html', {'url' : sub_template, 'correct' : correctness, 'input' : input})
+    else:  
+        return render(request, 'practice/tasks/lang_description.html', {"url" : sub_template})
+
+def taskDFAtoregex(request):
+    sub_template = 'practice/tasks/subtemplates/task_DFA_to_regex/input.html'
+
+    if request.method == 'POST':
+        input = request.POST['q']
+        answer = request.POST['answer']
+
+        correctness = check_equivalence(input, answer)
+
+        sub_template = 'practice/tasks/subtemplates/task_DFA_to_regex/result.html'
         return render(request, 'practice/tasks/task_DFA_to_regex.html', {'url' : sub_template, 'correct' : correctness, 'input' : input})
     else:  
         return render(request, 'practice/tasks/task_DFA_to_regex.html', {"url" : sub_template})
@@ -41,8 +55,6 @@ def check_equivalence(a, b):
 
     minDFA_1 = dfa_1.getMinimisedDFA()
     minDFA_2 = dfa_2.getMinimisedDFA()
-
-    # print(dfa_1.transitions)
 
     if minDFA_1.language != minDFA_2.language:
         return 0

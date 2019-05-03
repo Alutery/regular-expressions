@@ -1,8 +1,7 @@
 var current = 1;
+var max = 5;
 
 $(document).ready(function () {
-    var max = 5;
-
     var btn_prev = $('#prev');
     var btn_next = $('#next');
 

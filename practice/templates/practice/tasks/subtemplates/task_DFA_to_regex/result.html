@@ -1,0 +1,9 @@
+<p id="result">
+    {% if correct == 1 %}
+        <span style="color: green">Верно! </span>
+        (Вы ввели: {{input}})
+    {% else %}
+        <span style="color: red">Не верно! </span>
+        (Вы ввели: {{input}})
+    {% endif %}
+</p>
