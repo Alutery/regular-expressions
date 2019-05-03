@@ -8,6 +8,9 @@ def intro(request):
 def basic_definitions(request):
     return render(request, 'theory/lessons/basic_definitions.html')
 
+def regexEquivalence(request):
+    return render(request, 'theory/lessons/regex_equivalence.html')
+
 def FA(request):
     return render(request, 'theory/lessons/FA.html')
 

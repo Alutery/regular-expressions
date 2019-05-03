@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('intro/', views.intro, name='intro'),
     path('basicDefinitions/', views.basic_definitions, name='basic_definitions'),
+    path('regexEquivalence/', views.regexEquivalence, name='regex_equivalence'),
     path('FA/', views.FA, name='FA'),
     path('conversionChart/', views.conversionChart, name='conversion_chart'),
     path('NFAToDFA/', views.NFAToDFA, name='NFA_to_DFA'),
