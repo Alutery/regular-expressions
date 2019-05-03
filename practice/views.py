@@ -18,6 +18,9 @@ def task2(request):
 def task3(request):
     return render(request, 'practice/tasks/task_3.html')
 
+def simplifyRegex(request):
+    return render(request, 'practice/tasks/simplify_regex.html')
+
 def langDescription(request):
     sub_template = 'practice/tasks/subtemplates/lang_description/input.html'
 
