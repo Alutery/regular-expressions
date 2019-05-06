@@ -10,4 +10,5 @@ urlpatterns = [
     path('task_2/', views.task2, name='task2'),
     path('task_3/', views.task3, name='task3'),
     path('taskDFAtoregex/', views.taskDFAtoregex, name='task_DFA_to_regex'),
+    path('ajax/validateRegex/', views.validate_regex, name='validate_regex'),
 ]

@@ -3,6 +3,13 @@ from django.http import HttpResponse
 from .forms import CheckEquivalence
 from practice.lib import AutomataTheory
 from queue import Queue
+from django.http import JsonResponse
+
+
+def validate_regex(request):
+    regex = request.GET.get('regex', None)
+    data = {'correctness' : f'<span style="color: green">Верно! </span>(Вы ввели: {regex})'}
+    return JsonResponse(data)
 
 
 # Create your views here.
@@ -22,32 +29,29 @@ def simplifyRegex(request):
     return render(request, 'practice/tasks/simplify_regex.html')
 
 def langDescription(request):
-    sub_template = 'practice/tasks/subtemplates/lang_description/input.html'
+    # if request.method == 'POST':
+    #     input = request.POST['q']
+    #     answer = request.POST['answer']
 
-    if request.method == 'POST':
-        input = request.POST['q']
-        answer = request.POST['answer']
+    #     correctness = check_equivalence(input, answer)
 
-        correctness = check_equivalence(input, answer)
-
-        sub_template = 'practice/tasks/subtemplates/lang_description/result.html'
-        return render(request, 'practice/tasks/lang_description.html', {'url' : sub_template, 'correct' : correctness, 'input' : input})
-    else:  
-        return render(request, 'practice/tasks/lang_description.html', {"url" : sub_template})
+    #     sub_template = 'practice/tasks/subtemplates/lang_description/result.html'
+    #     return render(request, 'practice/tasks/lang_description.html', {'url' : sub_template, 'correct' : correctness, 'input' : input})
+    # else:  
+    return render(request, 'practice/tasks/lang_description.html')
 
 def taskDFAtoregex(request):
-    sub_template = 'practice/tasks/subtemplates/task_DFA_to_regex/input.html'
+    # if request.method == 'POST':
+    #     input = request.POST['q']
+    #     answer = request.POST['answer']
 
-    if request.method == 'POST':
-        input = request.POST['q']
-        answer = request.POST['answer']
+    #     correctness = check_equivalence(input, answer)
 
-        correctness = check_equivalence(input, answer)
-
-        sub_template = 'practice/tasks/subtemplates/task_DFA_to_regex/result.html'
-        return render(request, 'practice/tasks/task_DFA_to_regex.html', {'url' : sub_template, 'correct' : correctness, 'input' : input})
-    else:  
-        return render(request, 'practice/tasks/task_DFA_to_regex.html', {"url" : sub_template})
+    #     sub_template = 'practice/tasks/subtemplates/task_DFA_to_regex/result.html'
+    #     return render(request, 'practice/tasks/task_DFA_to_regex.html', {'url' : sub_template, 'correct' : correctness, 'input' : input})
+    # else:  
+    # if request.method != 'POST':
+    return render(request, 'practice/tasks/task_DFA_to_regex.html')
 
 def check_equivalence(a, b):
     a = AutomataTheory.NFAfromRegex(a)

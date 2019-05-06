@@ -6,7 +6,9 @@ $(document).ready(function () {
     var btn_next = $('#next');
 
     btn_prev.click(function() {
-        console.log(current);
+        // console.log(current);
+        $('#answer_request').show();
+        $('#result').hide();
         if(current > 1) {
             current--;
             $('#btn_task_' + current).click();
@@ -14,7 +16,9 @@ $(document).ready(function () {
     });
 
     btn_next.click(function() {
-        console.log(current);
+        // console.log(current);
+        $('#answer_request').show();
+        $('#result').hide();
         if(current < max) {
             current++;
             $('#btn_task_' + current).click();

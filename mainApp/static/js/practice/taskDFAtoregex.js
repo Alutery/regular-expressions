@@ -4,6 +4,33 @@ $(document).ready(function () {
         btn_1.click();
     });
 
+    $("#btn_accept").bind("click", function () {
+      event.preventDefault();
+
+      var inputRegex = $('#inputRegex').val();
+      $('#inputRegex').val('');
+
+      $.ajax({
+          url: '{% url "validate_regex" %}',
+          type: 'get',
+          data: ({ regex: inputRegex }),
+          beforeSend: function(){
+              $('#answer_request').hide();
+              $('#result').show();
+              $('#result').text('Обработка..');
+          },
+          success: function(data) {
+              $('#result').html(data.correctness);
+          },
+          error: function(){
+              $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+              console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+          }
+      });
+
+    });
+
     var btn_1 = jQuery('#btn_task_1');
     var btn_2 = jQuery('#btn_task_2');
     var btn_3 = jQuery('#btn_task_3');
@@ -61,6 +88,9 @@ $(document).ready(function () {
     btn_1.click(function(){
         $( ".page-item" ).removeClass( "active" );
         $(this).addClass( "active" );
+
+        $('#answer_request').show();
+        $('#result').hide();
     
         UpdateGraphviz(
           `digraph G { rankdir=LR;
@@ -95,6 +125,9 @@ $(document).ready(function () {
       $( ".page-item" ).removeClass( "active" );
       $(this).addClass( "active" );
 
+      $('#answer_request').show();
+      $('#result').hide();
+
       UpdateGraphviz(
         `digraph G { rankdir=LR;
         layout="dot";
@@ -111,6 +144,9 @@ $(document).ready(function () {
       $( ".page-item" ).removeClass( "active" );
       $(this).addClass( "active" );
 
+      $('#answer_request').show();
+      $('#result').hide();
+
       UpdateGraphviz(
         `digraph G { rankdir=LR;
         layout="dot";
@@ -124,6 +160,9 @@ $(document).ready(function () {
     btn_5.click(function(){
       $( ".page-item" ).removeClass( "active" );
       $(this).addClass( "active" );
+
+      $('#answer_request').show();
+      $('#result').hide();
 
       UpdateGraphviz(
         `digraph G { 

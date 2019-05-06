@@ -26,10 +26,19 @@
 <div class="jumbotron">
     <div class="container">
     <h5>Дан конечный автомат-распознаватель:</h5>
-    <!-- {% load staticfiles %} -->
-    <!-- <img class="img-theory" id="graph_1" src="{% static 'media/graph_1.png' %}" alt="graph_1"> -->
     <br><div id="graphviz_svg"><!-- Target for dynamic svg generation --></div><hr>
-    {% include url %}
+    <div id="answer_request">
+        <form  method="POST">
+            {% csrf_token %}
+            <div class="form-group mb-3 mt-">
+                <label for="inputRegex"><p class="mt-4 mb-2">Какое регулярное выражение ему соответствует?</p></label>
+                <input class="form-control noresize w-50 " rows="1" placeholder="Введите здесь" type="text" id="inputRegex" name="q" required>
+            </div>
+            <input type="hidden" name="answer" id="answer">
+            <button type="submit" class="btn btn-primary" id="btn_accept">Подтвердить</button>
+        </form>
+    </div>
+    <p id="result" style="display: none;"></p>
   </div>
 </div>
 
@@ -39,4 +48,5 @@
 <script src="{% static 'js/practice/taskDFAtoregex.js' %}"></script>
 <script src="{% static 'js/practice/moving.js' %}"></script>
 <script>$('#task_DFA_to_regex').addClass('active');</script>
+
 {% endblock %}
