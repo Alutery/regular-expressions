@@ -8,12 +8,14 @@ $(document).ready(function () {
       event.preventDefault();
 
       var inputRegex = $('#inputRegex').val();
+      var answerRegex = $('#answer').val();
+
       $('#inputRegex').val('');
 
       $.ajax({
-          url: '{% url "validate_regex" %}',
+          url: '../validate_regex/',
           type: 'get',
-          data: ({ regex: inputRegex }),
+          data: ({ input: inputRegex, answer: answerRegex }),
           beforeSend: function(){
               $('#answer_request').hide();
               $('#result').show();
@@ -22,7 +24,7 @@ $(document).ready(function () {
           success: function(data) {
               $('#result').html(data.correctness);
           },
-          error: function(){
+          error: function(xhr,errmsg,err){
               $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
                 " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
               console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console

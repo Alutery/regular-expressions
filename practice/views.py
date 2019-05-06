@@ -7,8 +7,17 @@ from django.http import JsonResponse
 
 
 def validate_regex(request):
-    regex = request.GET.get('regex', None)
-    data = {'correctness' : f'<span style="color: green">Верно! </span>(Вы ввели: {regex})'}
+    input = request.GET.get('input', None)
+    answer = request.GET.get('answer', None)
+
+    correctness = check_equivalence(input, answer)
+
+    data = {}
+    if correctness == 1:
+        data = {'correctness' : f'<span style="color: green">Верно! </span>(Вы ввели: {regex})'}
+    else:
+        data = {'correctness' : f'<span style="color: red">Не верно! </span>(Вы ввели: {regex})'}
+
     return JsonResponse(data)
 
 
