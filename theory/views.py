@@ -14,8 +14,8 @@ def regexEquivalence(request):
 def FA(request):
     return render(request, 'theory/lessons/FA.html')
 
-def conversionChart(request):
-    return render(request, 'theory/lessons/conversion_chart.html')
+def automatonLanguages(request):
+    return render(request, 'theory/lessons/automaton_languages.html')
 
 def NFAToDFA(request):
     return render(request, 'theory/lessons/NFA_to_DFA.html')

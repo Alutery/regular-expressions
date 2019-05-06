@@ -4,11 +4,11 @@ $(document).ready(function () {
         btn_1.click();
     });
 
-    var btn_1 = jQuery('#btn_task_1_1');
-    var btn_2 = jQuery('#btn_task_1_2');
-    var btn_3 = jQuery('#btn_task_1_3');
-    var btn_4 = jQuery('#btn_task_1_4');
-    var btn_5 = jQuery('#btn_task_1_5');
+    var btn_1 = jQuery('#btn_task_1');
+    var btn_2 = jQuery('#btn_task_2');
+    var btn_3 = jQuery('#btn_task_3');
+    var btn_4 = jQuery('#btn_task_4');
+    var btn_5 = jQuery('#btn_task_5');
 
     var svg_div = $('#graphviz_svg');
     var statement = $('#statement');
