@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -33,12 +33,15 @@
                 <li class="nav-item px-1" id="theory_tab"><a class="nav-link" href="{% url 'intro' %}">Теория</a></li>
                 <li class="nav-item px-1" id="practice_tab"><a class="nav-link" href="/practice">Практика</a></li>
             </ul>
-            {% if status %}
-            {% block account-loginOK %}
-            {% endblock %}
+            {% if username %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item my-2 px-1"><a class="btn btn-primary" href="{% url 'logout' %}" role="button" id="outClick">Выйти ({{ username }})</a></li>
+                </ul>
             {% else %}
-            {% block account-loginNO %}
-            {% endblock %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item my-2 px-1"><a class="btn btn-primary" data-whatever="@reg" data-toggle="modal" href="#popupLogin" role="button" id="regClick">Регистрация</a></li>
+                    <li class="nav-item my-2 px-1"><a class="btn btn-success" data-whatever="@log" data-toggle="modal" href="#popupLogin" role="button" id="logClick">Вход</a></li>
+                </ul>
             {% endif %}
         </div>
         </div>
@@ -65,7 +68,7 @@
                     <li class="nav-item"><a class="nav-link" href="#login" data-toggle="tab" id="log-nav-item"  target="_blank">Вход</a></li>
                 </ul>
                 <br>
-                <div class="tab-content">
+                <div class="tab-content">   
                     <div role="tabpanel" class="tab-pane" id="register">
                         <form id="registration_form" autocomplete="on" role="form" >
                         <div class="form-group">
@@ -79,6 +82,7 @@
                        <div class="form-group">
                             <label for="id_registration_password">Пароль</label>
                             <input id="id_registration_password" class="form-control" placeholder="Пароль" spellcheck="true" autocomplete="password" name="password" type="email">
+                            <!-- <p><a href="'password_reset'">Lost password?</a></p> -->
                         </div>
                     </form>
                     <br>
@@ -88,20 +92,23 @@
                     </div>
                     
                     <div role="tabpanel" class="tab-pane" id="login">
-                        <form id="login_form" autocomplete="on" role="form" >
-                       <div class="form-group">
-                            <label for="id_login_email">Email</label>
-                            <input id="id_login_email" class="form-control" required placeholder="E-mail" spellcheck="true" autocomplete="name" name="email" type="email">
-                        </div>
-                       <div class="form-group">
-                            <label for="id_login_password">Пароль</label>
-                            <input id="id_login_password" class="form-control" placeholder="Пароль" spellcheck="true" autocomplete="password" name="password" type="email">
-                        </div>
-                    </form>
-                      <br>
-                       <div class="text-right">
-                            <button class="btn btn-success btn-block" data-dismiss="modal">Вход</button>
-                        </div>
+                        <form action="{% url 'login' %}" id="login_form" autocomplete="on" role="form" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_login_email">Логин:</label>
+                                <input id="id_login_email" class="form-control" placeholder="Логин" autocomplete="username" name="username" type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_login_password">Пароль</label>
+                                <input id="id_login_password" class="form-control" placeholder="Пароль" autocomplete="password" name="password" type="password" required>
+                            </div>
+                            {% if login_error %}
+                                <label class="error">{{ login_error }}</label>
+                            {% endif %}
+                            <div class="text-right mb-3 mt-5">
+                                <input class="button btn btn-success btn-block" type="submit" value="Войти">
+                            </div>
+                        </form>                        
                     </div>
                     </div>
                 </div>
@@ -124,17 +131,26 @@
         $('#popupLogin').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var recipient = button.data('whatever') // Extract info from data-* attributes
-            if(recipient == "reg") {                
-                $( '#reg-nav-item' ).addClass( 'active' );
-                $( '#register' ).addClass( 'active' );
+
+            if(recipient == "@reg") {                
                 $( '#log-nav-item' ).removeClass( 'active' );
+                $( '#reg-nav-item' ).addClass( 'active' );
+
+                $( '#register' ).addClass( 'active' );
                 $( '#login' ).removeClass( 'active' );
+
+                $( '#register' ).addClass( 'show' );
+                $( '#login' ).removeClass( 'show' );
             }
             else {
                 $( '#reg-nav-item' ).removeClass( 'active' );
                 $( '#log-nav-item' ).addClass( 'active' );
+
                 $( '#register' ).removeClass( 'active' );
                 $( '#login' ).addClass( 'active' );
+
+                $( '#register' ).removeClass( 'show' );
+                $( '#login' ).addClass( 'show' );
             }
         });
     });

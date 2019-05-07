@@ -1,5 +1,9 @@
 from django.shortcuts import render
+from django.contrib import auth
 
 # Create your views here.
 def index(request):
-	return render(request, 'mainApp/home.html')
+	args = {}
+	if request.user.is_authenticated:
+		args['username'] = request.user.username
+	return render(request, 'mainApp/home.html', args)
