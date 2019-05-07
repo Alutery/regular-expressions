@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -5,8 +7,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}Default Title{% endblock %}</title>
-
-    {% load staticfiles %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     
@@ -31,11 +31,11 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item px-1" id="main_tab"><a class="nav-link" href="{% url 'index' %}">Главная</a></li>
                 <li class="nav-item px-1" id="theory_tab"><a class="nav-link" href="{% url 'intro' %}">Теория</a></li>
-                <li class="nav-item px-1" id="practice_tab"><a class="nav-link" href="/practice">Практика</a></li>
+                <li class="nav-item px-1" id="practice_tab"><a class="nav-link" href="{% url 'task1' %}">Практика</a></li>
             </ul>
-            {% if username %}
+            {% if user.is_authenticated %}
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item my-2 px-1"><a class="btn btn-primary" href="{% url 'logout' %}" role="button" id="outClick">Выйти ({{ username }})</a></li>
+                    <li class="nav-item my-2 px-1"><a class="btn btn-primary" href="{% url 'logout' %}" role="button" id="outClick">Выйти ({{ user.username }})</a></li>
                 </ul>
             {% else %}
                 <ul class="navbar-nav ml-auto">
