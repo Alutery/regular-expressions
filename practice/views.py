@@ -14,9 +14,9 @@ def validate_regex(request):
 
     data = {}
     if correctness == 1:
-        data = {'correctness' : f'<span style="color: green">Верно! </span>(Вы ввели: {regex})'}
+        data = {'correctness' : f'<span style="color: green">Верно! </span>(Вы ввели: {input})'}
     else:
-        data = {'correctness' : f'<span style="color: red">Не верно! </span>(Вы ввели: {regex})'}
+        data = {'correctness' : f'<span style="color: red">Не верно! </span>(Вы ввели: {input})'}
 
     return JsonResponse(data)
 
