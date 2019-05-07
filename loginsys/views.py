@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.template.context_processors import csrf
 from mainApp.models import Profile
+from mainApp.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 def login(request):
     args = {}
