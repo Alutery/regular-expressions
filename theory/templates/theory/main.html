@@ -14,15 +14,15 @@
 <div class="row">
     <div class="col-sm-3 sidebar">
         <ul class="nav nav-sidebar hidden-xs hidden-sm list-group">
-            <li class="list-group-item"><a href="{% url 'intro' %}">Введение</a></li>
-            <li class="list-group-item"><a href="{% url 'basic_definitions' %}">Регулярные множества и выражения</a></li>
-            <li class="list-group-item"><a href="{% url 'regex_equivalence' %}">Эквивалентность регулярных выражений</a></li>
-            <li class="list-group-item"><a href="{% url 'FA' %}">Конечные автоматы</a></li>
-            <li class="list-group-item"><a href="{% url 'automaton_languages' %}">Автоматные языки</a></li>
-            <li class="list-group-item"><a href="{% url 'regex_to_NFA' %}">Построение ДКА по регулярному выражению</a></li>
-            <li class="list-group-item"><a href="#">Построение НКА</a></li>
-            <li class="list-group-item"><a href="{% url 'NFA_to_DFA' %}">Построение ДКА по НКА</a></li>
-            <li class="list-group-item"><a href="{% url 'DFA_to_regex' %}">Преобразование ДКА в регулярное выражение</a></li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'intro' %}" id="intro">Введение</li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'basic_definitions' %}" id="basic_definitions">Регулярные множества и выражения</li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'regex_equivalence' %}" id="regex_equivalence">Эквивалентность регулярных выражений</li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'FA' %}" id="FA">Конечные автоматы</li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'automaton_languages' %}" id="automaton_languages">Автоматные языки</li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'regex_to_NFA' %}" id="regex_to_NFA">Построение ДКА по регулярному выражению</li>
+            <li class="list-group-item list-group-item-linkable" >Построение НКА</li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'NFA_to_DFA' %}" id="NFA_to_DFA">Построение ДКА по НКА</li>
+            <li class="list-group-item list-group-item-linkable" data-link="{% url 'DFA_to_regex' %}" id="DFA_to_regex">Преобразование ДКА в регулярное выражение</li>
         </ul>
     </div>
     <div class="col-sm-9">
@@ -31,25 +31,36 @@
     </div>
 </div>
 </div>
-{% endblock %}
 
-{% block scripts %}
 <script type="text/javascript">
+    $(document).ready(function() {
+        $('.list-group-item-linkable').on('click', function() {
+            // same window/tab:
+            window.location.href = $(this).data('link');
+            // new window/tab:
+            //window.open($(this).data('link'));
+        });
+
+        $('.list-group-item-linkable a, .list-group-item-linkable button')
+        .on('click', function(e) {
+            // e.stopPropagation();
+        });
+    });
 	$( '.navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
 	$( '#theory_tab' ).addClass( 'active' );
     
     
-    $('#logClick').click(function(e) {
-        e.preventDefault();
-        $( '#reg-nav-item' ).removeClass( 'active' );
-        $( '#log-nav-item' ).addClass( 'active' );
-    });
+    // $('#logClick').click(function(e) {
+    //     e.preventDefault();
+    //     $( '#reg-nav-item' ).removeClass( 'active' );
+    //     $( '#log-nav-item' ).addClass( 'active' );
+    // });
     
-    $('#regClick').click(function(e) {
-        e.preventDefault();
-        $( '#reg-nav-item' ).addClass( 'active' );
-        $( '#log-nav-item' ).removeClass( 'active' );
-    });
+    // $('#regClick').click(function(e) {
+    //     e.preventDefault();
+    //     $( '#reg-nav-item' ).addClass( 'active' );
+    //     $( '#log-nav-item' ).removeClass( 'active' );
+    // });
 
     // $('#modal-login').on('show.bs.modal', function (e) {
     //     e.preventDefault();
