@@ -120,8 +120,9 @@
                                     </div>
 
                                     <div class="mb-3 mt-5">
-                                        <button  type="button" id="signup_btn" class="btn btn-primary btn-lg btn-block  mb-2 mt-2"
-                                            style="max-width:500px" onclick="signup()">Зарегистрироваться</button>
+                                        <button type="button" id="signup_btn"
+                                            class="btn btn-primary btn-lg btn-block  mb-2 mt-2" style="max-width:500px"
+                                            onclick="signup()">Зарегистрироваться</button>
                                     </div>
                                 </form>
                             </div>
@@ -145,7 +146,7 @@
                                     </div>
                                     <button type="button" class="btn btn-primary btn-lg btn-block login-btn"
                                         style="max-width:500px" onclick="login()">Login</button>
-                                    
+
                                 </form>
                             </div>
                         </div>
@@ -155,12 +156,11 @@
         </div>
     </main>
 
-    <!--    Latest compiled and minified JavaScript-->
 
     <script src="{% static 'js/mainApp/main.js' %}"></script>
     <script type="text/javascript">
-    // using jQuery
-    function getCookie(name) {
+        // using jQuery
+        function getCookie(name) {
             var cookieValue = null;
             if (document.cookie && document.cookie != '') {
                 var cookies = document.cookie.split(';');
@@ -175,89 +175,46 @@
             }
             return cookieValue;
         }
-    $(document).ready(function () {
-
-        
-        var csrftoken = getCookie('csrftoken');
+        $(document).ready(function () {
 
 
-        function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
+            var csrftoken = getCookie('csrftoken');
 
-        function sameOrigin(url) {
-            // test that a given url is a same-origin URL
-            // url could be relative or scheme relative or absolute
-            var host = document.location.host; // host + port
-            var protocol = document.location.protocol;
-            var sr_origin = '//' + host;
-            var origin = protocol + sr_origin;
-            // Allow absolute or scheme relative URLs to same origin
-            return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-                (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
-                // or any other URL that isn't scheme relative or absolute i.e relative.
-                !(/^(\/\/|http:|https:).*/.test(url));
-        }
-        $.ajaxSetup({
-            beforeSend: function (xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-                    // Send the token to same-origin, relative URLs only.
-                    // Send the token only if the method warrants CSRF protection
-                    // Using the CSRFToken value acquired earlier
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
+
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
             }
+
+            function sameOrigin(url) {
+                // test that a given url is a same-origin URL
+                // url could be relative or scheme relative or absolute
+                var host = document.location.host; // host + port
+                var protocol = document.location.protocol;
+                var sr_origin = '//' + host;
+                var origin = protocol + sr_origin;
+                // Allow absolute or scheme relative URLs to same origin
+                return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+                    (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+                    // or any other URL that isn't scheme relative or absolute i.e relative.
+                    !(/^(\/\/|http:|https:).*/.test(url));
+            }
+            $.ajaxSetup({
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+                        // Send the token to same-origin, relative URLs only.
+                        // Send the token only if the method warrants CSRF protection
+                        // Using the CSRFToken value acquired earlier
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+
+
+
         });
 
-        
-    //     $("#signup_btn").on("click", function(event){
-        
-    //     if(!isValid()){
-    //         alert('!!');
-    //         // event.preventDefault();    //stop form from submitting
-    //     }
-    //     email = $("#inputEmail").val();
-    //     fname = document.getElementById("inputFname").value;
-    //     lname = document.getElementById("inputLname").value;
-    //     password1 = document.getElementById("inputPassword1").value;
-    //     password2 = document.getElementById("inputPassword2").value;
-    //     csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
-    //     $("#erroremail").html("");
-    //     $("#errorpass").html("");
-    //     console.log(':c');
-
-    //     $.ajax({
-    //         url:'/auth/signup/',
-    //         type:"POST",
-    //         data:{
-    //             'csrfmiddlewaretoken': csrfmiddlewaretoken,
-    //             'first_name':fname,
-    //             'last_name':lname,
-    //             'email':email,
-    //             'password1':password1,
-    //             'password2':password2,
-    //         },
-    //         success : function(data){
-    //             console.log(data['message']);
-    //             if(data['message'] == "Success"){
-    //                 console.log('Succeess');
-    //                 // window.location = "/"
-    //             }
-    //             else{
-    //                 console.log('Succeess');
-    //                 if("email" in data['message'])
-    //                     $("#erroremail").html(data['message']['email'][0]);
-    //                 if("password2" in data['message'])
-    //                     $("#errorpass").html(data['message']['password2'][0]);
-    //             }
-    //         }
-    //     })
-    // });
-
-});
-
-function login() {
+        function login() {
             email = document.getElementById("inputUsername").value;
             password = document.getElementById("inputPassword").value;
             csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
@@ -282,6 +239,7 @@ function login() {
                 }
             });
         }
+
         function signup() {
             email = document.getElementById("inputEmail").value;
             fname = document.getElementById("inputFname").value;
@@ -327,8 +285,6 @@ function login() {
                 })
             }
         }
-    
-
     </script>
 </body>
 
