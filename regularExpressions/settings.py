@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'practice.apps.PracticeConfig',
     'theory.apps.TheoryConfig',
     'registration.apps.RegistrationConfig',
+    'profilePage.apps.ProfilepageConfig',
     # 'loginsys.apps.LoginsysConfig',
     'django.contrib.admin',
     'django.contrib.auth',  # Фреймворк аутентификации и моделей по умолчанию.

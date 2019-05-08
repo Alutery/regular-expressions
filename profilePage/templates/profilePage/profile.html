@@ -1,0 +1,32 @@
+{% extends "mainApp/wrapper.html" %}
+
+{% block content %}
+<div class="jumbotron">
+<div class="container-fluid">
+<div class="continer">
+    <main role="main">
+        
+    </main>
+</div>
+</div>
+</div>
+
+
+<script type="text/javascript">
+$('#logClick').click(function(e) {
+        e.preventDefault();
+        $( '#reg-nav-item' ).removeClass( 'active' );
+        $( '#log-nav-item' ).addClass( 'active' );
+});
+    
+$('#regClick').click(function(e) {
+    e.preventDefault();
+    $( '#reg-nav-item' ).addClass( 'active' );
+    $( '#log-nav-item' ).removeClass( 'active' );
+});
+
+$( '.navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
+$( '#main_tab' ).addClass( 'active' );
+</script>
+
+{% endblock %}

@@ -43,11 +43,12 @@
                     </li>
                     <li class="nav-item px-1" id="theory_tab"><a class="nav-link" href="{% url 'intro' %}">Теория</a>
                     </li>
-                    <li class="nav-item px-1" id="practice_tab"><a class="nav-link"
-                            href="{% url 'task1' %}">Практика</a></li>
+                    <li class="nav-item px-1" id="practice_tab"><a class="nav-link" href="{% url 'task1' %}">Практика</a></li>
                 </ul>
                 {% if user.is_authenticated %}
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item my-2 px-1"><a class="btn btn-success" href="{% url 'profile' %}" role="button"
+                            id="outClick">Личный кабинет</a></li>
                     <li class="nav-item my-2 px-1"><a class="btn btn-primary" href="{% url 'logout' %}" role="button"
                             id="outClick">Выйти ({{ request.user.email }})</a></li>
                 </ul>
@@ -80,7 +81,7 @@
                     </div>
                     <div class="modal-body">
                         <ul class="nav nav-tabs">
-                            <li class="nav-item"><a class="nav-link active" href="#register" data-toggle="tab"
+                            <li class="nav-item"><a class="nav-link" href="#register" data-toggle="tab"
                                     id="reg-nav-item">Регистрация</a></li>
                             <li class="nav-item"><a class="nav-link" href="#login" data-toggle="tab"
                                     id="log-nav-item">Вход</a></li>
