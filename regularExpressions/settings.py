@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'regularexpressions.pythonanywhere.com']
 
+LOGIN_REDIRECT_URL = '/'
+AUTH_USER_MODEL = 'registration.User'
 
 # Application definition
 
@@ -34,7 +36,8 @@ INSTALLED_APPS = [
     'mainApp.apps.MainappConfig',
     'practice.apps.PracticeConfig',
     'theory.apps.TheoryConfig',
-    'loginsys.apps.LoginsysConfig',
+    'registration.apps.RegistrationConfig',
+    # 'loginsys.apps.LoginsysConfig',
     'django.contrib.admin',
     'django.contrib.auth',  # Фреймворк аутентификации и моделей по умолчанию.
     'django.contrib.contenttypes',  # Django контент-типовая система (даёт разрешения, связанные с моделями).

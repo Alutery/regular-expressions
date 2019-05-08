@@ -2,158 +2,334 @@
 
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
     <title>{% block title %}Default Title{% endblock %}</title>
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    
+
     <!--    jQuerty-->
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-       <div class="container">
-        
-        <a href="{% url 'index' %}" class="navbar-brand" >REGEX</a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-1" >
-            <span class="sr-only">Navigation</span>
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbar-collapse-1">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item px-1" id="main_tab"><a class="nav-link" href="{% url 'index' %}">Главная</a></li>
-                <li class="nav-item px-1" id="theory_tab"><a class="nav-link" href="{% url 'intro' %}">Теория</a></li>
-                <li class="nav-item px-1" id="practice_tab"><a class="nav-link" href="{% url 'task1' %}">Практика</a></li>
-            </ul>
-            {% if user.is_authenticated %}
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item my-2 px-1"><a class="btn btn-primary" href="{% url 'logout' %}" role="button" id="outClick">Выйти ({{ user.username }})</a></li>
+        <div class="container">
+
+            <a href="{% url 'index' %}" class="navbar-brand">REGEX</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-1">
+                <span class="sr-only">Navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item px-1" id="main_tab"><a class="nav-link" href="{% url 'index' %}">Главная</a>
+                    </li>
+                    <li class="nav-item px-1" id="theory_tab"><a class="nav-link" href="{% url 'intro' %}">Теория</a>
+                    </li>
+                    <li class="nav-item px-1" id="practice_tab"><a class="nav-link"
+                            href="{% url 'task1' %}">Практика</a></li>
                 </ul>
-            {% else %}
+                {% if user.is_authenticated %}
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item my-2 px-1"><a class="btn btn-primary" data-whatever="@reg" data-toggle="modal" href="#popupLogin" role="button" id="regClick">Регистрация</a></li>
-                    <li class="nav-item my-2 px-1"><a class="btn btn-success" data-whatever="@log" data-toggle="modal" href="#popupLogin" role="button" id="logClick">Вход</a></li>
+                    <li class="nav-item my-2 px-1"><a class="btn btn-primary" href="{% url 'logout' %}" role="button"
+                            id="outClick">Выйти ({{ request.user.email }})</a></li>
                 </ul>
-            {% endif %}
-        </div>
+                {% else %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item my-2 px-1"><a class="btn btn-primary" data-whatever="@reg" data-toggle="modal"
+                            href="#popupLogin" role="button" id="regClick">Регистрация</a></li>
+                    <li class="nav-item my-2 px-1"><a class="btn btn-success" data-whatever="@log" data-toggle="modal"
+                            href="#popupLogin" role="button" id="logClick">Вход</a></li>
+                </ul>
+                {% endif %}
+            </div>
         </div>
     </nav>
-    
+
     <main role="main" class="container">
-    
-      
-    {% block content %}
-    {% endblock %}
-    
-    <div id="popupLogin" class="modal fade" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                   <h4 class="modal-title">Добро пожаловать!</h4>
-                    <button class="close" data-dismiss="modal" aria-label="Close" type="button">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item"><a class="nav-link active" href="#register" data-toggle="tab" id="reg-nav-item"  target="_blank">Регистрация</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#login" data-toggle="tab" id="log-nav-item"  target="_blank">Вход</a></li>
-                </ul>
-                <br>
-                <div class="tab-content">   
-                    <div role="tabpanel" class="tab-pane" id="register">
-                        <form id="registration_form" autocomplete="on" role="form" >
-                        <div class="form-group">
-                            <label for="id_registration_full-name">Имя и фамилия</label>
-                            <input id="id_registration_full-name" class="form-control" autofocus placeholder="Имя и фамилия" spellcheck="true" autocomplete="name" name="full_name" type="text">
-                        </div>
-                       <div class="form-group">
-                            <label for="id_registration_email">Email</label>
-                            <input id="id_registration_email" class="form-control" required placeholder="E-mail" spellcheck="true" autocomplete="name" name="email" type="email">
-                        </div>
-                       <div class="form-group">
-                            <label for="id_registration_password">Пароль</label>
-                            <input id="id_registration_password" class="form-control" placeholder="Пароль" spellcheck="true" autocomplete="password" name="password" type="email">
-                            <!-- <p><a href="'password_reset'">Lost password?</a></p> -->
-                        </div>
-                    </form>
-                    <br>
-                    <div class="text-right">
-                        <button class="btn btn-success btn-block" data-dismiss="modal">Регистрация</button>
+
+
+        {% block content %}
+        {% endblock %}
+
+        <div id="popupLogin" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Добро пожаловать!</h4>
+                        <button class="close" data-dismiss="modal" aria-label="Close" type="button">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    </div>
-                    
-                    <div role="tabpanel" class="tab-pane" id="login">
-                        <form action="{% url 'login' %}" id="login_form" autocomplete="on" role="form" method="POST">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <label for="id_login_email">Логин:</label>
-                                <input id="id_login_email" class="form-control" placeholder="Логин" autocomplete="username" name="username" type="text" required>
+                    <div class="modal-body">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item"><a class="nav-link active" href="#register" data-toggle="tab"
+                                    id="reg-nav-item">Регистрация</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#login" data-toggle="tab"
+                                    id="log-nav-item">Вход</a></li>
+                        </ul>
+                        <br>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane" id="register">
+                                <form class='login-form' id="registration_form" method="POST" action=".">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="inputFname">Имя</label>
+                                        <input type="text" id="inputFname" class="form-control"
+                                            aria-describedby="emailHelp" required placeholder="Имя" autocomplete="text"
+                                            name="fname" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputLname">Фамилия</label>
+                                        <input type="text" id="inputLname" class="form-control"
+                                            aria-describedby="emailHelp" required placeholder="Фамилия"
+                                            autocomplete="text" name="lname" type="text" />
+                                    </div>
+                                    <div class="form-group">
+                                        <div id="erroremail" style="color:red"></div>
+                                        <label for="inputEmail">Email</label>
+                                        <input type="text" id="inputEmail" class="form-control"
+                                            aria-describedby="emailHelp" required placeholder="Email"
+                                            autocomplete="email" name="email" type="email" />
+                                    </div>
+                                    <div class="form-group">
+                                        <div id="errorpass" style="color:red"></div>
+                                        <label for="inputPassword1">Создайте пароль</label>
+                                        <input type="password" class="form-control" id="inputPassword1" required
+                                            placeholder="Пароль" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword2">Подвердите пароль</label>
+                                        <input type="password" class="form-control" id="inputPassword2" required
+                                            placeholder="Подвердите пароль" />
+                                    </div>
+
+                                    <div class="mb-3 mt-5">
+                                        <button  type="button" id="signup_btn" class="btn btn-primary btn-lg btn-block  mb-2 mt-2"
+                                            style="max-width:500px" onclick="signup()">Зарегистрироваться</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label for="id_login_password">Пароль</label>
-                                <input id="id_login_password" class="form-control" placeholder="Пароль" autocomplete="password" name="password" type="password" required>
+
+                            <div role="tabpanel" class="tab-pane" id="login">
+                                <form class="login-form" id="login_form" autocomplete="on">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="inputUsername">Email</label>
+                                        <input type="email" class="form-control" id="inputUsername"
+                                            aria-describedby="emailHelp" placeholder="Email" required>
+                                        <small id="emailHelp" class="form-text text-muted">Enter your registred E-mail
+                                            ID</small>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputPassword">Password</label>
+                                        <input type="password" name="password" class="form-control" id="inputPassword"
+                                            placeholder="Password" required>
+                                        <div id="errorlogin" style="color:red"></div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary btn-lg btn-block login-btn"
+                                        style="max-width:500px" onclick="login()">Login</button>
+                                    
+                                </form>
                             </div>
-                            {% if login_error %}
-                                <label class="error">{{ login_error }}</label>
-                            {% endif %}
-                            <div class="text-right mb-3 mt-5">
-                                <input class="button btn btn-success btn-block" type="submit" value="Войти">
-                            </div>
-                        </form>                        
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-      
-   
-  </main>
- 
-    
-    
+    </main>
+
     <!--    Latest compiled and minified JavaScript-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    {% block scripts %}
-    {% endblock %}
 
+    <script src="{% static 'js/mainApp/main.js' %}"></script>
     <script type="text/javascript">
-    $(document).ready(function () {
-        $('#popupLogin').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var recipient = button.data('whatever') // Extract info from data-* attributes
-
-            if(recipient == "@reg") {                
-                $( '#log-nav-item' ).removeClass( 'active' );
-                $( '#reg-nav-item' ).addClass( 'active' );
-
-                $( '#register' ).addClass( 'active' );
-                $( '#login' ).removeClass( 'active' );
-
-                $( '#register' ).addClass( 'show' );
-                $( '#login' ).removeClass( 'show' );
+    // using jQuery
+    function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
             }
-            else {
-                $( '#reg-nav-item' ).removeClass( 'active' );
-                $( '#log-nav-item' ).addClass( 'active' );
+            return cookieValue;
+        }
+    $(document).ready(function () {
 
-                $( '#register' ).removeClass( 'active' );
-                $( '#login' ).addClass( 'active' );
+        
+        var csrftoken = getCookie('csrftoken');
 
-                $( '#register' ).removeClass( 'show' );
-                $( '#login' ).addClass( 'show' );
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        function sameOrigin(url) {
+            // test that a given url is a same-origin URL
+            // url could be relative or scheme relative or absolute
+            var host = document.location.host; // host + port
+            var protocol = document.location.protocol;
+            var sr_origin = '//' + host;
+            var origin = protocol + sr_origin;
+            // Allow absolute or scheme relative URLs to same origin
+            return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+                (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+                // or any other URL that isn't scheme relative or absolute i.e relative.
+                !(/^(\/\/|http:|https:).*/.test(url));
+        }
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+                    // Send the token to same-origin, relative URLs only.
+                    // Send the token only if the method warrants CSRF protection
+                    // Using the CSRFToken value acquired earlier
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
             }
         });
-    });
+
+        
+    //     $("#signup_btn").on("click", function(event){
+        
+    //     if(!isValid()){
+    //         alert('!!');
+    //         // event.preventDefault();    //stop form from submitting
+    //     }
+    //     email = $("#inputEmail").val();
+    //     fname = document.getElementById("inputFname").value;
+    //     lname = document.getElementById("inputLname").value;
+    //     password1 = document.getElementById("inputPassword1").value;
+    //     password2 = document.getElementById("inputPassword2").value;
+    //     csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+    //     $("#erroremail").html("");
+    //     $("#errorpass").html("");
+    //     console.log(':c');
+
+    //     $.ajax({
+    //         url:'/auth/signup/',
+    //         type:"POST",
+    //         data:{
+    //             'csrfmiddlewaretoken': csrfmiddlewaretoken,
+    //             'first_name':fname,
+    //             'last_name':lname,
+    //             'email':email,
+    //             'password1':password1,
+    //             'password2':password2,
+    //         },
+    //         success : function(data){
+    //             console.log(data['message']);
+    //             if(data['message'] == "Success"){
+    //                 console.log('Succeess');
+    //                 // window.location = "/"
+    //             }
+    //             else{
+    //                 console.log('Succeess');
+    //                 if("email" in data['message'])
+    //                     $("#erroremail").html(data['message']['email'][0]);
+    //                 if("password2" in data['message'])
+    //                     $("#errorpass").html(data['message']['password2'][0]);
+    //             }
+    //         }
+    //     })
+    // });
+
+});
+
+function login() {
+            email = document.getElementById("inputUsername").value;
+            password = document.getElementById("inputPassword").value;
+            csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+            $("#errorlogin").html("");
+            $.ajax({
+                type: "POST",
+                url: '/auth/login/',
+                data: {
+                    'csrfmiddlewaretoken': csrfmiddlewaretoken,
+                    'email': email,
+                    'password': password,
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data['message'] == "Success") {
+                        location.reload();
+                    } else if (data['message'] == "inactive") {
+                        $("#errorlogin").html("Please verify this E-mail address.");
+                    } else {
+                        $("#errorlogin").html("The E-mail and Password do not match.");
+                    }
+                }
+            });
+        }
+        function signup() {
+            email = document.getElementById("inputEmail").value;
+            fname = document.getElementById("inputFname").value;
+            lname = document.getElementById("inputLname").value;
+            password1 = document.getElementById("inputPassword1").value;
+            password2 = document.getElementById("inputPassword2").value;
+            csrfmiddlewaretoken = getCookie('csrftoken');
+
+            $("#erroremail").html("");
+            $("#errorpass").html("");
+
+            if (fname == "" || lname == "") {
+                $("#errorname").html("First Name and Last Name Required");
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: '/auth/signup/',
+                    data: {
+                        'csrfmiddlewaretoken': csrfmiddlewaretoken,
+                        'first_name': fname,
+                        'last_name': lname,
+                        'email': email,
+                        'password1': password1,
+                        'password2': password2,
+                    },
+                    beforeSend: function (xhr, settings) {
+                        // if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        //     xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        // }
+                    },
+                    success: function (data) {
+                        console.log(data['message']);
+                        if (data['message'] == "Success") {
+                            print('SUCCEESS')
+                        } else {
+                            print(data['message'])
+                            if ("email" in data['message'])
+                                $("#erroremail").html(data['message']['email'][0]);
+                            if ("password2" in data['message'])
+                                $("#errorpass").html(data['message']['password2'][0]);
+                        }
+                    }
+                })
+            }
+        }
+    
+
     </script>
 </body>
+
 </html>
