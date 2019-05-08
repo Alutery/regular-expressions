@@ -11,6 +11,8 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager ## A new cl
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from mainApp.models import ComletedQuestions
+
 class UserManager(BaseUserManager):
 	"""Define a model manager for User model with no username field."""
 
@@ -50,6 +52,13 @@ class User(AbstractUser):
 
 	username = None
 	email = models.EmailField(_('email address'), unique=True)
+
+	comletedquestionsID = models.ForeignKey(
+        ComletedQuestions,
+		blank=True, null=True,
+        on_delete=models.CASCADE, # При удалении ссылочного объекта также удаляются объекты, на которые есть ссылки 
+        verbose_name="related comleted questions",
+    )
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = []

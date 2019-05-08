@@ -1,7 +1,8 @@
 from django.contrib import admin
-# from .models import Post
+from .models import QuestionCategory, ComletedQuestions
 
-# admin.site.register(Post)
+admin.site.register(QuestionCategory)
 
+admin.site.register(ComletedQuestions)
 
 # Register your models here.
