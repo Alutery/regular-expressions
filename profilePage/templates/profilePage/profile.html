@@ -5,10 +5,42 @@
 <div class="container-fluid">
 <div class="continer">
     <main role="main">
-        
+        <h1 class="mb-4">Profile</h1>
+        <p>Фамилия: {{ user.last_name }}</p>
+        <p>Имя: {{ user.first_name }}</p>
+        <p>Email: {{ user.email }}</p>
     </main>
 </div>
 </div>
+</div>
+
+<div class="container-fluid">
+    <div class="continer">
+        <h3>Ваши результаты:</h3>
+        {% if results %}
+        <table class="mt-4 mb-4 table table-bordered table-responsive-sm text-center" cellpadding="4" >
+            <thead>
+                <tr>
+                {% for i in range %}
+                    <th scope="col" class="align-middle">{{ i }}</th>
+                {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for category in completed_questions %}
+                <tr>
+                <th>category</th>
+                {% for question in category %}
+                    <td style="text-align:center">{{ question }}</td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>    
+        {% else %}
+            <p>К сожалению, вы еще не выполнили ни одного задания.</p>
+        {% endif %}
+    </div>
 </div>
 
 
@@ -26,7 +58,6 @@ $('#regClick').click(function(e) {
 });
 
 $( '.navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
-$( '#main_tab' ).addClass( 'active' );
 </script>
 
 {% endblock %}

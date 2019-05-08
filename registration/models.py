@@ -53,12 +53,12 @@ class User(AbstractUser):
 	username = None
 	email = models.EmailField(_('email address'), unique=True)
 
-	completedquestionsID = models.ForeignKey(
-        CompletedQuestions,
-		blank=True, null=True,
-        on_delete=models.CASCADE, # При удалении ссылочного объекта также удаляются объекты, на которые есть ссылки 
-        verbose_name="related comleted questions",
-    )
+	# completedquestionsID = models.ForeignKey(
+    #     CompletedQuestions,
+	# 	blank=True, null=True,
+    #     on_delete=models.CASCADE, # При удалении ссылочного объекта также удаляются объекты, на которые есть ссылки 
+    #     verbose_name="related comleted questions",
+    # )
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = []
