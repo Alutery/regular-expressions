@@ -5,6 +5,7 @@ from practice.lib import AutomataTheory
 from queue import Queue
 from django.http import JsonResponse
 
+from mainApp.models import CompletedQuestions,QuestionCategory
 
 def validate_regex(request):
     input = request.GET.get('input', None)
@@ -20,6 +21,28 @@ def validate_regex(request):
 
     return JsonResponse(data)
 
+def send_result(request):
+    category = request.GET.get('category', None)
+    i = int(request.GET.get('i', None))
+    n = int(request.GET.get('n', None))
+
+    if category and n:
+        profile = request.user
+        q = CompletedQuestions.objects.filter(userID=profile.id, categoryID=category)
+        if q.exists():
+            q.questionresults[i] = 1
+            q.save()
+        else:
+            results = '0' * n
+            # results[i] = '1'
+            results = results[:i] + '1' + results[i+1:]
+            category = QuestionCategory.objects.get(id=category)
+            print(results)
+            q = CompletedQuestions(userID=profile, categoryID=category, questionresults=results)
+            q.save()
+    
+    return HttpResponse(0)
+        
 
 # Create your views here.
 def practice(request):

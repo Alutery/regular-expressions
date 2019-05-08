@@ -11,18 +11,18 @@ def profile(request):
     userID = profile.id
     questions = CompletedQuestions.objects.filter(userID = userID)
 
-    if not questions.exists():
-
+    if questions.exists():
+        args['results'] = True
         maxn = 0
         completed_questions = {}
 
         for question in questions:
-            category = QuestionCategory.objects.get(id = question.categoryID)
+            category = question.categoryID
             name = category.name
             n = category.questionsnumber
-            answers = [i == 1 for i in str(question.questionresults)]
+            answers = [i == '1' for i in str(question.questionresults)]
             maxn = max(maxn, n)
-            completed_questions['name'] = answers
+            completed_questions[name] = answers
 
 
         args['completed_questions'] = completed_questions

@@ -11,4 +11,5 @@ urlpatterns = [
     path('task_3/', views.task3, name='task3'),
     path('taskDFAtoregex/', views.taskDFAtoregex, name='task_DFA_to_regex'),
     path('validate_regex/', views.validate_regex, name='validate_regex'),
+    path('send_result/', views.send_result, name='send_result'),
 ]

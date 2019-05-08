@@ -1,4 +1,5 @@
 {% extends "mainApp/wrapper.html" %}
+{% load profile_extras %}
 
 {% block content %}
 <div class="jumbotron">
@@ -18,9 +19,10 @@
     <div class="continer">
         <h3>Ваши результаты:</h3>
         {% if results %}
-        <table class="mt-4 mb-4 table table-bordered table-responsive-sm text-center" cellpadding="4" >
+        <table class="mt-4 mb-4 table table-responsive-sm text-center" cellpadding="4" >
             <thead>
                 <tr>
+                    <th>Задание</th>
                 {% for i in range %}
                     <th scope="col" class="align-middle">{{ i }}</th>
                 {% endfor %}
@@ -29,9 +31,15 @@
             <tbody>
             {% for category in completed_questions %}
                 <tr>
-                <th>category</th>
-                {% for question in category %}
-                    <td style="text-align:center">{{ question }}</td>
+                <th>{{category}}</th>
+                {% for question in completed_questions|get_item:category %}
+                <td style="text-align:center">
+                    {% if question %}
+                        <i class="fas fa-check-circle"></i>
+                    {% else %}
+                        <i class="far fa-circle"></i>
+                    {% endif %}
+                </td>
                 {% endfor %}
                 </tr>
             {% endfor %}

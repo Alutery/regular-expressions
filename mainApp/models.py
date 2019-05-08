@@ -7,7 +7,7 @@ from django.conf import settings
 
 
 class QuestionCategory(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=40)
     questionsnumber = models.IntegerField(default=5)
 
     class Meta:
