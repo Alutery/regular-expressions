@@ -1,3 +1,6 @@
+var categoryID = 3;
+var n = 5;
+
 $(document).ready(function () {
   var btn_1 = jQuery('#btn_task_1');
   var btn_2 = jQuery('#btn_task_2');
@@ -92,21 +95,3 @@ $(document).ready(function () {
 
 
 });
-
-var categoryID = 3;
-var n = 5;
-
-function send_result(i) {
-  $.ajax({
-    url: '../send_result/',
-    type: 'get',
-    data: ({
-      category: categoryID,
-      i: i,
-      n: n
-    }),
-    error: function (xhr, errmsg, err) {
-      console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-    }
-  });
-}
