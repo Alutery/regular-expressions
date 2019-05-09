@@ -29,7 +29,18 @@
     <br>
     <p id="description"></p>
     <hr>
-
+    <div id="answer_request">
+      <form  method="POST">
+          {% csrf_token %}
+          <div class="form-group mb-3 mt-">
+              <label for="inputRegex"><p class="mt-4 mb-2">Какое регулярное выражение ему соответствует?</p></label>
+              <input class="form-control noresize w-50 " rows="1" placeholder="Введите здесь" type="text" id="inputRegex" name="q" required>
+          </div>
+          <input type="hidden" name="answer" id="answer">
+          <button type="submit" class="btn btn-primary" id="btn_accept">Подтвердить</button>
+      </form>
+  </div>
+  <p id="result" style="display: none;"></p>
     
   </div>
 </div>
@@ -40,5 +51,6 @@
 <script src="{% static 'js/viz.js/full.render.js' %}"></script>
 <script src="{% static 'js/practice/lang_description.js' %}"></script>
 <script src="{% static 'js/practice/moving.js' %}"></script>
+<script src="{% static 'js/practice/results.js' %}"></script>
 <script>$('#lang_description').addClass('active');</script>
 {% endblock %}

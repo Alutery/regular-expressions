@@ -1,8 +1,43 @@
+var categoryID = 2;
+var n = 5;
+
 $(document).ready(function () {
     // Startup function: call UpdateGraphviz
     jQuery(function() {
         btn_1.click();
     });
+
+    $("#btn_accept").bind("click", function () {
+        event.preventDefault();
+  
+        var inputRegex = $('#inputRegex').val();
+        var answerRegex = $('#answer').val();
+  
+        $('#inputRegex').val('');
+  
+        $.ajax({
+            url: '../validate_regex/',
+            type: 'get',
+            data: ({ input: inputRegex, answer: answerRegex }),
+            beforeSend: function(){
+                $('#answer_request').hide();
+                $('#result').show();
+                $('#result').text('Обработка..');
+            },
+            success: function(data) {
+                $('#result').html(data.correctness);
+                if(data.correct == true) {
+                  send_result(current-1, n, categoryID);
+                }
+            },
+            error: function(xhr,errmsg,err){
+                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                  " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+        });
+  
+      });
 
     max = 5;
 

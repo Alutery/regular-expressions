@@ -1,3 +1,6 @@
+var categoryID = 6;
+var n = 5;
+
 $(document).ready(function () {
     // Startup function: call UpdateGraphviz
     jQuery(function() {
@@ -23,6 +26,9 @@ $(document).ready(function () {
           },
           success: function(data) {
               $('#result').html(data.correctness);
+              if(data.correct == true) {
+                send_result(current-1, n, categoryID);
+              }
           },
           error: function(xhr,errmsg,err){
               $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
@@ -68,24 +74,6 @@ $(document).ready(function () {
             console.error(error);
           });
       }
-    
-    // btn_accept.click(function(){
-    //     $('#answer_request').hide();
-    //     if(current_answer === true) {
-    //         $('#result').text('Верно!');
-    //         $('#result').css( "color", "green" );
-    //     }
-    //     else {
-    //         $('#result').text('Не верно!');
-    //         $('#result').css( "color", "red" );
-    //     }
-    // });
-
-    // $("#inputRegex").on('keyup', function (e) {
-    //     if (e.keyCode == 13) {
-    //         btn_accept.click();
-    //     }
-    // });
     
     btn_1.click(function(){
         $( ".page-item" ).removeClass( "active" );

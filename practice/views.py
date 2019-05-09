@@ -15,9 +15,9 @@ def validate_regex(request):
 
     data = {}
     if correctness == 1:
-        data = {'correctness' : f'<span style="color: green">Верно! </span>(Вы ввели: {input})'}
+        data = {'correctness' : f'<span style="color: green">Верно! </span>(Вы ввели: {input})', 'correct':True}
     else:
-        data = {'correctness' : f'<span style="color: red">Не верно! </span>(Вы ввели: {input})'}
+        data = {'correctness' : f'<span style="color: red">Не верно! </span>(Вы ввели: {input})', 'correct':False}
 
     return JsonResponse(data)
 
@@ -30,7 +30,9 @@ def send_result(request):
         profile = request.user
         q = CompletedQuestions.objects.filter(userID=profile.id, categoryID=category)
         if q.exists():
-            q.questionresults[i] = 1
+            q = q[0]
+            results = q.questionresults
+            q.questionresults = results[:i] + '1' + results[i+1:]
             q.save()
         else:
             results = '0' * n

@@ -40,7 +40,7 @@ $(document).ready(function () {
     $('#btn_repeat').show();
 
     if (current_answer == $('input[name=radio]:checked', '#answer_request').val()) {
-      send_result(current-1);
+      send_result(current-1, n, categoryID);
 
       $('#result').text('Верно!');
       $('#result').css("color", "green");

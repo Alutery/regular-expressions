@@ -1,3 +1,6 @@
+var categoryID = 1;
+var n = 5;
+
 $(document).ready(function () {
 
   var btn_1 = jQuery('#btn_task_1');
@@ -47,6 +50,7 @@ $(document).ready(function () {
   btn_yes.click(function(){
     $('#answer_request').hide();
     if(current_answer === true) {
+      send_result(current-1, n, categoryID);
       $('#result').text('Верно!');
       $('#result').css( "color", "green" );
     }
@@ -59,6 +63,7 @@ $(document).ready(function () {
   btn_no.click(function(){
     $('#answer_request').hide();
     if(current_answer !== true) {
+      send_result(current-1, n, categoryID);
       $('#result').text('Верно!');
       $('#result').css( "color", "green" );
     }

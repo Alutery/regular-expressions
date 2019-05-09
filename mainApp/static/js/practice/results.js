@@ -1,4 +1,5 @@
 function send_result(i, n, categoryID) {
+    alert('send');
     $.ajax({
         url: '../send_result/',
         type: 'get',
