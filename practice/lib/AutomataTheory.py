@@ -240,9 +240,6 @@ class DFAfromNFA:
             return True
         return False
     
-    # def min(self):
-        # minimizedDFA = Automata(self.language, self.states, self.startstate, self.finalstates, self.transitions)
-
     def minimise(self):
         states = list(self.dfa.states)
         n = len(states)
@@ -298,7 +295,6 @@ class DFAfromNFA:
         newFound = True
         while newFound and len(unchecked) > 0:
             newFound = False
-            toremove = set()
             for p, pair in unchecked.items():
                 for tr in pair[2:]:
                     if [tr[0], tr[1]] in distinguished or [tr[1], tr[0]] in distinguished:
@@ -416,4 +412,3 @@ class NFAfromRegex:
                 self.automata.append(BuildAutomata.plusstruct(b,a))
             elif operator == self.dot:
                 self.automata.append(BuildAutomata.dotstruct(b,a))
-
