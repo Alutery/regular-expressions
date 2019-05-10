@@ -1,8 +1,10 @@
 from future.utils import iteritems
+# from six import iteritems
 from os import popen
 import time
 
 class Automata:
+    """class to represent an Automata"""
 
     def __init__(self, language = set(['0', '1'])):
         self.states = set()
@@ -115,8 +117,24 @@ class Automata:
             rebuild.addfinalstates(pos[s])
         return rebuild
 
+    def getDotFile(self):
+        dotFile = "digraph DFA {\nrankdir=LR\n"
+        if len(self.states) != 0:
+            dotFile += "root=s1\nstart [shape=point]\nstart->s%d\n" % self.startstate
+            for state in self.states:
+                if state in self.finalstates:
+                    dotFile += "s%d [shape=doublecircle]\n" % state
+                else:
+                    dotFile += "s%d [shape=circle]\n" % state
+            for fromstate, tostates in self.transitions.items():
+                for state in tostates:
+                    for char in tostates[state]:
+                        dotFile += 's%d->s%d [label="%s"]\n' % (fromstate, state, char)
+        dotFile += "}"
+        return dotFile
 
 class BuildAutomata:
+    """class for building e-nfa basic structures"""
 
     @staticmethod
     def basicstruct(inp):
@@ -239,7 +257,7 @@ class DFAfromNFA:
         if currentstate in self.dfa.finalstates:
             return True
         return False
-    
+
     def minimise(self):
         states = list(self.dfa.states)
         n = len(states)
@@ -295,7 +313,8 @@ class DFAfromNFA:
         newFound = True
         while newFound and len(unchecked) > 0:
             newFound = False
-            for p, pair in unchecked.items():
+            toremove = set()
+            for p, pair in list(unchecked.items()):
                 for tr in pair[2:]:
                     if [tr[0], tr[1]] in distinguished or [tr[1], tr[0]] in distinguished:
                         unchecked.pop(p)
@@ -316,6 +335,7 @@ class DFAfromNFA:
             self.minDFA = self.dfa.newBuildFromEquivalentStates(equivalent, pos)
 
 class NFAfromRegex:
+    """class for building e-nfa from regular expressions"""
 
     def __init__(self, regex):
         self.star = '*'
@@ -341,7 +361,7 @@ class NFAfromRegex:
         self.stack = []
         self.automata = []
         previous = "::e::"
-        for char in self.regex:
+        for char in list(self.regex):
             if char in self.alphabet:
                 language.add(char)
                 if previous != self.dot and (previous in self.alphabet or previous in [self.closingBracket,self.star]):
@@ -412,3 +432,29 @@ class NFAfromRegex:
                 self.automata.append(BuildAutomata.plusstruct(b,a))
             elif operator == self.dot:
                 self.automata.append(BuildAutomata.dotstruct(b,a))
+
+def drawGraph(automata, file = ""):
+    """From https://github.com/max99x/automata-editor/blob/master/util.py"""
+    f = popen(r"dot -Tpng -o graph%s.png" % file, 'w')
+    try:
+        f.write(automata.getDotFile())
+    except:
+        raise BaseException("Error creating graph")
+    finally:
+        f.close()
+
+def isInstalled(program):
+    """From http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python"""
+    import os
+    def is_exe(fpath):
+        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+    fpath, fname = os.path.split(program)
+    if fpath:
+        if is_exe(program) or is_exe(program+".exe"):
+            return True
+    else:
+        for path in os.environ["PATH"].split(os.pathsep):
+            exe_file = os.path.join(path, program)
+            if is_exe(exe_file) or is_exe(exe_file+".exe"):
+                return True
+    return False

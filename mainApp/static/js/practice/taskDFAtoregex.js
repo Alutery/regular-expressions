@@ -1,16 +1,26 @@
 var categoryID = 6;
 var n = 5;
 
+function btnClick(){
+event.preventDefault();
+return false;
+}
+
 $(document).ready(function () {
     // Startup function: call UpdateGraphviz
     jQuery(function() {
         btn_1.click();
     });
 
-    $("#btn_accept").bind("click", function () {
-      event.preventDefault();
+    $("#btn_accept").click(function (event) {
 
       var inputRegex = $('#inputRegex').val();
+
+      if(inputRegex=="" || inputRegex==null) { 
+        alert("Введите ответ");
+        return false;
+      }
+      event.preventDefault();
       var answerRegex = $('#answer').val();
 
       $('#inputRegex').val('');
@@ -36,6 +46,7 @@ $(document).ready(function () {
               console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
           }
       });
+      return false;
 
     });
 
@@ -78,6 +89,7 @@ $(document).ready(function () {
     btn_1.click(function(){
         $( ".page-item" ).removeClass( "active" );
         $(this).addClass( "active" );
+        current = 1;
 
         $('#answer_request').show();
         $('#result').hide();
@@ -92,13 +104,17 @@ $(document).ready(function () {
           A -> C [ label = "b" ];
           C -> A [ label = "a" ];
           C -> B [ label = "b" ];}`, 
-          '(ab+b(a+bb))*');
+          'aa*');
     });
 
     btn_2.click(function(){
       $( ".page-item" ).removeClass( "active" );
       $(this).addClass( "active" );
-  
+      current = 2;
+
+      $('#answer_request').show();
+      $('#result').hide();
+      
       UpdateGraphviz(
         `digraph G { 
         layout="dot";
@@ -114,6 +130,7 @@ $(document).ready(function () {
     btn_3.click(function(){
       $( ".page-item" ).removeClass( "active" );
       $(this).addClass( "active" );
+      current = 3;
 
       $('#answer_request').show();
       $('#result').hide();
@@ -133,6 +150,7 @@ $(document).ready(function () {
     btn_4.click(function(){
       $( ".page-item" ).removeClass( "active" );
       $(this).addClass( "active" );
+      current = 4;
 
       $('#answer_request').show();
       $('#result').hide();
@@ -150,6 +168,7 @@ $(document).ready(function () {
     btn_5.click(function(){
       $( ".page-item" ).removeClass( "active" );
       $(this).addClass( "active" );
+      current = 5;
 
       $('#answer_request').show();
       $('#result').hide();

@@ -7,10 +7,15 @@ $(document).ready(function () {
         btn_1.click();
     });
 
-    $("#btn_accept").bind("click", function () {
-        event.preventDefault();
-  
+    $("#btn_accept").click(function () {
         var inputRegex = $('#inputRegex').val();
+
+        if(inputRegex=="" || inputRegex==null) { 
+            alert("Введите ответ");
+            return false;
+        }
+        event.preventDefault();
+
         var answerRegex = $('#answer').val();
   
         $('#inputRegex').val('');

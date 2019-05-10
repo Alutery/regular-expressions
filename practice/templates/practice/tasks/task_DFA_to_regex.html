@@ -28,14 +28,14 @@
     <h5>Дан конечный автомат-распознаватель:</h5>
     <br><div id="graphviz_svg"><!-- Target for dynamic svg generation --></div><hr>
     <div id="answer_request">
-        <form  method="POST">
+        <form>
             {% csrf_token %}
             <div class="form-group mb-3 mt-">
                 <label for="inputRegex"><p class="mt-4 mb-2">Какое регулярное выражение ему соответствует?</p></label>
-                <input class="form-control noresize w-50 " rows="1" placeholder="Введите здесь" type="text" id="inputRegex" name="q" required>
+                <input class="form-control noresize w-50 " rows="1" placeholder="Введите здесь" required="required" type="text" id="inputRegex" name="q" required>
             </div>
             <input type="hidden" name="answer" id="answer">
-            <button type="submit" class="btn btn-primary" id="btn_accept">Подтвердить</button>
+            <button type="submit" class="btn btn-primary" id="btn_accept" >Подтвердить</button>
         </form>
     </div>
     <p id="result" style="display: none;"></p>
