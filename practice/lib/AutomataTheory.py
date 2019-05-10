@@ -1,10 +1,8 @@
 from future.utils import iteritems
-# from six import iteritems
 from os import popen
 import time
 
 class Automata:
-    """class to represent an Automata"""
 
     def __init__(self, language = set(['0', '1'])):
         self.states = set()
@@ -117,24 +115,8 @@ class Automata:
             rebuild.addfinalstates(pos[s])
         return rebuild
 
-    def getDotFile(self):
-        dotFile = "digraph DFA {\nrankdir=LR\n"
-        if len(self.states) != 0:
-            dotFile += "root=s1\nstart [shape=point]\nstart->s%d\n" % self.startstate
-            for state in self.states:
-                if state in self.finalstates:
-                    dotFile += "s%d [shape=doublecircle]\n" % state
-                else:
-                    dotFile += "s%d [shape=circle]\n" % state
-            for fromstate, tostates in self.transitions.items():
-                for state in tostates:
-                    for char in tostates[state]:
-                        dotFile += 's%d->s%d [label="%s"]\n' % (fromstate, state, char)
-        dotFile += "}"
-        return dotFile
 
 class BuildAutomata:
-    """class for building e-nfa basic structures"""
 
     @staticmethod
     def basicstruct(inp):
@@ -257,6 +239,9 @@ class DFAfromNFA:
         if currentstate in self.dfa.finalstates:
             return True
         return False
+    
+    # def min(self):
+        # minimizedDFA = Automata(self.language, self.states, self.startstate, self.finalstates, self.transitions)
 
     def minimise(self):
         states = list(self.dfa.states)
@@ -265,14 +250,19 @@ class DFAfromNFA:
         count = 1
         distinguished = []
         equivalent = dict(zip(range(len(states)), [{s} for s in states]))
-        pos = dict(zip(states,range(len(states))))
-        for i in range(n-1):
-            for j in range(i+1, n):
+        pos = dict(zip(states, range(len(states))))
+        for i in range(n - 1):
+            for j in range(i + 1, n):
                 if not ([states[i], states[j]] in distinguished or [states[j], states[i]] in distinguished):
+                    if (states[i] in self.dfa.finalstates and states[j] not in self.dfa.finalstates) or (states[i] not in self.dfa.finalstates and states[j] in self.dfa.finalstates):
+                        distinguished.append([states[i], states[j]])
+                        continue
                     eq = 1
                     toappend = []
                     for char in self.dfa.language:
                         s1 = self.dfa.gettransitions(states[i], char)
+                        # print "debug trans "
+                        # print s1
                         s2 = self.dfa.gettransitions(states[j], char)
                         if len(s1) != len(s2):
                             eq = 0
@@ -309,7 +299,7 @@ class DFAfromNFA:
         while newFound and len(unchecked) > 0:
             newFound = False
             toremove = set()
-            for p, pair in list(unchecked.items()):
+            for p, pair in unchecked.items():
                 for tr in pair[2:]:
                     if [tr[0], tr[1]] in distinguished or [tr[1], tr[0]] in distinguished:
                         unchecked.pop(p)
@@ -330,7 +320,6 @@ class DFAfromNFA:
             self.minDFA = self.dfa.newBuildFromEquivalentStates(equivalent, pos)
 
 class NFAfromRegex:
-    """class for building e-nfa from regular expressions"""
 
     def __init__(self, regex):
         self.star = '*'
@@ -428,28 +417,3 @@ class NFAfromRegex:
             elif operator == self.dot:
                 self.automata.append(BuildAutomata.dotstruct(b,a))
 
-def drawGraph(automata, file = ""):
-    """From https://github.com/max99x/automata-editor/blob/master/util.py"""
-    f = popen(r"dot -Tpng -o graph%s.png" % file, 'w')
-    try:
-        f.write(automata.getDotFile())
-    except:
-        raise BaseException("Error creating graph")
-    finally:
-        f.close()
-
-def isInstalled(program):
-    """From http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python"""
-    import os
-    def is_exe(fpath):
-        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
-    fpath, fname = os.path.split(program)
-    if fpath:
-        if is_exe(program) or is_exe(program+".exe"):
-            return True
-    else:
-        for path in os.environ["PATH"].split(os.pathsep):
-            exe_file = os.path.join(path, program)
-            if is_exe(exe_file) or is_exe(exe_file+".exe"):
-                return True
-    return False
