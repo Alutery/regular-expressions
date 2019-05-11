@@ -67,25 +67,25 @@
 <ul>
     <li><p><b>Определение.</b><br>Класс регулярных множеств над конечным словарем Σ определяется так:</p>
         <p>∅ - регулярное множество;<br>
-        {ε} - регулярное множество;<br>
-        {a} - регулярное множество для любого a∈Σ;<br></p>
+        <span class="math inline">\( \{ ε \} \)</span> - регулярное множество;<br>
+        <span class="math inline">\( \{ a \} \)</span> - регулярное множество для любого a∈Σ;<br></p>
     </li>
 
-    <li><p>Если S и T - регулярные множества, то регулярны и:</p>
-        <p>объединение S∪T;<br>
-        произведение ST;<br>
-        итерация S* ;<br></p>
+    <li><p>Если <span class="math inline">\(S\)</span> и <span class="math inline">\(T\)</span> - регулярные множества, то регулярны и:</p>
+        <p>объединение <span class="math inline">\(S∪T\)</span><br>
+        произведение <span class="math inline">\(ST\)</span><br>
+        итерация <span class="math inline">\(S^*\)</span><br></p>
     </li>
 
     <li><p>Примеры регулярных множеств:</p>
-        <p>{ab, ba}* {aa} = {aa, abaa, baaa, ababbaaa, babaabaa, ... }<br>
-        {b} ( {c} ∪ {d, ab}*) = {bc, b, bd, bab, bababd, ... }<br></p>
+        <p><span class="math inline">\({ab, ba}^* {aa} = {aa, abaa, baaa, ababbaaa, babaabaa, ... }\)</span><br>
+        <span class="math inline">\({b} ( {c} ∪ {d, ab}^*) = {bc, b, bd, bab, bababd, ... }\)</span><br></p>
     </li>
 
     <li><p>Примеры нерегулярных множеств:</p>
-        <p>{anbn| n>0} = {ab, aabb, aaabbb, aaaabbbb, ... };<br>
-        {α⏐ в цепочке α количества вхождений символов а и b совпадают} =<br>
-        = {aababbba, ε, baababaabb, ba, ab, ... }<br></p>
+        <p><span class="math inline">\( \{ anbn| n>0 \} = \{ ab, aabb, aaabbb, aaaabbbb, ... \} ; \)</span><br>
+        <span class="math inline">\( \{ α ⏐ \)</span> в цепочке α количества вхождений символов а и b совпадают <span class="math inline">\( \} = \)</span><br>
+        <span class="math inline">\( = \{ aababbba, ε, baababaabb, ba, ab, ... \} \)</span><br></p>
     </li>
 </ul>
 
@@ -101,14 +101,14 @@
     </li>
 
     <li><p><b>Определение.</b><br>Класс регулярных выражений над конечным словарем Σ определяется так:</p>
-        <p>∅, ε - и любое a∈Σ - регулярные выражения;</p>
+        <p>∅, ε - и любое a ∈ Σ - регулярные выражения;</p>
     </li>
 
     <li>
-        <p>Если R1 и R2- рег. выр., то регулярными выражениями будут:</p>
-        <p>их сумма <b>R1 + R2</b>; (знак ‘+’, иногда записывают как ‘|’)<br><i>Например</i>, {"ab", "c"}|{"ab", "d", "ef"} = {"ab", "c", "d", "ef"}<br><br>
-        их произведение <b>R1R2</b>; <br><i>Например</i>, {"boy", "girl"}{"friend", "cott"} = {"boyfriend", "girlfriend", "boycott", "girlcott"}<br><br>
-        итерация <b>R1*</b> и урезанная итерация R1+;<br><i>Например</i>, {"Run", "Forrest"}* = {ε, "Run", "Forrest", "RunRun", "RunForrest", "ForrestRun", "ForrestForrest", ...}<br><br></p>
+        <p>Если <span class="math inline">\(\boldsymbol{R_1}\)</span> и <span class="math inline">\(\boldsymbol{R_2}\)</span> - рег. выр., то регулярными выражениями будут:</p>
+        <p>- их сумма <span class="math inline">\(\boldsymbol{R_1 + R_2}\)</span>; (знак " + ", иногда записывают как " | ")<br><i>Например</i>, { "ab", "c" } | { "ab", "d", "ef" } = { "ab", "c", "d", "ef" }<br><br>
+        - их произведение <span class="math inline">\(\boldsymbol{R_1R_2}\)</span>; <br><i>Например</i>, { "boy", "girl" }{ "friend", "cott" } = { "boyfriend", "girlfriend", "boycott", "girlcott" }<br><br>
+        - итерация <span class="math inline">\(\boldsymbol{R_1^*}\)</span> и урезанная итерация <span class="math inline">\(\boldsymbol{R_1^+}\)</span>;<br><i>Например</i>, { "Run", "Forrest" }* = { ε, "Run", "Forrest", "RunRun", "RunForrest", "ForrestRun", "ForrestForrest", ... }<br><br></p>
     </li>
 
     <li>
@@ -119,7 +119,7 @@
     </li>
 </ul>
 
-<p><i>Пример регулярных выражений</i>: ab + ba*; (aa)*b + (c + dab)*</p>
+<p><i>Примеры регулярных выражений</i>: <span class="math inline">\(ab + ba^*, (aa)^*b + (c + dab)^* \)</span></p>
 
 <h5 class="mb-3 mt-5">Регулярные множества и регулярные выражения</h5>
 
@@ -128,12 +128,12 @@
 <ul>
     <li><p>конкатенация подформул соответствует произведению множеств</p></li>
     <li><p>операция сложения ‘+’ (или) соответствует операции ∪ объединения множеств</p></li>
-    <li><p>операция итерации R* соответствует операции MR* итерации множеств (т.е. 0 или большее число повторений)</p></li>
-    <li><p>операция R+ соответствует операции MR+ усеченной итерации множества (т.е. 1 или большее число повторений)</p></li>
+    <li><p>операция итерации  <span class="math inline">\(R^*\)</span> соответствует операции итерации множеств (т.е. 0 или большее число повторений)</p></li>
+    <li><p>операция  <span class="math inline">\(R^+\)</span> соответствует операции усеченной итерации множества (т.е. 1 или большее число повторений)</p></li>
 </ul>
 
-<p>Таким образом, выражение b( c + (d + a)*) определяет язык {bc, b, bd, bdd, bda, baad, ... }, полученный последовательностью операций над одноэлементными множествами:
-        {b}•( {c} ∪ ({d} ∪ {a}•{b})*)</p>
+<p>Таким образом, выражение  <span class="math inline">\(b(c+(d+a)^*) \)</span> определяет язык  <span class="math inline">\( \{ bc, b, bd, bdd, bda, baad, ... \} \)</span>, полученный последовательностью операций над одноэлементными множествами:
+    <span class="math inline">\( \{ b \} •( {c} ∪ ( \{ d \} ∪ \{ a \}• \{ b \} )^*) \)</span></p>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 <script>$('#basic_definitions').addClass('active');</script>
