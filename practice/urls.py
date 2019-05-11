@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.practice, name='practice'),
-    path('task_1/', views.task1, name='task1'),
+    path('chainAcceptance/', views.chainAcceptance, name='chain_acceptance'),
     path('langDescription/', views.langDescription ,name='lang_description'),
     path('simplifyRegex/', views.simplifyRegex ,name='simplify_regex'),
     path('task_2/', views.task2, name='task2'),

@@ -11,7 +11,7 @@ def validate_regex(request):
     input = request.GET.get('input', None)
     answer = request.GET.get('answer', None)
 
-    # answer = aswers[answer]
+    answer = aswers[answer]
 
     correctness = check_equivalence(input, answer)
 
@@ -52,9 +52,9 @@ def send_result(request):
 def practice(request):
     return render(request, 'practice/main.html')
 
-def task1(request):
-    return render(request, 'practice/tasks/task_1.html')
-
+def chainAcceptance(request):
+    return render(request, 'practice/tasks/chain_acceptance.html')
+    
 def task2(request):
     return render(request, 'practice/tasks/task_2.html')
 
