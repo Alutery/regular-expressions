@@ -27,6 +27,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
+
+<style type="text/css" media="print">
+    @page {
+        size: auto;   /* auto is the initial value */
+        margin: 0;  /* this affects the margin in the printer settings */
+    }
+    </style>
 </head>
 
 <body>
@@ -94,33 +101,34 @@
                                 <form class='login-form' id="registration_form" method="POST" action=".">
                                     {% csrf_token %}
                                     <div class="form-group">
+                                        <div id="errorname" style="color:red"></div>
                                         <label for="inputFname">Имя</label>
                                         <input type="text" id="inputFname" class="form-control"
-                                            aria-describedby="emailHelp" required placeholder="Имя" autocomplete="text"
+                                            aria-describedby="emailHelp"  placeholder="Имя" autocomplete="text"
                                             name="fname" />
                                     </div>
                                     <div class="form-group">
                                         <label for="inputLname">Фамилия</label>
                                         <input type="text" id="inputLname" class="form-control"
-                                            aria-describedby="emailHelp" required placeholder="Фамилия"
+                                            aria-describedby="emailHelp"  placeholder="Фамилия"
                                             autocomplete="text" name="lname" type="text" />
                                     </div>
                                     <div class="form-group">
                                         <div id="erroremail" style="color:red"></div>
                                         <label for="inputEmail">Email</label>
                                         <input type="text" id="inputEmail" class="form-control"
-                                            aria-describedby="emailHelp" required placeholder="Email"
+                                            aria-describedby="emailHelp"  placeholder="Email"
                                             autocomplete="email" name="email" type="email" />
                                     </div>
                                     <div class="form-group">
                                         <div id="errorpass" style="color:red"></div>
                                         <label for="inputPassword1">Создайте пароль</label>
-                                        <input type="password" class="form-control" id="inputPassword1" required
+                                        <input type="password" class="form-control" id="inputPassword1" 
                                             placeholder="Пароль" />
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword2">Подвердите пароль</label>
-                                        <input type="password" class="form-control" id="inputPassword2" required
+                                        <input type="password" class="form-control" id="inputPassword2" 
                                             placeholder="Подвердите пароль" />
                                     </div>
 
@@ -150,7 +158,7 @@
                                         <div id="errorlogin" style="color:red"></div>
                                     </div>
                                     <button type="button" class="btn btn-primary btn-lg btn-block login-btn"
-                                        style="max-width:500px" onclick="login()">Login</button>
+                                        style="max-width:500px" onclick="login()" id="login_btn">Login</button>
 
                                 </form>
                             </div>
@@ -270,22 +278,21 @@
                         'password1': password1,
                         'password2': password2,
                     },
-                    beforeSend: function (xhr, settings) {
-                        // if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                        //     xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                        // }
+                    beforeSend: function () {
+                        $("#signup_btn").attr("disabled", true);
                     },
                     success: function (data) {
-                        console.log(data['message']);
                         if (data['message'] == "Success") {
-                            print('SUCCEESS')
+                            alert('Регистрация прошла успешно.')
+                            document.location.reload(true);
                         } else {
-                            print(data['message'])
+                            $("#signup_btn").attr("disabled", false);
                             if ("email" in data['message'])
                                 $("#erroremail").html(data['message']['email'][0]);
                             if ("password2" in data['message'])
                                 $("#errorpass").html(data['message']['password2'][0]);
                         }
+                        
                     }
                 })
             }

@@ -3,11 +3,11 @@ var n = 5;
 
 $(document).ready(function () {
 
-  var btn_1 = jQuery('#btn_task_1_1');
-  var btn_2 = jQuery('#btn_task_1_2');
-  var btn_3 = jQuery('#btn_task_1_3');
-  var btn_4 = jQuery('#btn_task_1_4');
-  var btn_5 = jQuery('#btn_task_1_5');
+  var btn_1 = jQuery('#btn_task_1');
+  var btn_2 = jQuery('#btn_task_2');
+  var btn_3 = jQuery('#btn_task_3');
+  var btn_4 = jQuery('#btn_task_4');
+  var btn_5 = jQuery('#btn_task_5');
 
   var regex = $('#regex');
   var statement = $('#statement');
@@ -63,35 +63,35 @@ $(document).ready(function () {
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
     current = 1;
-    Update('a+b.', 'abc', false);
+    Update('b((c+b)*+(ba)*a*)', 'aca', false);
   });
 
   btn_2.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
     current = 2;
-    Update('AAA', 'abc', false);
+    Update('(a+c)((ac)*bb*abbb*+(caca)*(b+c))', 'ccacacacab', true);
   });
 
   btn_3.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
     current = 3;
-    Update('AFDDA', 'aaa', true);
+    Update('((b+c(ca+(B+B)))(a+((ac)*+(c+b)))+c)(b(b(BB+b)(c+(a+b)))*)', 'ccaacacbbBBabBBa', true);
   });
 
   btn_4.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
     current = 4;
-    Update('abc', 'fgfgf', false);
+    Update('((((c|b*)|(c(a|b*))*)|(b((a|a)*|c))(a((a*|a)(aa|b*))))(c*|c)*a)c', 'baaaaaaabbbccac', true);
   });
 
   btn_5.click(function(){
     $( ".page-item" ).removeClass( "active" );
     $(this).addClass( "active" );
     current = 5;
-    Update('ab+c', 'h', false);
+    Update('((qw+e)+eb)+((wq+(2+e))+(((eb)(qq))*+((b+ww)*+(2+((e+2)*)*)e*)))', 'ebqqebqq', false);
   });
 
 });

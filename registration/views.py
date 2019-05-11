@@ -39,7 +39,6 @@ def loginUser(request):
 
 def signup(request):
 	if request.user.is_authenticated:
-		print('!!!!!')
 		return redirect('/')
 	if request.method == 'POST':
 		fname = request.POST.get('first_name')

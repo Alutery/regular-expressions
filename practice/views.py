@@ -11,6 +11,8 @@ def validate_regex(request):
     input = request.GET.get('input', None)
     answer = request.GET.get('answer', None)
 
+    # answer = aswers[answer]
+
     correctness = check_equivalence(input, answer)
 
     data = {}
