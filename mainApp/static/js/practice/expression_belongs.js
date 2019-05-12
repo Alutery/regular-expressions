@@ -1,4 +1,3 @@
-var n;
 var regex_args;
 var statements;
 var numbers;

@@ -31,6 +31,7 @@ def send_result(request):
 
     if category and n:
         profile = request.user
+        category = QuestionCategory.objects.get(code_name=category).id
         q = CompletedQuestions.objects.filter(userID=profile.id, categoryID=category)
         if q.exists():
             q = q[0]
@@ -76,19 +77,21 @@ class GetTasks(View):
 
 
 def check(request):
-        taskType = request.POST.get('taskType')
-        number = request.POST.get('number')
-        answer = request.POST.get('answer')
+    taskType = request.POST.get('taskType')
+    number = request.POST.get('number')
+    answer = request.POST.get('answer')
 
-        task = Tasks.objects.get(taskType=taskType, number=number)
-        
-        return answer == task.answer
+    task = Tasks.objects.get(taskType=taskType, number=number)
+    print(type(answer))
+    print(type(task.answer))
+    return answer == task.answer
 
 
 class ChainAcceptance(View):
+
     def get(self, request):
         try:
-            tasks_number = QuestionCategory.objects.get(code_name='ChainAcceptance').questionsnumber
+            tasks_number = Tasks.objects.filter(taskType='ChainAcceptance').count()
         except:
             tasks_number = 0
 
@@ -98,11 +101,31 @@ class ChainAcceptance(View):
         return JsonResponse({'correct': check(request)})
 
     
-def task2(request):
-    return render(request, 'practice/tasks/task_2.html')
+class ExpressionBelongs(View):
 
-def task3(request):
-    return render(request, 'practice/tasks/task_3.html')
+    def get(self, request):
+        try:
+            tasks_number = Tasks.objects.filter(taskType='ExpressionBelongs').count()
+        except:
+            tasks_number = 0
+
+        return render(request, 'practice/tasks/expression_belongs.html', {'tasks_number' : tasks_number, 'range' : range(1, tasks_number+1)})
+
+    def post(self, request):
+        return JsonResponse({'correct': check(request)})
+
+
+class Accordance(View):
+    def get(self, request):
+        try:
+            tasks_number = Tasks.objects.filter(taskType='Accordance').count()
+        except:
+            tasks_number = 0
+
+        return render(request, 'practice/tasks/accordance.html', {'tasks_number' : tasks_number, 'range' : range(1, tasks_number+1)})
+
+    def post(self, request):
+        return JsonResponse({'correct': check(request)})
 
 def simplifyRegex(request):
     return render(request, 'practice/tasks/simplify_regex.html')

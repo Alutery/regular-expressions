@@ -2,8 +2,7 @@ var graphs;
 var statements;
 var numbers;
 var answers;
-var categoryID = 'ChainAcceptance';
-
+var categoryID = 'Accordance';
 
 function getData() {
   $.ajax({
@@ -25,36 +24,44 @@ function getData() {
 }
 
 $(document).ready(function () {
+  
+  var img_graph = ['#graph_1', '#graph_2', '#graph_3', '#graph_4'];
 
-  var svg_div = $('#graphviz_svg');
-  var statement = $('#statement');
+  var statement = $('#regex_assignment');
   var n = parseInt($('#nnn').text(), 10);
 
-  var btn_yes = $('#btn_yes');
-  var btn_no = $('#btn_no');
+  var btn_accept = $('#btn_accept');
+  var btn_repeat = $('#btn_repeat');
+
   var number;
 
-
-  function UpdateGraphviz(data, statement_input, numberID) {
+  // answer = {1, 2, 3, 4}, [4 indexes for data array]
+  function Update(graph, regex_assignment, numberID) {
     $('#answer_request').show();
+    $('#btn_repeat').hide();
     $('#result').text('');
 
-    svg_div.html("<br>loaing...<br>");
-    statement.text(statement_input);
+    graph = graph.split("$");
+
+    console.log(graph);
+    statement.text(regex_assignment);
     number = numberID;
 
-    var viz = new Viz();
-    viz.renderSVGElement(data)
-      .then(function (element) {
-        svg_div.html(element);
-      })
-      .catch(error => {
-        viz = new Viz();
-        console.error(error);
-      });
+    for (let i = 1; i <= 4; i++) {
+      var viz = new Viz();
+      let toFind = '#graph_' + i.toString();
+      
+      viz.renderSVGElement(graph[i-1])
+        .then(function(element) {
+          $(toFind).html(element);
+        })
+        .catch(error => {
+          viz = new Viz();
+        });
+    }
   }
 
-  jQuery(function () {
+  jQuery(function() {
     getData();
 
     for (let i = 1; i <= n; i++) {
@@ -62,31 +69,24 @@ $(document).ready(function () {
         $(".page-item").removeClass("active");
         $(this).addClass("active");
         current = i;
-        UpdateGraphviz(graphs[i - 1], statements[i - 1], numbers[i - 1]);
+        Update(graphs[i - 1], statements[i - 1], numbers[i - 1]);
       });
     }
 
     $('#btn_task_1').click();
   });
 
-  btn_yes.click(function () {
+  btn_accept.click(function(){
     $('#answer_request').hide();
-    displayResult(true);
-  });
+    $('#btn_repeat').show();
 
-  btn_no.click(function () {
-    $('#answer_request').hide();
-    displayResult(false);
-  });
-
-  function displayResult(answer) {
     $.ajax({
       async: false,
       url: '',
       type: 'post',
       data: ({
         taskType: categoryID,
-        answer: answer,
+        answer: $('input[name=radio]:checked', '#answer_request').val(),
         number: number
       }),
       success: function (data) {
@@ -103,5 +103,10 @@ $(document).ready(function () {
         console.log(errorThrown);
       }
     });
-  }
+  });
+
+  btn_repeat.click(function(){
+    $('li.active').click();
+  });
+
 });
