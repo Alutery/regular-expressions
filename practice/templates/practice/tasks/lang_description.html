@@ -9,11 +9,9 @@
         <span class="sr-only">Previous</span>
       </a>
     </li>
-    <li class="page-item active" id="btn_task_1"><a class="page-link">1</a></li>
-    <li class="page-item" id="btn_task_2"><a class="page-link">2</a></li>
-    <li class="page-item" id="btn_task_3"><a class="page-link">3</a></li>
-    <li class="page-item" id="btn_task_4"><a class="page-link">4</a></li>
-    <li class="page-item" id="btn_task_5"><a class="page-link">5</a></li>
+    {% for i in range %}
+    <li class="page-item" id="btn_task_{{ i }}"><a class="page-link">{{ i }}</a></li>
+    {% endfor %}
     <li class="page-item">
       <a class="page-link" aria-label="Next" id="next">
         <span aria-hidden="true">&raquo;</span>
@@ -40,7 +38,8 @@
           <button type="submit" class="btn btn-primary" id="btn_accept">Подтвердить</button>
       </form>
   </div>
-  <p id="result" style="display: none;"></p>
+  <p id="nnn" style="display:none;">{{ tasks_number }}</p>
+  <p id="result" ></p>
     
   </div>
 </div>

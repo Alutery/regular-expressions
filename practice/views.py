@@ -9,8 +9,8 @@ from django.views import View  # import the View parent class
 from mainApp.models import CompletedQuestions, QuestionCategory, Tasks
 
 def validate_regex(request):
-    input = request.GET.get('input', None)
-    answer = request.GET.get('answer', None)
+    input = request.POST.get('input', None)
+    answer = request.POST.get('answer', None)
 
     # answer = aswers[answer]
 
@@ -83,8 +83,7 @@ def check(request):
     answer = request.POST.get('answer')
 
     task = Tasks.objects.get(taskType=taskType, number=number)
-    print(type(answer))
-    print(type(task.answer))
+ 
     return answer == task.answer
 
 
@@ -141,17 +140,33 @@ class SimplifyRegex(View):
         return JsonResponse({'correct': check(request)})
 
 
-def langDescription(request):
-    # if request.method == 'POST':
-    #     input = request.POST['q']
-    #     answer = request.POST['answer']
+class LangDescription(View):
+    def get(self, request):
+        try:
+            tasks_number = Tasks.objects.filter(taskType='LangDescription').count()
+        except:
+            tasks_number = 0
 
-    #     correctness = check_equivalence(input, answer)
+        return render(request, 'practice/tasks/lang_description.html', {'tasks_number' : tasks_number, 'range' : range(1, tasks_number+1)})
+    
+    def post(self, request):
+        answer = request.POST.get('input', None)
+        taskType = request.POST.get('taskType')
+        number = request.POST.get('number')
 
-    #     sub_template = 'practice/tasks/subtemplates/lang_description/result.html'
-    #     return render(request, 'practice/tasks/lang_description.html', {'url' : sub_template, 'correct' : correctness, 'input' : input})
-    # else:  
-    return render(request, 'practice/tasks/lang_description.html')
+        print(number)
+        print(type(number))
+
+        task = Tasks.objects.get(taskType=taskType, number=number)
+        correctness = check_equivalence(answer, task.answer)
+
+        data = {}
+        if correctness == 1:
+            data = {'correctness' : f'<span style="color: green">Верно! </span>(Вы ввели: {input})', 'correct':True}
+        else:
+            data = {'correctness' : f'<span style="color: red">Не верно! </span>(Вы ввели: {input})', 'correct':False}
+
+        return JsonResponse(data)
 
 def taskDFAtoregex(request):
     # if request.method == 'POST':
