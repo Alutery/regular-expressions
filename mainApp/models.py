@@ -9,7 +9,7 @@ class Tasks(models.Model):
     number = models.IntegerField(default=1)
     has_additional_description = models.BooleanField()
     description = models.TextField()
-    additional_description = models.TextField()
+    additional_description = models.TextField(blank=True)
     answer = models.CharField(max_length=50)
 
     class Meta:

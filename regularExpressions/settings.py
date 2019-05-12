@@ -32,13 +32,16 @@ AUTH_USER_MODEL = 'registration.User'
 
 # Application definition
 
+# FIXTURE_DIRS = (
+#     os.path.join(BASE_DIR, 'mainApp', 'fixtures'), 
+# )
+
 INSTALLED_APPS = [
     'mainApp.apps.MainappConfig',
     'practice.apps.PracticeConfig',
     'theory.apps.TheoryConfig',
     'registration.apps.RegistrationConfig',
     'profilePage.apps.ProfilepageConfig',
-    # 'loginsys.apps.LoginsysConfig',
     'django.contrib.admin',
     'django.contrib.auth',  # Фреймворк аутентификации и моделей по умолчанию.
     'django.contrib.contenttypes',  # Django контент-типовая система (даёт разрешения, связанные с моделями).
