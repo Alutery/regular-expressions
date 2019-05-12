@@ -12,7 +12,7 @@ def validate_regex(request):
     input = request.GET.get('input', None)
     answer = request.GET.get('answer', None)
 
-    answer = aswers[answer]
+    # answer = aswers[answer]
 
     correctness = check_equivalence(input, answer)
 
@@ -57,21 +57,22 @@ class GetTasks(View):
         tasks = Tasks.objects.filter(taskType=taskType)
 
         data = {}
-        description = []
-        description2 = [] # optional
-        numbers = []
+        if tasks.exists():
+            description = []
+            description2 = [] # optional
+            numbers = []
 
-        for task in tasks:
-            description.append(task.description)
-            numbers.append(task.number)
-
-        if tasks[0].has_additional_description:
             for task in tasks:
-                description2.append(task.additional_description)
-        
-        data['description'] = description
-        data['description2'] = description2
-        data['numbers'] = numbers
+                description.append(task.description)
+                numbers.append(task.number)
+
+            if tasks[0].has_additional_description:
+                for task in tasks:
+                    description2.append(task.additional_description)
+            
+            data['description'] = description
+            data['description2'] = description2
+            data['numbers'] = numbers
 
         return JsonResponse(data)
 
@@ -127,8 +128,18 @@ class Accordance(View):
     def post(self, request):
         return JsonResponse({'correct': check(request)})
 
-def simplifyRegex(request):
-    return render(request, 'practice/tasks/simplify_regex.html')
+class SimplifyRegex(View):
+    def get(self, request):
+        try:
+            tasks_number = Tasks.objects.filter(taskType='SimplifyRegex').count()
+        except:
+            tasks_number = 0
+
+        return render(request, 'practice/tasks/simplify_regex.html', {'tasks_number' : tasks_number, 'range' : range(1, tasks_number+1)})
+
+    def post(self, request):
+        return JsonResponse({'correct': check(request)})
+
 
 def langDescription(request):
     # if request.method == 'POST':
