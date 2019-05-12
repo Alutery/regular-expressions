@@ -3,8 +3,9 @@ from django.urls import path, re_path
 from . import views
 
 urlpatterns = [
-    path('', views.practice, name='practice'),
-    path('chainAcceptance/', views.chainAcceptance, name='chain_acceptance'),
+    # path('', views.practice, name='practice'),
+    path('gettask/', views.GetTasks.as_view(), name='get_tasks'),
+    path('chainAcceptance/', views.ChainAcceptance.as_view(), name='chain_acceptance'),
     path('langDescription/', views.langDescription ,name='lang_description'),
     path('simplifyRegex/', views.simplifyRegex ,name='simplify_regex'),
     path('task_2/', views.task2, name='task2'),

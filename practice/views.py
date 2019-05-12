@@ -4,8 +4,9 @@ from .forms import CheckEquivalence
 from practice.lib import AutomataTheory
 from queue import Queue
 from django.http import JsonResponse
+from django.views import View  # import the View parent class
 
-from mainApp.models import CompletedQuestions,QuestionCategory
+from mainApp.models import CompletedQuestions, QuestionCategory, Tasks
 
 def validate_regex(request):
     input = request.GET.get('input', None)
@@ -48,12 +49,54 @@ def send_result(request):
     return HttpResponse(0)
         
 
-# Create your views here.
-def practice(request):
-    return render(request, 'practice/main.html')
 
-def chainAcceptance(request):
-    return render(request, 'practice/tasks/chain_acceptance.html')
+class GetTasks(View):
+    def post(self, request):
+        taskType = request.POST.get('taskType')
+        tasks = Tasks.objects.filter(taskType=taskType)
+
+        data = {}
+        description = []
+        description2 = [] # optional
+        numbers = []
+
+        for task in tasks:
+            description.append(task.description)
+            numbers.append(task.number)
+
+        if tasks[0].has_additional_description:
+            for task in tasks:
+                description2.append(task.additional_description)
+        
+        data['description'] = description
+        data['description2'] = description2
+        data['numbers'] = numbers
+
+        return JsonResponse(data)
+
+
+def check(request):
+        taskType = request.POST.get('taskType')
+        number = request.POST.get('number')
+        answer = request.POST.get('answer')
+
+        task = Tasks.objects.get(taskType=taskType, number=number)
+        
+        return answer == task.answer
+
+
+class ChainAcceptance(View):
+    def get(self, request):
+        try:
+            tasks_number = QuestionCategory.objects.get(code_name='ChainAcceptance').questionsnumber
+        except:
+            tasks_number = 0
+
+        return render(request, 'practice/tasks/chain_acceptance.html', {'tasks_number' : tasks_number, 'range' : range(1, tasks_number+1)})
+
+    def post(self, request):
+        return JsonResponse({'correct': check(request)})
+
     
 def task2(request):
     return render(request, 'practice/tasks/task_2.html')

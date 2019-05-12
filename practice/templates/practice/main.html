@@ -47,4 +47,7 @@
 	$( '.navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
 	$( '#practice_tab' ).addClass( 'active' );
 </script>
+
+{% load staticfiles%}
+<script src="{% static 'js/practice/pagination.js' %}"></script>
 {% endblock %}
