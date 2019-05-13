@@ -18,7 +18,6 @@ class Tasks(models.Model):
 
 class QuestionCategory(models.Model):
     name = models.CharField(max_length=40)
-    questionsnumber = models.IntegerField(default=5)
     code_name = models.CharField(max_length=30)
 
     class Meta:
@@ -44,15 +43,6 @@ class CompletedQuestions(models.Model):
         verbose_name = 'Completed Questions'
         verbose_name_plural = 'Completed Questions'
 
-    @property
-    def answers(self):
-        "Returns the user's results."
-        category = QuestionCategory.objects.get(pk = self.categoryID)[0]
-        return {
-            'category_name' : category.name,
-            'questions_number' : category.questionsnumber,
-            'answers' : [i == 1 for i in str(self.questionresults)]
-            }
     
 
 

@@ -62,7 +62,7 @@ class GetTasks(View):
 
             for task in tasks:
                 description.append(task.description)
-                numbers.append(task.id)
+                numbers.append(task.number)
 
             if tasks[0].has_additional_description:
                 for task in tasks:
@@ -80,7 +80,7 @@ def check(request):
     number = request.POST.get('number')
     answer = request.POST.get('answer')
 
-    task = Tasks.objects.get(id=number)
+    task = Tasks.objects.get(taskType=taskType, number=number)
  
     return answer == task.answer
 
@@ -152,14 +152,14 @@ class LangDescription(View):
         taskType = request.POST.get('taskType')
         number = request.POST.get('number')
 
-        task = Tasks.objects.get(id=number)
+        task = Tasks.objects.get(taskType=taskType, number=number)
         correctness = check_equivalence(answer, task.answer)
 
         data = {}
         if correctness == 1:
-            data = {'correctness' : f'<span style="color: green">Верно! </span>(Вы ввели: {answer})', 'correct':True}
+            data = {'correctness' : f'<span style="color: green">Верно! </span>(Вы ввели: {input})', 'correct':True}
         else:
-            data = {'correctness' : f'<span style="color: red">Не верно! </span>(Вы ввели: {answer})', 'correct':False}
+            data = {'correctness' : f'<span style="color: red">Не верно! </span>(Вы ввели: {input})', 'correct':False}
 
         return JsonResponse(data)
 
@@ -177,14 +177,17 @@ class TaskDFAtoregex(View):
         taskType = request.POST.get('taskType')
         number = request.POST.get('number')
 
-        task = Tasks.objects.get(id=number)
+        print(number)
+        print(type(number))
+
+        task = Tasks.objects.get(taskType=taskType, number=number)
         correctness = check_equivalence(answer, task.answer)
 
         data = {}
         if correctness == 1:
-            data = {'correctness' : f'<span style="color: green">Верно! </span>(Вы ввели: {answer})', 'correct':True}
+            data = {'correctness' : f'<span style="color: green">Верно! </span>(Вы ввели: {input})', 'correct':True}
         else:
-            data = {'correctness' : f'<span style="color: red">Не верно! </span>(Вы ввели: {answer})', 'correct':False}
+            data = {'correctness' : f'<span style="color: red">Не верно! </span>(Вы ввели: {input})', 'correct':False}
 
         return JsonResponse(data)
 

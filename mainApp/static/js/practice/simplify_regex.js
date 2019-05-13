@@ -2,7 +2,7 @@ var regex_args;
 var statements;
 var numbers;
 var answers;
-var categoryID = 'ExpressionBelongs';
+var categoryID = 'SimplifyRegex';
 
 function getData() {
   $.ajax({

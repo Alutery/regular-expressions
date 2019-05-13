@@ -6,7 +6,7 @@ from mainApp.models import QuestionCategory, CompletedQuestions
 
 # @login_required
 def profile(request):
-    args = {}
+    args = {} 
     profile = request.user
     userID = profile.id
     questions = CompletedQuestions.objects.filter(userID = userID)
@@ -19,7 +19,7 @@ def profile(request):
         for question in questions:
             category = question.categoryID
             name = category.name
-            n = category.questionsnumber
+            n = Tasks.objects.filter(taskType=category.code_name).count()
             answers = [i == '1' for i in str(question.questionresults)]
             maxn = max(maxn, n)
             completed_questions[name] = answers

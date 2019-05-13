@@ -10,7 +10,7 @@ urlpatterns = [
     path('simplifyRegex/', views.SimplifyRegex.as_view() ,name='simplify_regex'),
     path('expressionBelongs/', views.ExpressionBelongs.as_view(), name='expression_belongs'),
     path('accordance/', views.Accordance.as_view(), name='accordance'),
-    path('taskDFAtoregex/', views.taskDFAtoregex, name='task_DFA_to_regex'),
+    path('taskDFAtoregex/', views.TaskDFAtoregex.as_view(), name='task_DFA_to_regex'),
     path('validate_regex/', views.validate_regex, name='validate_regex'),
     path('send_result/', views.send_result, name='send_result'),
 ]
