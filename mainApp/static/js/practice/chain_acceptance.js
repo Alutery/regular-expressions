@@ -38,6 +38,7 @@ $(document).ready(function () {
   function UpdateGraphviz(data, statement_input, numberID) {
     $('#answer_request').show();
     $('#result').text('');
+    $('#display_result').hide();
 
     svg_div.html("<br>loaing...<br>");
     statement.text(statement_input);
@@ -71,12 +72,18 @@ $(document).ready(function () {
 
   btn_yes.click(function () {
     $('#answer_request').hide();
+    $('#display_result').show();
     displayResult(true);
   });
 
   btn_no.click(function () {
     $('#answer_request').hide();
+    $('#display_result').show();
     displayResult(false);
+  });
+
+  $("#btn_repeat").click(function () {
+    $('.page-item.active').click();
   });
 
   function displayResult(answer) {

@@ -29,13 +29,12 @@ $(document).ready(function () {
   var n = parseInt($('#nnn').text(), 10);
 
   var btn_accept = $('#btn_accept');
-  var btn_repeat = $('#btn_repeat');
 
   var number;
 
   function Update(options, regex_assignment, numberID) {
     $('#answer_request').show();
-    $('#btn_repeat').hide();
+    $('#display_result').hide();
     $('#result').text('');
 
     statement.text(regex_assignment);
@@ -67,7 +66,7 @@ $(document).ready(function () {
 
   btn_accept.click(function () {
     $('#answer_request').hide();
-    $('#btn_repeat').show();
+    $('#display_result').show();
 
     $.ajax({
       async: false,
@@ -95,8 +94,8 @@ $(document).ready(function () {
 
   });
 
-  btn_repeat.click(function () {
-    $('li.active').click();
+  $("#btn_repeat").click(function () {
+    $('.page-item.active').click();
   });
 
 });

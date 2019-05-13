@@ -29,7 +29,6 @@
     <hr>
     <p>Выберете возможный результат преобразования данного регулярного выражения (если их несколько, выберете наиболее краткую форму):</p>
 
-    <p id="result"></p>
     <div id="answer_request">
         <div class="radio">
             <input type="radio" name="radio" id="radio1" value="1" checked="" />
@@ -50,10 +49,12 @@
     
         <br>
         <p id="nnn" style="display:none;">{{ tasks_number }}</p>
-        <p id="result" style="display:none;"></p>
         <button class="btn btn-success btn-block" id="btn_accept">Подтвердить</button>
     </div>
-    <button class="btn btn-primary btn-block" id="btn_repeat" hidden>Повторить</button>
+    <div id="display_result" style="display: none;">
+        <p id="result"></p>
+        <button class="btn btn-primary" id="btn_repeat">Повторить</button>
+    </div>
 </div>
 </div>
 

@@ -191,19 +191,22 @@ class TaskDFAtoregex(View):
 
 
 def check_equivalence(a, b):
-    a = AutomataTheory.NFAfromRegex(a)
-    b = AutomataTheory.NFAfromRegex(b)
+    try:
+        a = AutomataTheory.NFAfromRegex(a)
+        b = AutomataTheory.NFAfromRegex(b)
 
-    dfa_1 = AutomataTheory.DFAfromNFA(a.getNFA())
-    dfa_2 = AutomataTheory.DFAfromNFA(b.getNFA())
+        dfa_1 = AutomataTheory.DFAfromNFA(a.getNFA())
+        dfa_2 = AutomataTheory.DFAfromNFA(b.getNFA())
 
-    minDFA_1 = dfa_1.getMinimisedDFA()
-    minDFA_2 = dfa_2.getMinimisedDFA()
+        minDFA_1 = dfa_1.getMinimisedDFA()
+        minDFA_2 = dfa_2.getMinimisedDFA()
 
-    if minDFA_1.language != minDFA_2.language:
+        if minDFA_1.language != minDFA_2.language:
+            return 0
+
+        return bfsEquivalenceCheck(minDFA_1.transitions, minDFA_2.transitions, minDFA_1.startstate, minDFA_2.startstate, minDFA_1.finalstates, minDFA_2.finalstates, minDFA_1.language)
+    except BaseException:
         return 0
-
-    return bfsEquivalenceCheck(minDFA_1.transitions, minDFA_2.transitions, minDFA_1.startstate, minDFA_2.startstate, minDFA_1.finalstates, minDFA_2.finalstates, minDFA_1.language)
 
 def bfsEquivalenceCheck(aut1, aut2, s1, s2, f1, f2, L):
     q = Queue()

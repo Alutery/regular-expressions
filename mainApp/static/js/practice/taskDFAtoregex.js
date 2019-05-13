@@ -33,7 +33,7 @@ $(document).ready(function () {
         $(this).addClass("active");
 
         $('#answer_request').show();
-        $('#result').hide();
+        $('#display_result').hide();
 
         current = i;
         UpdateGraphviz(graphs[i - 1], numbers[i - 1]);
@@ -42,6 +42,10 @@ $(document).ready(function () {
 
 
     $('#btn_task_1').click();
+  });
+
+  $('#btn_repeat').click(function () {
+    $('.page-item.active').click();
   });
 
   $("#btn_accept").click(function (event) {
@@ -56,7 +60,7 @@ $(document).ready(function () {
 
     $('#inputRegex').val('');
     $('#answer_request').hide();
-    $('#result').show();
+    $('#display_result').show();
     $('#result').text('Обработка..');
 
     $.ajax({
@@ -87,7 +91,6 @@ $(document).ready(function () {
   var svg_div = $('#graphviz_svg');
 
   function UpdateGraphviz(data, numberID) {
-
     svg_div.html("<br>loaing...<br>");
     number = numberID;
 

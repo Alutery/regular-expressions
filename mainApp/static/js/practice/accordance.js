@@ -31,19 +31,17 @@ $(document).ready(function () {
   var n = parseInt($('#nnn').text(), 10);
 
   var btn_accept = $('#btn_accept');
-  var btn_repeat = $('#btn_repeat');
 
   var number;
 
   // answer = {1, 2, 3, 4}, [4 indexes for data array]
   function Update(graph, regex_assignment, numberID) {
     $('#answer_request').show();
-    $('#btn_repeat').hide();
+    $('#display_result').hide();
     $('#result').text('');
 
     graph = graph.split("$");
 
-    console.log(graph);
     statement.text(regex_assignment);
     number = numberID;
 
@@ -76,9 +74,14 @@ $(document).ready(function () {
     $('#btn_task_1').click();
   });
 
+  $('#btn_repeat').click(function () {
+    $('.page-item.active').click();
+  });
+
+
   btn_accept.click(function(){
     $('#answer_request').hide();
-    $('#btn_repeat').show();
+    $('#display_result').show();
 
     $.ajax({
       async: false,
@@ -103,10 +106,6 @@ $(document).ready(function () {
         console.log(errorThrown);
       }
     });
-  });
-
-  btn_repeat.click(function(){
-    $('li.active').click();
   });
 
 });

@@ -36,6 +36,7 @@ $(document).ready(function () {
 
   function Update(regex_arg, statement_input, numberID) {
     $('#answer_request').show();
+    $('#display_result').hide();
     $('#result').text('');
     number = numberID;
 
@@ -58,13 +59,19 @@ $(document).ready(function () {
     $('#btn_task_1').click();
   });
 
+  $('#btn_repeat').click(function () {
+    $('.page-item.active').click();
+  });
+
   btn_yes.click(function () {
     $('#answer_request').hide();
+    $('#display_result').show();
     displayResult(true);
   });
 
   btn_no.click(function () {
     $('#answer_request').hide();
+    $('#display_result').show();
     displayResult(false);
   });
 
