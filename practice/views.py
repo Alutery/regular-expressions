@@ -23,27 +23,28 @@ def validate_regex(request):
     return JsonResponse(data)
 
 def send_result(request):
-    category = request.GET.get('category', None)
-    i = int(request.GET.get('i', None))
-    n = int(request.GET.get('n', None))
+    if request.user.is_authenticated:
+        category = request.GET.get('category', None)
+        i = int(request.GET.get('i', None))
+        n = int(request.GET.get('n', None))
 
-    if category and n:
-        profile = request.user
-        category = QuestionCategory.objects.get(code_name=category).id
-        q = CompletedQuestions.objects.filter(userID=profile.id, categoryID=category)
-        if q.exists():
-            q = q[0]
-            results = q.questionresults
-            q.questionresults = results[:i] + '1' + results[i+1:]
-            q.save()
-        else:
-            results = '0' * n
-            # results[i] = '1'
-            results = results[:i] + '1' + results[i+1:]
-            category = QuestionCategory.objects.get(id=category)
-            print(results)
-            q = CompletedQuestions(userID=profile, categoryID=category, questionresults=results)
-            q.save()
+        if category and n:
+            profile = request.user
+            category = QuestionCategory.objects.get(code_name=category).id
+            q = CompletedQuestions.objects.filter(userID=profile.id, categoryID=category)
+            if q.exists():
+                q = q[0]
+                results = q.questionresults
+                q.questionresults = results[:i] + '1' + results[i+1:]
+                q.save()
+            else:
+                results = '0' * n
+                # results[i] = '1'
+                results = results[:i] + '1' + results[i+1:]
+                category = QuestionCategory.objects.get(id=category)
+                print(results)
+                q = CompletedQuestions(userID=profile, categoryID=category, questionresults=results)
+                q.save()
     
     return HttpResponse(0)
         

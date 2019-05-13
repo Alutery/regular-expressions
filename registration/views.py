@@ -47,19 +47,14 @@ def signup(request):
 		password1 = request.POST.get('password1')
 		password2 = request.POST.get('password2')
 		data = {'first_name':fname, 'last_name':lname, 'email':email, 'password2':password2, 'password1':password1}
-		print(data)
 		form = SignUpForm(data = data)
-		print('1-----------------------')
 		if form.is_valid():
-			print('2-----------------------')
 			user = form.save(commit=False)
 			user.is_active = True
 			user.save()
-			print('3-----------------------')
 			time.sleep(5)
 			return HttpResponse(json.dumps({"message": "Success"}),content_type="application/json")
 		else:
-			print('4-----------------------')
 			return HttpResponse(json.dumps({"message":form.errors}),content_type="application/json")
 	else:
 		form = SignUpForm()

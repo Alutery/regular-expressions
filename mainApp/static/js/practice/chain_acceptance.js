@@ -91,7 +91,7 @@ $(document).ready(function () {
       }),
       success: function (data) {
         if (data.correct) {
-          send_result(current - 1, n, categoryID);
+          send_result(number, n, categoryID);
           $('#result').text('Верно!');
           $('#result').css("color", "green");
         } else {

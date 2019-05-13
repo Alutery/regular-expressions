@@ -33,10 +33,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('.list-group-item-linkable').on('click', function() {
-            // same window/tab:
             window.location.href = $(this).data('link');
-            // new window/tab:
-            //window.open($(this).data('link'));
         });
 
         $('.list-group-item-linkable a, .list-group-item-linkable button')
@@ -47,23 +44,5 @@
 	$( '.navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
 	$( '#theory_tab' ).addClass( 'active' );
     
-    
-    // $('#logClick').click(function(e) {
-    //     e.preventDefault();
-    //     $( '#reg-nav-item' ).removeClass( 'active' );
-    //     $( '#log-nav-item' ).addClass( 'active' );
-    // });
-    
-    // $('#regClick').click(function(e) {
-    //     e.preventDefault();
-    //     $( '#reg-nav-item' ).addClass( 'active' );
-    //     $( '#log-nav-item' ).removeClass( 'active' );
-    // });
-
-    // $('#modal-login').on('show.bs.modal', function (e) {
-    //     e.preventDefault();
-    //     $( '#reg-nav-item' ).removeClass( 'active' );
-    //     $( '#log-nav-item' ).removeClass( 'active' );
-    // })
 </script>
 {% endblock %}
