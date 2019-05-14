@@ -4,45 +4,52 @@
 
 {% block account-loginNO %}
 <ul class="navbar-nav ml-auto">
-    <li class="nav-item active my-2 px-1"><button class="btn btn-primary" data-toggle="modal" data-target="#popupLogin" id="regClick" data-whatever="reg">Регистрация</button></li>
-    <li class="nav-item my-2 px-1"><button class="btn btn-success" data-toggle="modal" data-target="#popupLogin" id="logClick" data-whatever="log">Вход</button></li>
+    <li class="nav-item active my-2 px-1"><button class="btn btn-primary" data-toggle="modal" data-target="#popupLogin"
+            id="regClick" data-whatever="reg">Регистрация</button></li>
+    <li class="nav-item my-2 px-1"><button class="btn btn-success" data-toggle="modal" data-target="#popupLogin"
+            id="logClick" data-whatever="log">Вход</button></li>
 </ul>
 {% endblock %}
 
 {% block content %}
 <div class="container-fluid">
-<div class="row">
-    <div class="col-sm-3 sidebar">
-        <ul class="nav nav-sidebar hidden-xs hidden-sm list-group">
-            <li class="list-group-item list-group-item-linkable" data-link="{% url 'intro' %}" id="intro">Введение</li>
-            <li class="list-group-item list-group-item-linkable" data-link="{% url 'basic_definitions' %}" id="basic_definitions">Регулярные множества и выражения</li>
-            <li class="list-group-item list-group-item-linkable" data-link="{% url 'regex_equivalence' %}" id="regex_equivalence">Эквивалентность регулярных выражений</li>
-            <li class="list-group-item list-group-item-linkable" data-link="{% url 'FA' %}" id="FA">Конечные автоматы</li>
-            <li class="list-group-item list-group-item-linkable" data-link="{% url 'regex_to_NFA' %}" id="regex_to_NFA">Построение НКА по регулярному выражению</li>
-            <li class="list-group-item list-group-item-linkable" data-link="{% url 'NFA_to_DFA' %}" id="NFA_to_DFA">Построение ДКА по НКА</li>
-            <li class="list-group-item list-group-item-linkable" data-link="{% url 'DFA_to_regex' %}" id="DFA_to_regex">Преобразование ДКА в регулярное выражение</li>
-        </ul>
+    <div class="row">
+        <div class="col-sm-3 sidebar">
+            <div class="sidebar-item">
+                <div class="make-me-sticky">
+                    <ul class="nav nav-sidebar hidden-xs hidden-sm list-group">
+                        <li class="list-group-item list-group-item-linkable" data-link="{% url 'intro' %}" id="intro">
+                            Введение</li>
+                        <li class="list-group-item list-group-item-linkable" data-link="{% url 'basic_definitions' %}"
+                            id="basic_definitions">Регулярные множества и выражения</li>
+                        <li class="list-group-item list-group-item-linkable" data-link="{% url 'regex_equivalence' %}"
+                            id="regex_equivalence">Эквивалентность регулярных выражений</li>
+                        <li class="list-group-item list-group-item-linkable" data-link="{% url 'FA' %}" id="FA">Конечные
+                            автоматы</li>
+                        <li class="list-group-item list-group-item-linkable" data-link="{% url 'regex_to_NFA' %}"
+                            id="regex_to_NFA">Построение НКА по регулярному выражению</li>
+                        <li class="list-group-item list-group-item-linkable" data-link="{% url 'NFA_to_DFA' %}"
+                            id="NFA_to_DFA">Построение ДКА по НКА</li>
+                        <li class="list-group-item list-group-item-linkable" data-link="{% url 'DFA_to_regex' %}"
+                            id="DFA_to_regex">Преобразование ДКА в регулярное выражение</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            {% block doc %}
+            {% endblock %}
+        </div>
     </div>
-    <div class="col-sm-9">
-    {% block doc %}
-    {% endblock %}
-    </div>
-</div>
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('.list-group-item-linkable').on('click', function() {
+    $(document).ready(function () {
+        $('.list-group-item-linkable').on('click', function () {
             window.location.href = $(this).data('link');
         });
-
-        $('.list-group-item-linkable a, .list-group-item-linkable button')
-        .on('click', function(e) {
-            // e.stopPropagation();
-        });
     });
-	$( '.navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
-	$( '#theory_tab' ).addClass( 'active' );
-    
+    $('.navbar-nav').find('li.active').removeClass('active');
+    $('#theory_tab').addClass('active');
 </script>
 {% endblock %}

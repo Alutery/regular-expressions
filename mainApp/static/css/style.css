@@ -19,6 +19,7 @@ body {
 	line-height: 1.5;
 	padding-bottom: 90px;
 }
+
 .modal { padding-right: 0 !important }
 
 footer {
@@ -26,23 +27,6 @@ footer {
 	position: relative;
 	width: 100%;
 }
-
-/* width
-::-webkit-scrollbar {
-	width: 5px;
-}
-
-::-webkit-scrollbar-track {
-	background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-	background: #888;
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background: #555;
-} */
 
 html {
     overflow: scroll;
@@ -84,16 +68,19 @@ table.table-bordered > tbody > tr > th{
     cursor: pointer;
 }
 
-@page 
-{
-
-size: auto; /* auto is the current printer page size */
-margin: 0mm; /* this affects the margin in the printer settings */
+/* Sticky Sidebar */
+.sidebar-item {
+    position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
-@media print {
-#print {
-display : none;
+.make-me-sticky {
+  position: -webkit-sticky;
+	position: sticky;
+	top: 90px;
+    
+  padding: 0 15px;
 }
-}
-

@@ -4,47 +4,51 @@
 
 {% block account-loginNO %}
 <ul class="navbar-nav ml-auto">
-    <li class="nav-item active my-2 px-1"><a class="btn btn-primary" data-toggle="modal" href="#popupLogin" role="button">Регистрация</a></li>
+    <li class="nav-item active my-2 px-1"><a class="btn btn-primary" data-toggle="modal" href="#popupLogin"
+            role="button">Регистрация</a></li>
     <li class="nav-item my-2 px-1"><a class="btn btn-success" href="#" role="button">Вход</a></li>
 </ul>
 {% endblock %}
 
 {% block content %}
+
 <div class="container-fluid">
-<div class="row">
-    <div class="col-sm-3 sidebar">
-        <ul class="nav nav-sidebar hidden-xs hidden-sm list-group">
-            <li class="list-group-item list-group-item-linkable" data-link="{% url 'chain_acceptance' %}" id="chain_acceptance">Допущение цепочки автоматом</li>
-            <li class="list-group-item list-group-item-linkable" data-link="{% url 'lang_description' %}" id="lang_description">Регулярное выражение по описанию языка</li>
-            <li class="list-group-item list-group-item-linkable" data-link="{% url 'expression_belongs' %}" id="expression_belongs">Принадлежность слова регулярному выражению</li>
-            <li class="list-group-item list-group-item-linkable" data-link="{% url 'simplify_regex' %}" id="simplify_regex">Упростить регулярное выражение</li>
-            <li class="list-group-item list-group-item-linkable" data-link="{% url 'accordance' %}" id="accordance">Соотвествие автомата рег. выражению</li>
-            <li class="list-group-item list-group-item-linkable" data-link="{% url 'task_DFA_to_regex' %}" id="task_DFA_to_regex">ДКА в регулярное выражение</li>
-        </ul>
+    <div class="row">
+        <div class="col-sm-3 sidebar">
+            <div class="sidebar-item">
+                <div class="make-me-sticky">
+                    <ul class="nav nav-sidebar hidden-xs hidden-sm list-group">
+                        <li class="list-group-item list-group-item-linkable" data-link="{% url 'chain_acceptance' %}"
+                            id="chain_acceptance">Допущение цепочки автоматом</li>
+                        <li class="list-group-item list-group-item-linkable" data-link="{% url 'lang_description' %}"
+                            id="lang_description">Регулярное выражение по описанию языка</li>
+                        <li class="list-group-item list-group-item-linkable" data-link="{% url 'expression_belongs' %}"
+                            id="expression_belongs">Принадлежность слова регулярному выражению</li>
+                        <li class="list-group-item list-group-item-linkable" data-link="{% url 'simplify_regex' %}"
+                            id="simplify_regex">Упростить регулярное выражение</li>
+                        <li class="list-group-item list-group-item-linkable" data-link="{% url 'accordance' %}"
+                            id="accordance">Соотвествие автомата рег. выражению</li>
+                        <li class="list-group-item list-group-item-linkable" data-link="{% url 'task_DFA_to_regex' %}"
+                            id="task_DFA_to_regex">ДКА в регулярное выражение</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            {% block task %}
+            {% endblock %}
+        </div>
     </div>
-    <div class="col-sm-9">
-    {% block task %}
-    {% endblock %}
-    </div>
-</div>
 </div>
 
 <script>
-    $(document).ready(function() {
-        $('.list-group-item-linkable').on('click', function() {
-            // same window/tab:
+    $(document).ready(function () {
+        $('.list-group-item-linkable').on('click', function () {
             window.location.href = $(this).data('link');
-            // new window/tab:
-            //window.open($(this).data('link'));
-        });
-
-        $('.list-group-item-linkable a, .list-group-item-linkable button')
-        .on('click', function(e) {
-            // e.stopPropagation();
         });
     });
-	$( '.navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
-	$( '#practice_tab' ).addClass( 'active' );
+    $('.navbar-nav').find('li.active').removeClass('active');
+    $('#practice_tab').addClass('active');
 </script>
 
 {% endblock %}
