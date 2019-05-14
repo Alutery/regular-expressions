@@ -1,0 +1,49 @@
+{% extends "mainApp/wrapper.html" %}
+
+{% block title %}Практика{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <div class="container-fluid">
+        <div class="continer">
+            <main role="main">
+                <div class="jumborton">
+                    <div class="col-sm-8 mx-auto">
+                        <h1>Калькулятор</h1>
+                        <div id="input_request">
+                            <form>
+                              {% csrf_token %}
+                              <div class="form-group mb-3 mt-">
+                                <label for="inputRegex">
+                                  <p class="mt-4 mb-2">
+                                    Введите регулярное выражение.</p>
+                                </label>
+                                <input class="form-control noresize w-50 " rows="1" placeholder="Введите здесь" type="text" id="inputRegex"
+                                  name="q" required>
+                              </div>
+                              <button type="submit" class="btn btn-primary" id="btn_accept">Преобразовать в мин. ДКА</button>
+                            </form>
+                        </div>
+                        <div id="display_automate" style="display: none;">
+                            <p id="result"></p>
+                            <button class="mt-3 btn btn-primary" id="btn_repeat">Повторить</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.list-group-item-linkable').on('click', function () {
+            window.location.href = $(this).data('link');
+        });
+    });
+    $('.navbar-nav').find('li.active').removeClass('active');
+    $('#calculator_tab').addClass('active');
+</script>
+
+{% endblock %}

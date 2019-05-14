@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'theory.apps.TheoryConfig',
     'registration.apps.RegistrationConfig',
     'profilePage.apps.ProfilepageConfig',
+    'calculator.apps.CalculatorConfig',
     'django.contrib.admin',
     'django.contrib.auth',  # Фреймворк аутентификации и моделей по умолчанию.
     'django.contrib.contenttypes',  # Django контент-типовая система (даёт разрешения, связанные с моделями).

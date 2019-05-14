@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import CheckEquivalence
 from practice.lib import AutomataTheory
-from queue import Queue
 from django.http import JsonResponse
 from django.views import View  # import the View parent class
 

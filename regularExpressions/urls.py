@@ -26,4 +26,5 @@ urlpatterns = [
     path('theory/', include('theory.urls')),
     path('auth/', include('registration.urls')),
     path('profile/', include('profilePage.urls')),
+    path('calculator/', include('calculator.urls')),
 ]
