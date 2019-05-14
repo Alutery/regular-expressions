@@ -19,11 +19,13 @@ def profile(request):
             category = question.categoryID
             name = category.name
             n = Tasks.objects.filter(taskType=category.code_name).count()
-            answers = [i == '1' for i in str(question.questionresults)]
+            answers = list(question.questionresults)
             maxn = max(maxn, n)
             completed_questions[name] = answers
 
-
+        for q in completed_questions:
+            completed_questions[q] += ['2' for i in range(maxn - len(completed_questions[q]))]
+        
         args['completed_questions'] = completed_questions
         args['range'] = range(1, maxn + 1)
     print(args)
