@@ -69,31 +69,6 @@ class Automata:
                         states.add(tns)
         return allstates
 
-    def display(self, f):
-        f.write ("states:" + str(self.states) + "\n")
-        f.write ("start state: " + str(self.startstate) + "\n")
-        f.write ("final states:" + str(self.finalstates) + "\n")
-        f.write ("transitions:\n")
-        for fromstate, tostates in self.transitions.items():
-            for state in tostates:
-                for char in tostates[state]:
-                    f.write ("  " + str(fromstate) + "->" + str(state) + "on '"+ char + "'\n"),
-            f.write('\n')
-
-    def getPrintText(self):
-        text = "language: {" + ", ".join(self.language) + "}\n"
-        text += "states: {" + ", ".join(map(str,self.states)) + "}\n"
-        text += "start state: " + str(self.startstate) + "\n"
-        text += "final states: {" + ", ".join(map(str,self.finalstates)) + "}\n"
-        text += "transitions:\n"
-        linecount = 5
-        for fromstate, tostates in self.transitions.items():
-            for state in tostates:
-                for char in tostates[state]:
-                    text += "    " + str(fromstate) + " -> " + str(state) + " on '" + char + "'\n"
-                    linecount +=1
-        return [text, linecount]
-
     def newBuildFromNumber(self, startnum):
         translations = {}
         for i in list(self.states):
@@ -194,7 +169,6 @@ class BuildAutomata:
 
 
 class DFAfromNFA:
-    """class for building dfa from e-nfa and minimise it"""
 
     def __init__(self, nfa):
         self.buildDFA(nfa)
@@ -205,12 +179,6 @@ class DFAfromNFA:
 
     def getMinimisedDFA(self):
         return self.minDFA
-
-    def displayDFA(self, f):
-        self.dfa.display(f)
-
-    def displayMinimisedDFA(self, f):
-        self.minDFA.display(f)
 
     def buildDFA(self, nfa):
         allstates = dict()
@@ -276,8 +244,7 @@ class DFAfromNFA:
                     toappend = []
                     for char in self.dfa.language:
                         s1 = self.dfa.gettransitions(states[i], char)
-                        # print "debug trans "
-                        # print s1
+                        
                         s2 = self.dfa.gettransitions(states[j], char)
                         if len(s1) != len(s2):
                             eq = 0
@@ -335,7 +302,6 @@ class DFAfromNFA:
             self.minDFA = self.dfa.newBuildFromEquivalentStates(equivalent, pos)
 
 class NFAfromRegex:
-    """class for building e-nfa from regular expressions"""
 
     def __init__(self, regex):
         self.star = '*'
@@ -352,9 +318,6 @@ class NFAfromRegex:
 
     def getNFA(self):
         return self.nfa
-
-    def displayNFA(self, f):
-        self.nfa.display(f)
 
     def buildNFA(self):
         language = set()
@@ -433,28 +396,3 @@ class NFAfromRegex:
             elif operator == self.dot:
                 self.automata.append(BuildAutomata.dotstruct(b,a))
 
-def drawGraph(automata, file = ""):
-    """From https://github.com/max99x/automata-editor/blob/master/util.py"""
-    f = popen(r"dot -Tpng -o graph%s.png" % file, 'w')
-    try:
-        f.write(automata.getDotFile())
-    except:
-        raise BaseException("Error creating graph")
-    finally:
-        f.close()
-
-def isInstalled(program):
-    """From http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python"""
-    import os
-    def is_exe(fpath):
-        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
-    fpath, fname = os.path.split(program)
-    if fpath:
-        if is_exe(program) or is_exe(program+".exe"):
-            return True
-    else:
-        for path in os.environ["PATH"].split(os.pathsep):
-            exe_file = os.path.join(path, program)
-            if is_exe(exe_file) or is_exe(exe_file+".exe"):
-                return True
-    return False

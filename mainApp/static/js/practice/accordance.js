@@ -4,6 +4,7 @@ var numbers;
 var answers;
 var categoryID = 'Accordance';
 
+// получение данных заданий
 function getData() {
   $.ajax({
     async: false,
@@ -24,16 +25,14 @@ function getData() {
 }
 
 $(document).ready(function () {
-
-  var img_graph = ['#graph_1', '#graph_2', '#graph_3', '#graph_4'];
-
+  
   var statement = $('#regex_assignment');
   var n = parseInt($('#nnn').text(), 10);
 
-  var btn_accept = $('#btn_accept');
-
+  // хранит id текущенго задания из бд
   var number;
 
+  // обновление содержимого страницы по ее соответствующему номеру
   // answer = {1, 2, 3, 4}, [4 indexes for data array]
   function Update(graph, regex_assignment, numberID) {
     $('#answer_request').show();
@@ -62,6 +61,7 @@ $(document).ready(function () {
   jQuery(function () {
     getData();
 
+    // обработчики кнопок листания заданий
     for (let i = 1; i <= n; i++) {
       $('#btn_task_' + i).click(function () {
         $(".page-item").removeClass("active");
@@ -71,15 +71,17 @@ $(document).ready(function () {
       });
     }
 
+    // при обновлении страницы выводим первое задание
     $('#btn_task_1').click();
   });
 
+  // кнопка повтора
   $('#btn_repeat').click(function () {
     $('.page-item.active').click();
   });
 
-
-  btn_accept.click(function () {
+  // кнопка подтверждения
+  $('#btn_accept').click(function () {
     $('#answer_request').hide();
     $('#display_result').show();
 
