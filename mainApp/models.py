@@ -6,7 +6,6 @@ from django.conf import settings
 
 class Tasks(models.Model):
     taskType = models.CharField(max_length=30)
-    number = models.IntegerField(default=1)
     has_additional_description = models.BooleanField()
     description = models.TextField()
     additional_description = models.TextField(blank=True)
