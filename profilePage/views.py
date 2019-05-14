@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from registration.models import User
-# from django.contrib.auth.models import User
-from mainApp.models import QuestionCategory, CompletedQuestions
+from mainApp.models import QuestionCategory, CompletedQuestions, Tasks
 # Create your views here.
 
 # @login_required
