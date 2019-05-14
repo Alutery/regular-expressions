@@ -24,7 +24,7 @@ function getData() {
 }
 
 $(document).ready(function () {
-  
+
   var img_graph = ['#graph_1', '#graph_2', '#graph_3', '#graph_4'];
 
   var statement = $('#regex_assignment');
@@ -48,9 +48,9 @@ $(document).ready(function () {
     for (let i = 1; i <= 4; i++) {
       var viz = new Viz();
       let toFind = '#graph_' + i.toString();
-      
-      viz.renderSVGElement(graph[i-1])
-        .then(function(element) {
+
+      viz.renderSVGElement(graph[i - 1])
+        .then(function (element) {
           $(toFind).html(element);
         })
         .catch(error => {
@@ -59,7 +59,7 @@ $(document).ready(function () {
     }
   }
 
-  jQuery(function() {
+  jQuery(function () {
     getData();
 
     for (let i = 1; i <= n; i++) {
@@ -79,7 +79,7 @@ $(document).ready(function () {
   });
 
 
-  btn_accept.click(function(){
+  btn_accept.click(function () {
     $('#answer_request').hide();
     $('#display_result').show();
 

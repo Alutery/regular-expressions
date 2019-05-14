@@ -2,13 +2,13 @@ $(document).ready(function () {
     var k = 1;
     $('#forward').click(function () {
         dotIndex = 0;
-        k=1;
+        k = 1;
         render();
     });
 
     $('#back').click(function () {
-        dotIndex = dots.length;
-        k=-1;
+        dotIndex = dots.length - 1;
+        k = -1;
         render();
     });
 
@@ -27,7 +27,6 @@ $(document).ready(function () {
     function attributer(datum, index, nodes) {
         var selection = d3.select(this);
         if (datum.tag == "svg") {
-            //var width = 500;
             var height = 400 * width / 964;
             var scale = 1.5 * width / 964;
             var viewBox = `0 0 ${width * 3 / 4 / scale} ${height * 3 / 4 / scale}`;

@@ -4,7 +4,6 @@
 
 .img-theory {
 	margin: 25px 0;
-	/* width: 350px; */
 }
 
 html {
@@ -20,7 +19,9 @@ body {
 	padding-bottom: 90px;
 }
 
-.modal { padding-right: 0 !important }
+.modal {
+	padding-right: 0 !important
+}
 
 footer {
 	bottom: 0;
@@ -29,16 +30,20 @@ footer {
 }
 
 html {
-    overflow: scroll;
-    overflow-x: hidden;
+	overflow: scroll;
+	overflow-x: hidden;
 }
+
 ::-webkit-scrollbar {
-    width: 0px;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
+	width: 0px;
+	/* Remove scrollbar space */
+	background: transparent;
+	/* Optional: just make scrollbar invisible */
 }
+
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
-    background: #FF0000;
+	background: #FF0000;
 }
 
 p {
@@ -46,31 +51,31 @@ p {
 }
 
 .noresize {
-	resize: none; 
+	resize: none;
 }
 
-table.table-bordered > thead > tr > th{
-    border:1.5px solid;
+table.table-bordered>thead>tr>th {
+	border: 1.5px solid;
 }
 
-table.table-bordered > tbody > tr > td{
-    border:1.5px solid;
+table.table-bordered>tbody>tr>td {
+	border: 1.5px solid;
 }
 
-table.table-bordered > tbody > tr > th{
-    border:1.5px solid;
+table.table-bordered>tbody>tr>th {
+	border: 1.5px solid;
 }
 
 .list-group-item-linkable:hover {
-    color: #555;
-    text-decoration: none;
-    background-color: #f5f5f5;
-    cursor: pointer;
+	color: #555;
+	text-decoration: none;
+	background-color: #f5f5f5;
+	cursor: pointer;
 }
 
 /* Sticky Sidebar */
 .sidebar-item {
-    position: absolute;
+	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -78,9 +83,9 @@ table.table-bordered > tbody > tr > th{
 }
 
 .make-me-sticky {
-  position: -webkit-sticky;
+	position: -webkit-sticky;
 	position: sticky;
 	top: 90px;
-    
-  padding: 0 15px;
+
+	padding: 0 15px;
 }

@@ -22,16 +22,19 @@
 </nav>
 
 <div class="jumbotron">
-    <div class="container">
+  <div class="container">
     <h5>Дано регулярное выражение:</h5>
     <br>
-    <p id="regex"><!-- Target for dynamic svg generation --></p><hr>
+    <p id="regex">
+      <!-- Target for dynamic svg generation -->
+    </p>
+    <hr>
     <p>Принадлежит ли слово данному регулярному выражению?</p>
     <p id="statement">loading...</p><br>
     <p id="nnn" style="display:none;">{{ tasks_number }}</p>
     <div id="display_result" style="display: none;">
-        <p id="result"></p>
-        <button class="btn btn-primary" id="btn_repeat">Повторить</button>
+      <p id="result"></p>
+      <button class="btn btn-primary" id="btn_repeat">Повторить</button>
     </div>
 
     <div class="row" id="answer_request">
@@ -41,13 +44,15 @@
       <div class="col">
         <button class="btn btn-danger btn-block" id="btn_no">Нет</button>
       </div>
+    </div>
   </div>
-</div>
 </div>
 
 {% load staticfiles%}
 <script src="{% static 'js/practice/expression_belongs.js' %}"></script>
 <script src="{% static 'js/practice/results.js' %}"></script>
 <script src="{% static 'js/practice/moving.js' %}"></script>
-<script>$('#expression_belongs').addClass('active');</script>
+<script>
+  $('#expression_belongs').addClass('active');
+</script>
 {% endblock %}

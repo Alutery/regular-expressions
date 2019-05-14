@@ -22,47 +22,52 @@
 </nav>
 
 <div class="jumbotron">
-    <div class="container">
+  <div class="container">
     <h5>Дано регулярное выражение:</h5>
     <br>
-    <p id="regex_assignment"><!-- Target for dynamic svg generation --></p>
+    <p id="regex_assignment">
+      <!-- Target for dynamic svg generation -->
+    </p>
     <hr>
-    <p>Выберете возможный результат преобразования данного регулярного выражения (если их несколько, выберете наиболее краткую форму):</p>
+    <p>Выберете возможный результат преобразования данного регулярного выражения (если их несколько, выберете наиболее
+      краткую форму):</p>
 
     <div id="answer_request">
-        <div class="radio">
-            <input type="radio" name="radio" id="radio1" value="1" checked="" />
-            <label for="radio1" id="label_radio1"></label>
-        </div>
-        <div class="radio">
-            <input type="radio" name="radio" id="radio2" value="2" />
-            <label for="radio2" id="label_radio2"></label>
-        </div>
-        <div class="radio">
-            <input type="radio" name="radio" id="radio3" value="3" />
-            <label for="radio3" id="label_radio3"></label>
-        </div>
-        <div class="radio">
-            <input type="radio" name="radio" id="radio4" value="4" />
-            <label for="radio4" id="label_radio4"></label>
-        </div>
-    
-        <br>
-        <p id="nnn" style="display:none;">{{ tasks_number }}</p>
-        <button class="btn btn-success btn-block" id="btn_accept">Подтвердить</button>
+      <div class="radio">
+        <input type="radio" name="radio" id="radio1" value="1" checked="" />
+        <label for="radio1" id="label_radio1"></label>
+      </div>
+      <div class="radio">
+        <input type="radio" name="radio" id="radio2" value="2" />
+        <label for="radio2" id="label_radio2"></label>
+      </div>
+      <div class="radio">
+        <input type="radio" name="radio" id="radio3" value="3" />
+        <label for="radio3" id="label_radio3"></label>
+      </div>
+      <div class="radio">
+        <input type="radio" name="radio" id="radio4" value="4" />
+        <label for="radio4" id="label_radio4"></label>
+      </div>
+
+      <br>
+      <p id="nnn" style="display:none;">{{ tasks_number }}</p>
+      <button class="btn btn-success btn-block" id="btn_accept">Подтвердить</button>
     </div>
     <div id="display_result" style="display: none;">
-        <p id="result"></p>
-        <button class="btn btn-primary" id="btn_repeat">Повторить</button>
+      <p id="result"></p>
+      <button class="btn btn-primary" id="btn_repeat">Повторить</button>
     </div>
-</div>
+  </div>
 </div>
 
 {% load staticfiles%}
-  <script src="{% static 'js/practice/simplify_regex.js' %}"></script>
-  <script src="{% static 'js/viz.js/viz.js' %}"></script>
-  <script src="{% static 'js/viz.js/full.render.js' %}"></script>
-  <script src="{% static 'js/practice/moving.js' %}"></script>
-  <script src="{% static 'js/practice/results.js' %}"></script>
-  <script>$('#simplify_regex').addClass('active');</script>
+<script src="{% static 'js/practice/simplify_regex.js' %}"></script>
+<script src="{% static 'js/viz.js/viz.js' %}"></script>
+<script src="{% static 'js/viz.js/full.render.js' %}"></script>
+<script src="{% static 'js/practice/moving.js' %}"></script>
+<script src="{% static 'js/practice/results.js' %}"></script>
+<script>
+  $('#simplify_regex').addClass('active');
+</script>
 {% endblock %}

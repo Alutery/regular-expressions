@@ -212,9 +212,6 @@ def bfsEquivalenceCheck(aut1, aut2, s1, s2, f1, f2, L):
     q = Queue()
     q.put((s1, s2))
 
-    print(aut1)
-    print(aut2)
-
     used1 = [s1]
     used2 = [s2]
 

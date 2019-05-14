@@ -22,10 +22,15 @@
 </nav>
 
 <div class="jumbotron">
-    <div class="container">
+  <div class="container">
     <h5>Дан конечный автомат-распознаватель:</h5>
-    <p>Начальное состояние выделено красным, финальные (допускающие) - в двойном кружке, не допускающие - в одинарном.</p>
-    <br><div id="graphviz_svg"><!-- Target for dynamic svg generation --></div><hr>
+    <p>Начальное состояние выделено красным, финальные (допускающие) - в двойном кружке, не допускающие - в одинарном.
+    </p>
+    <br>
+    <div id="graphviz_svg">
+      <!-- Target for dynamic svg generation -->
+    </div>
+    <hr>
     <p>Допускает ли автомат данную цепочку?</p>
     <p id="statement">loading...</p><br>
     <p id="nnn" style="display:none;">{{ tasks_number }}</p>
@@ -33,16 +38,16 @@
       <p id="result"></p>
       <button class="btn btn-primary" id="btn_repeat">Повторить</button>
     </div>
-    
+
     <div class="row" id="answer_request">
-    <div class="col">
-      <button class="btn btn-success btn-block" id="btn_yes">Да</button>
-    </div>
-    <div class="col">
-      <button class="btn btn-danger btn-block" id="btn_no">Нет</button>
+      <div class="col">
+        <button class="btn btn-success btn-block" id="btn_yes">Да</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-danger btn-block" id="btn_no">Нет</button>
+      </div>
     </div>
   </div>
-</div>
 </div>
 
 {% load staticfiles%}
@@ -51,5 +56,7 @@
 <script src="{% static 'js/practice/chain_acceptance.js' %}"></script>
 <script src="{% static 'js/practice/moving.js' %}"></script>
 <script src="{% static 'js/practice/results.js' %}"></script>
-<script>$('#chain_acceptance').addClass('active');</script>
+<script>
+  $('#chain_acceptance').addClass('active');
+</script>
 {% endblock %}

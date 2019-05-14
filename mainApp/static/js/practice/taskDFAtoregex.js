@@ -87,7 +87,6 @@ $(document).ready(function () {
 
   });
 
-
   var svg_div = $('#graphviz_svg');
 
   function UpdateGraphviz(data, numberID) {
@@ -104,7 +103,5 @@ $(document).ready(function () {
         console.error(error);
       });
   }
-
-
 
 });

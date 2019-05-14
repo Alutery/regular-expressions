@@ -3,71 +3,71 @@
 
 {% block content %}
 <div class="jumbotron">
-<div class="container-fluid">
-<div class="continer">
-    <main role="main">
-        <h1 class="mb-4">Profile</h1>
-        <p>Фамилия: {{ user.last_name }}</p>
-        <p>Имя: {{ user.first_name }}</p>
-        <p>Email: {{ user.email }}</p>
-    </main>
-</div>
-</div>
+    <div class="container-fluid">
+        <div class="continer">
+            <main role="main">
+                <h1 class="mb-4">Profile</h1>
+                <p>Фамилия: {{ user.last_name }}</p>
+                <p>Имя: {{ user.first_name }}</p>
+                <p>Email: {{ user.email }}</p>
+            </main>
+        </div>
+    </div>
 </div>
 
 <div class="container-fluid">
     <div class="continer">
         <h3>Ваши результаты:</h3>
         {% if results %}
-        <table class="mt-4 mb-4 table table-responsive-sm text-center" cellpadding="4" >
+        <table class="mt-4 mb-4 table table-responsive-sm text-center" cellpadding="4">
             <thead>
                 <tr>
                     <th>Задание</th>
-                {% for i in range %}
+                    {% for i in range %}
                     <th scope="col" class="align-middle">{{ i }}</th>
-                {% endfor %}
+                    {% endfor %}
                 </tr>
             </thead>
             <tbody>
-            {% for category in completed_questions %}
+                {% for category in completed_questions %}
                 <tr>
-                <th>{{category}}</th>
-                {% for question in completed_questions|get_item:category %}
-                <td style="text-align:center">
-                    {% if question == "1" %}
+                    <th>{{category}}</th>
+                    {% for question in completed_questions|get_item:category %}
+                    <td style="text-align:center">
+                        {% if question == "1" %}
                         <i class="fas fa-check-circle"></i>
-                    {% elif question == "0" %}
+                        {% elif question == "0" %}
                         <i class="far fa-circle"></i>
-                    {% else %}
+                        {% else %}
                         <i class="far fa-circle" style="color: #ced4da;"></i>
-                    {% endif %}
-                </td>
-                {% endfor %}
+                        {% endif %}
+                    </td>
+                    {% endfor %}
                 </tr>
-            {% endfor %}
+                {% endfor %}
             </tbody>
-        </table>    
+        </table>
         {% else %}
-            <p>К сожалению, вы еще не выполнили ни одного задания.</p>
+        <p>К сожалению, вы еще не выполнили ни одного задания.</p>
         {% endif %}
     </div>
 </div>
 
 
 <script type="text/javascript">
-$('#logClick').click(function(e) {
+    $('#logClick').click(function (e) {
         e.preventDefault();
-        $( '#reg-nav-item' ).removeClass( 'active' );
-        $( '#log-nav-item' ).addClass( 'active' );
-});
-    
-$('#regClick').click(function(e) {
-    e.preventDefault();
-    $( '#reg-nav-item' ).addClass( 'active' );
-    $( '#log-nav-item' ).removeClass( 'active' );
-});
+        $('#reg-nav-item').removeClass('active');
+        $('#log-nav-item').addClass('active');
+    });
 
-$( '.navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
+    $('#regClick').click(function (e) {
+        e.preventDefault();
+        $('#reg-nav-item').addClass('active');
+        $('#log-nav-item').removeClass('active');
+    });
+
+    $('.navbar-nav').find('li.active').removeClass('active');
 </script>
 
 {% endblock %}

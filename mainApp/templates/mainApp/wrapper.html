@@ -18,7 +18,8 @@
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -43,7 +44,8 @@
                     </li>
                     <li class="nav-item px-1" id="theory_tab"><a class="nav-link" href="{% url 'intro' %}">Теория</a>
                     </li>
-                    <li class="nav-item px-1" id="practice_tab"><a class="nav-link" href="{% url 'chain_acceptance' %}">Практика</a></li>
+                    <li class="nav-item px-1" id="practice_tab"><a class="nav-link"
+                            href="{% url 'chain_acceptance' %}">Практика</a></li>
                 </ul>
                 {% if user.is_authenticated %}
                 <ul class="navbar-nav ml-auto">
@@ -94,31 +96,31 @@
                                         <div id="errorname" style="color:red"></div>
                                         <label for="inputFname">Имя</label>
                                         <input type="text" id="inputFname" class="form-control"
-                                            aria-describedby="emailHelp"  placeholder="Имя" autocomplete="text"
+                                            aria-describedby="emailHelp" placeholder="Имя" autocomplete="text"
                                             name="fname" />
                                     </div>
                                     <div class="form-group">
                                         <label for="inputLname">Фамилия</label>
                                         <input type="text" id="inputLname" class="form-control"
-                                            aria-describedby="emailHelp"  placeholder="Фамилия"
-                                            autocomplete="text" name="lname" type="text" />
+                                            aria-describedby="emailHelp" placeholder="Фамилия" autocomplete="text"
+                                            name="lname" type="text" />
                                     </div>
                                     <div class="form-group">
                                         <div id="erroremail" style="color:red"></div>
                                         <label for="inputEmail">Email</label>
                                         <input type="text" id="inputEmail" class="form-control"
-                                            aria-describedby="emailHelp"  placeholder="Email"
-                                            autocomplete="email" name="email" type="email" />
+                                            aria-describedby="emailHelp" placeholder="Email" autocomplete="email"
+                                            name="email" type="email" />
                                     </div>
                                     <div class="form-group">
                                         <div id="errorpass" style="color:red"></div>
                                         <label for="inputPassword1">Создайте пароль</label>
-                                        <input type="password" class="form-control" id="inputPassword1" 
+                                        <input type="password" class="form-control" id="inputPassword1"
                                             placeholder="Пароль" />
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword2">Подвердите пароль</label>
-                                        <input type="password" class="form-control" id="inputPassword2" 
+                                        <input type="password" class="form-control" id="inputPassword2"
                                             placeholder="Подвердите пароль" />
                                     </div>
 
@@ -137,7 +139,8 @@
                                         <label for="inputUsername">Email</label>
                                         <input type="email" class="form-control" id="inputUsername"
                                             aria-describedby="emailHelp" placeholder="Email" required>
-                                        <small id="emailHelp" class="form-text text-muted">Введите зарегистрированный E-mail</small>
+                                        <small id="emailHelp" class="form-text text-muted">Введите зарегистрированный
+                                            E-mail</small>
                                     </div>
 
                                     <div class="form-group">
@@ -279,7 +282,7 @@
                             if ("password2" in data['message'])
                                 $("#errorpass").html(data['message']['password2'][0]);
                         }
-                        
+
                     }
                 })
             }
