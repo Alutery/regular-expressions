@@ -1,12 +1,18 @@
 $(document).ready(function () {
     var k = 1;
     $('#forward').click(function () {
+        $("#forward").attr('disabled', true);
+        $("#back").attr('disabled', true);
+
         dotIndex = 0;
         k = 1;
         render();
     });
 
     $('#back').click(function () {
+        $("#forward").attr('disabled', true);
+        $("#back").attr('disabled', true);
+
         dotIndex = dots.length - 1;
         k = -1;
         render();
@@ -53,6 +59,11 @@ $(document).ready(function () {
                 dotIndex += k;
                 if ((dotIndex != dots.length && k == 1) || (dotIndex >= 0 && k == -1)) {
                     render();
+                }
+                else
+                {
+                    $("#forward").attr('disabled', false);
+                    $("#back").attr('disabled', false);
                 }
             });
     }

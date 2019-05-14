@@ -5,4 +5,3 @@ env-re
 db.sqlite3
 /static
 .DS_Store
-/tasks
