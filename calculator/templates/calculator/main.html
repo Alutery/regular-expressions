@@ -12,7 +12,7 @@
                     <div class="col-sm-8 mx-auto">
                         <h1 class="mb-4">Калькулятор</h1>
                         <div id="input_request">
-                            <form>
+                            <form onSubmit="return false">
                               {% csrf_token %}
                               <div class="form-group mb-3">
                                 <label for="inputRegex">
@@ -29,7 +29,7 @@
                             <h4 class="mb-4 mt-5" id="inputRegex_result"></h4>
                             <div id="graphviz_svg"></div>
 
-                            <form>
+                            <form onSubmit="return false">
                                 {% csrf_token %}
                                 <div class="form-group mb-3">
                                 <label for="inputWord">

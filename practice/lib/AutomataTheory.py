@@ -108,25 +108,31 @@ class Automata:
         dotFile += "}"
         return dotFile
     
-    def getSpecialDotFile(self, st):
+    def getSpecialDotFile(self, from_st, to_st, ch):
         dotFile = "digraph DFA {\nrankdir=LR\n"
         if len(self.states) != 0:
-            dotFile += "root=s1\nstart [shape=point]\nstart->s%d\n" % self.startstate
+            if to_st == self.startstate and from_st is None:
+                dotFile += "root=s1\nstart [shape=point]\nstart->s%d [color = red]\n" % self.startstate
+            else:
+                dotFile += "root=s1\nstart [shape=point]\nstart->s%d [color = black]\n" % self.startstate
             for state in self.states:
                 if state in self.finalstates:
-                    if state == st:
+                    if state == to_st:
                         dotFile += "s%d [shape=doublecircle, color = red]\n" % state
                     else:
                         dotFile += "s%d [shape=doublecircle]\n" % state
                 else:
-                    if state == st:
+                    if state == to_st:
                         dotFile += "s%d [shape=circle, color = red]\n" % state
                     else:
                         dotFile += "s%d [shape=circle]\n" % state
             for fromstate, tostates in self.transitions.items():
                 for state in tostates:
                     for char in tostates[state]:
-                        dotFile += 's%d->s%d [label="%s"]\n' % (fromstate, state, char)
+                        if to_st == state and fromstate == from_st and ch == char:
+                            dotFile += 's%d->s%d [label="%s", color=red]\n' % (fromstate, state, char)
+                        else:
+                            dotFile += 's%d->s%d [label="%s"]\n' % (fromstate, state, char)
         dotFile += "}"
         return dotFile
 
@@ -236,7 +242,7 @@ class DFAfromNFA:
         self.dfa = dfa
 
     def acceptsString(self, string):
-        result = [self.minDFA.getSpecialDotFile(self.minDFA.startstate)]
+        result = [self.minDFA.getSpecialDotFile(None, self.minDFA.startstate, None)]
 
         currentstate = self.minDFA.startstate
         for ch in string:
@@ -244,13 +250,16 @@ class DFAfromNFA:
                 continue
             st = list(self.minDFA.gettransitions(currentstate, ch))
             if len(st) == 0:
-                return False
-            result.append(self.minDFA.getSpecialDotFile(st[0]))
+                result.append(self.minDFA.getDotFile())
+                return False, result
+            result.append(self.minDFA.getSpecialDotFile(currentstate, st[0], ch))
             currentstate = st[0]
+
+        result.append(self.minDFA.getDotFile())
+
         if currentstate in self.minDFA.finalstates:
-            result.append(result[0])
             return True, result
-        return False, None
+        return False, result
 
     def minimise(self):
         states = list(self.dfa.states)

@@ -3,8 +3,10 @@ from django.http import HttpResponse
 from practice.lib import AutomataTheory
 from django.http import JsonResponse
 from django.views import View  # import the View parent class
+from django.views.decorators.csrf import csrf_exempt
 
 from mainApp.models import CompletedQuestions, QuestionCategory, Tasks
+
 
 def get_actions(request):
     if request.POST:
@@ -19,10 +21,10 @@ def get_actions(request):
             return JsonResponse({'correct': result[0], 'actions': result[1] })
 
         except BaseException:
-            return JsonResponse({'correct': False })
+            return JsonResponse({'correct': '2' })
 
 class Calculator(View):
-    
+
     def get(self, request):
         return render(request, 'calculator/main.html')
 

@@ -1,5 +1,7 @@
 
 $(document).ready(function () {
+
+  
     var inputRegex;
     var svg_div = $('#graphviz_svg');
 
@@ -20,7 +22,6 @@ $(document).ready(function () {
 
     function animate(data) {
 
-        console.log(data);
         var image_number = 0;
         var timerId = setInterval(
             function () {
@@ -28,10 +29,10 @@ $(document).ready(function () {
                 image_number++;
                 if (image_number >= data.length) {
                     clearTimeout(timerId);
+                    $('#btn_check').attr('disabled', false);
                 }
-            }, 2000);
+            }, 1300);
         
-        $('#btn_check').prop('disabled', false);
     }
 
     $("#btn_accept").click(function () {
@@ -41,7 +42,7 @@ $(document).ready(function () {
             alert("Введите регулярное выражение.");
             return false;
         }
-        event.preventDefault();
+        // event.preventDefault();
         $('#btn_accept').prop('disabled', true);
 
         $.ajax({
@@ -51,7 +52,6 @@ $(document).ready(function () {
             data: ({
                 input: inputRegex
             }),
-
             success: function (data) {
                 if (data.correct == true) {
                     $('#input_request').hide();
@@ -72,8 +72,9 @@ $(document).ready(function () {
             alert("Введите слово.");
             return false;
         }
-        event.preventDefault();
-        $('#btn_check').attr('disabled', true);
+        // event.preventDefault();
+        $('#btn_accept').prop('disabled', true);
+
 
         $.ajax({
             async: false,
@@ -83,16 +84,18 @@ $(document).ready(function () {
                 input: inputRegex,
                 word: inputWord
             }),
-
             success: function (data) {
-                if (data.correct == true) {
+                if (data.correct == '2') {
+                    alert('Ошибка');
+                }
+                else if (data.correct == true) {
+                    alert('Допускает');
                     animate(data.actions);
                 } else {
-                    $('#btn_check').attr('disabled', false);
-                    alert('Неверный ввод!')
+                    alert('Не допускает');
+                    animate(data.actions);
                 }
             }
         });
     });
-
 });
