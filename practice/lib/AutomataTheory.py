@@ -107,6 +107,28 @@ class Automata:
                         dotFile += 's%d->s%d [label="%s"]\n' % (fromstate, state, char)
         dotFile += "}"
         return dotFile
+    
+    def getSpecialDotFile(self, st):
+        dotFile = "digraph DFA {\nrankdir=LR\n"
+        if len(self.states) != 0:
+            dotFile += "root=s1\nstart [shape=point]\nstart->s%d\n" % self.startstate
+            for state in self.states:
+                if state in self.finalstates:
+                    if state == st:
+                        dotFile += "s%d [shape=doublecircle, color = red]\n" % state
+                    else:
+                        dotFile += "s%d [shape=doublecircle]\n" % state
+                else:
+                    if state == st:
+                        dotFile += "s%d [shape=circle, color = red]\n" % state
+                    else:
+                        dotFile += "s%d [shape=circle]\n" % state
+            for fromstate, tostates in self.transitions.items():
+                for state in tostates:
+                    for char in tostates[state]:
+                        dotFile += 's%d->s%d [label="%s"]\n' % (fromstate, state, char)
+        dotFile += "}"
+        return dotFile
 
 class BuildAutomata:
     """class for building e-nfa basic structures"""
@@ -214,17 +236,21 @@ class DFAfromNFA:
         self.dfa = dfa
 
     def acceptsString(self, string):
-        currentstate = self.dfa.startstate
+        result = [self.minDFA.getSpecialDotFile(self.minDFA.startstate)]
+
+        currentstate = self.minDFA.startstate
         for ch in string:
             if ch==":e:":
                 continue
-            st = list(self.dfa.gettransitions(currentstate, ch))
+            st = list(self.minDFA.gettransitions(currentstate, ch))
             if len(st) == 0:
                 return False
+            result.append(self.minDFA.getSpecialDotFile(st[0]))
             currentstate = st[0]
-        if currentstate in self.dfa.finalstates:
-            return True
-        return False
+        if currentstate in self.minDFA.finalstates:
+            result.append(result[0])
+            return True, result
+        return False, None
 
     def minimise(self):
         states = list(self.dfa.states)

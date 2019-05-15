@@ -6,7 +6,20 @@ from django.views import View  # import the View parent class
 
 from mainApp.models import CompletedQuestions, QuestionCategory, Tasks
 
+def get_actions(request):
+    if request.POST:
+        inputRegex = request.POST.get('input')
+        inputWord = request.POST.get('word')
 
+        try:
+            a = AutomataTheory.NFAfromRegex(inputRegex)
+            dfa = AutomataTheory.DFAfromNFA(a.getNFA())
+            result = dfa.acceptsString(inputWord)
+
+            return JsonResponse({'correct': result[0], 'actions': result[1] })
+
+        except BaseException:
+            return JsonResponse({'correct': False })
 
 class Calculator(View):
     
