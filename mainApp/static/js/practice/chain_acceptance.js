@@ -62,10 +62,6 @@ $(document).ready(function () {
     displayResult(false);
   });
 
-  $("#btn_repeat").click(function () {
-    $('.page-item.active').click();
-  });
-
   function displayResult(answer) {
     $.ajax({
       async: false,

@@ -54,11 +54,6 @@ $(document).ready(function () {
     $('#btn_task_1').click();
   });
 
-  // кнопка повтора
-  $('#btn_repeat').click(function () {
-    $('.page-item.active').click();
-  });
-
   // кнопка подтверждения
   $('#btn_accept').click(function () {
     $('#answer_request').hide();

@@ -27,9 +27,6 @@ $(document).ready(function () {
     $('#btn_task_1').click();
   });
 
-  $('#btn_repeat').click(function () {
-    $('.page-item.active').click();
-  });
 
   $("#btn_accept").click(function (event) {
 

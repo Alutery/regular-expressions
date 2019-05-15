@@ -40,10 +40,6 @@ $(document).ready(function () {
     $('#btn_task_1').click();
   });
 
-  $('#btn_repeat').click(function () {
-    $('.page-item.active').click();
-  });
-
   btn_yes.click(function () {
     $('#answer_request').hide();
     $('#display_result').show();
