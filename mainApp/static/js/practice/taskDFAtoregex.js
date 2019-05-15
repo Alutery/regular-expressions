@@ -3,10 +3,11 @@ var description2;
 var number;
 var numbers;
 var categoryID = 'TaskDFAtoregex';
+var n;
 
 
 $(document).ready(function () {
-  var n = parseInt($('#nnn').text(), 10);
+  n = parseInt($('#nnn').text(), 10);
   jQuery(function () {
     getData();
 

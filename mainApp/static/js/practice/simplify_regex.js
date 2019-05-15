@@ -3,12 +3,13 @@ var description2;
 var number;
 var numbers;
 var categoryID = 'SimplifyRegex';
+var n;
 
 
 $(document).ready(function () {
 
   var statement = $('#regex_assignment');
-  var n = parseInt($('#nnn').text(), 10);
+  n = parseInt($('#nnn').text(), 10);
 
   var btn_accept = $('#btn_accept');
 

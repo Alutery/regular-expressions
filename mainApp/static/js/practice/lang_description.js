@@ -3,6 +3,7 @@ var description2;
 var number;
 var numbers;
 var categoryID = 'LangDescription';
+var n;
 
 
 function Update(data, numberID) {
@@ -12,7 +13,7 @@ function Update(data, numberID) {
 
 
 $(document).ready(function () {
-    var n = parseInt($('#nnn').text(), 10);
+    n = parseInt($('#nnn').text(), 10);
     var statement = $('#statement');
 
 

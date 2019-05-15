@@ -3,13 +3,14 @@ var description2;
 var number;
 var numbers;
 var categoryID = 'ExpressionBelongs';
+var n;
 
 
 $(document).ready(function () {
 
   var regex = $('#regex');
   var statement = $('#statement');
-  var n = parseInt($('#nnn').text(), 10);
+  n = parseInt($('#nnn').text(), 10);
 
   var btn_yes = $('#btn_yes');
   var btn_no = $('#btn_no');
