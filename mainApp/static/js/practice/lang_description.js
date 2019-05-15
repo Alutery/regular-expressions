@@ -1,27 +1,8 @@
-var statements;
-var numbers;
-var answers;
-var categoryID = 'LangDescription';
+var description;
+var description2;
 var number;
-
-
-function getData() {
-    $.ajax({
-        async: false,
-        url: '../gettask/',
-        type: 'post',
-        data: ({
-            taskType: categoryID
-        }),
-        success: function (data) {
-            statements = data.description;
-            numbers = data.numbers;
-        },
-        error: function (jqXhr, textStatus, errorThrown) {
-            console.log(errorThrown);
-        }
-    });
-}
+var numbers;
+var categoryID = 'LangDescription';
 
 
 function Update(data, numberID) {
@@ -47,7 +28,7 @@ $(document).ready(function () {
                 $('#display_result').hide();
 
                 current = i;
-                Update(statements[i - 1], numbers[i - 1]);
+                Update(description[i - 1], numbers[i - 1]);
             });
         }
 

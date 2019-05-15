@@ -1,36 +1,15 @@
-var graphs;
-var statements;
+var description;
+var description2;
+var number;
 var numbers;
-var answers;
 var categoryID = 'Accordance';
 
-// получение данных заданий
-function getData() {
-  $.ajax({
-    async: false,
-    url: '../gettask/',
-    type: 'post',
-    data: ({
-      taskType: categoryID
-    }),
-    success: function (data) {
-      graphs = data.description;
-      statements = data.description2;
-      numbers = data.numbers;
-    },
-    error: function (jqXhr, textStatus, errorThrown) {
-      console.log(errorThrown);
-    }
-  });
-}
 
 $(document).ready(function () {
   
   var statement = $('#regex_assignment');
   var n = parseInt($('#nnn').text(), 10);
 
-  // хранит id текущенго задания из бд
-  var number;
 
   // обновление содержимого страницы по ее соответствующему номеру
   // answer = {1, 2, 3, 4}, [4 indexes for data array]
@@ -67,7 +46,7 @@ $(document).ready(function () {
         $(".page-item").removeClass("active");
         $(this).addClass("active");
         current = i;
-        Update(graphs[i - 1], statements[i - 1], numbers[i - 1]);
+        Update(description[i - 1], description2[i - 1], numbers[i - 1]);
       });
     }
 

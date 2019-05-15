@@ -1,27 +1,9 @@
-var regex_args;
-var statements;
+var description;
+var description2;
+var number;
 var numbers;
-var answers;
 var categoryID = 'SimplifyRegex';
 
-function getData() {
-  $.ajax({
-    async: false,
-    url: '../gettask/',
-    type: 'post',
-    data: ({
-      taskType: categoryID
-    }),
-    success: function (data) {
-      regex_args = data.description;
-      statements = data.description2;
-      numbers = data.numbers;
-    },
-    error: function (jqXhr, textStatus, errorThrown) {
-      console.log(errorThrown);
-    }
-  });
-}
 
 $(document).ready(function () {
 
@@ -29,8 +11,6 @@ $(document).ready(function () {
   var n = parseInt($('#nnn').text(), 10);
 
   var btn_accept = $('#btn_accept');
-
-  var number;
 
   function Update(options, regex_assignment, numberID) {
     $('#answer_request').show();
@@ -57,7 +37,7 @@ $(document).ready(function () {
         $(".page-item").removeClass("active");
         $(this).addClass("active");
         current = i;
-        Update(regex_args[i - 1], statements[i - 1], numbers[i - 1]);
+        Update(description[i - 1], description2[i - 1], numbers[i - 1]);
       });
     }
 

@@ -1,28 +1,9 @@
-var graphs;
-var statements;
+var description;
+var description2;
+var number;
 var numbers;
-var answers;
 var categoryID = 'ChainAcceptance';
 
-
-function getData() {
-  $.ajax({
-    async: false,
-    url: '../gettask/',
-    type: 'post',
-    data: ({
-      taskType: categoryID
-    }),
-    success: function (data) {
-      graphs = data.description;
-      statements = data.description2;
-      numbers = data.numbers;
-    },
-    error: function (jqXhr, textStatus, errorThrown) {
-      console.log(errorThrown);
-    }
-  });
-}
 
 $(document).ready(function () {
 
@@ -32,7 +13,6 @@ $(document).ready(function () {
 
   var btn_yes = $('#btn_yes');
   var btn_no = $('#btn_no');
-  var number;
 
 
   function UpdateGraphviz(data, statement_input, numberID) {
@@ -63,7 +43,7 @@ $(document).ready(function () {
         $(".page-item").removeClass("active");
         $(this).addClass("active");
         current = i;
-        UpdateGraphviz(graphs[i - 1], statements[i - 1], numbers[i - 1]);
+        UpdateGraphviz(description[i - 1], description2[i - 1], numbers[i - 1]);
       });
     }
 

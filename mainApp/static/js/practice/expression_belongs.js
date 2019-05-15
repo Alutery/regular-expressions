@@ -1,27 +1,9 @@
-var regex_args;
-var statements;
+var description;
+var description2;
+var number;
 var numbers;
-var answers;
 var categoryID = 'ExpressionBelongs';
 
-function getData() {
-  $.ajax({
-    async: false,
-    url: '../gettask/',
-    type: 'post',
-    data: ({
-      taskType: categoryID
-    }),
-    success: function (data) {
-      regex_args = data.description;
-      statements = data.description2;
-      numbers = data.numbers;
-    },
-    error: function (jqXhr, textStatus, errorThrown) {
-      console.log(errorThrown);
-    }
-  });
-}
 
 $(document).ready(function () {
 
@@ -31,7 +13,6 @@ $(document).ready(function () {
 
   var btn_yes = $('#btn_yes');
   var btn_no = $('#btn_no');
-  var number;
 
 
   function Update(regex_arg, statement_input, numberID) {
@@ -52,7 +33,7 @@ $(document).ready(function () {
         $(".page-item").removeClass("active");
         $(this).addClass("active");
         current = i;
-        Update(regex_args[i - 1], statements[i - 1], numbers[i - 1]);
+        Update(description[i - 1], description2[i - 1], numbers[i - 1]);
       });
     }
 

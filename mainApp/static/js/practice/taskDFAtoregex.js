@@ -1,26 +1,9 @@
-var graphs;
-var numbers;
-var answers;
-var categoryID = 'TaskDFAtoregex';
+var description;
+var description2;
 var number;
+var numbers;
+var categoryID = 'TaskDFAtoregex';
 
-function getData() {
-  $.ajax({
-    async: false,
-    url: '../gettask/',
-    type: 'post',
-    data: ({
-      taskType: categoryID
-    }),
-    success: function (data) {
-      graphs = data.description;
-      numbers = data.numbers;
-    },
-    error: function (jqXhr, textStatus, errorThrown) {
-      console.log(errorThrown);
-    }
-  });
-}
 
 $(document).ready(function () {
   var n = parseInt($('#nnn').text(), 10);
@@ -36,7 +19,7 @@ $(document).ready(function () {
         $('#display_result').hide();
 
         current = i;
-        UpdateGraphviz(graphs[i - 1], numbers[i - 1]);
+        UpdateGraphviz(description[i - 1], numbers[i - 1]);
       });
     }
 
