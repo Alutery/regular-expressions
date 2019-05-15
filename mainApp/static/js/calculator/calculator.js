@@ -1,7 +1,13 @@
 
 $(document).ready(function () {
 
-  
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          return false;
+        }
+    });
+
     var inputRegex;
     var svg_div = $('#graphviz_svg');
 
@@ -42,8 +48,8 @@ $(document).ready(function () {
             alert("Введите регулярное выражение.");
             return false;
         }
-        // event.preventDefault();
-        $('#btn_accept').prop('disabled', true);
+ 
+        $('#btn_accept').attr('disabled', true);
 
         $.ajax({
             async: false,
@@ -58,7 +64,7 @@ $(document).ready(function () {
                     $('#display_automate').show();
                     UpdateGraphviz(data.dotFile, inputRegex);
                 } else {
-                    $('#btn_accept').prop('disabled', false);
+                    $('#btn_accept').attr('disabled', false);
                     alert('Неверный ввод!');
                 }
             }
@@ -72,8 +78,8 @@ $(document).ready(function () {
             alert("Введите слово.");
             return false;
         }
-        // event.preventDefault();
-        $('#btn_accept').prop('disabled', true);
+
+        $('#btn_check').attr('disabled', true);
 
 
         $.ajax({
@@ -87,6 +93,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.correct == '2') {
                     alert('Ошибка');
+                    $('#btn_check').attr('disabled', false);
                 }
                 else if (data.correct == true) {
                     alert('Допускает');
